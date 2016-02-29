@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     //alteracao master
     
+    //caracowf fasdjfk tam muitoasfn mentoiasd
     // fizemos um monte de coisas hoje foda pra caralho
     // mais numa alteracao yuri
 
