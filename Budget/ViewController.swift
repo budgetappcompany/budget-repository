@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     // Alteracao do yuRI ultima
     
     //alteracao master
+    
+    //caracowf fasdjfk tam muitoasfn mentoiasd
 
     override func viewDidLoad() {
         super.viewDidLoad()
