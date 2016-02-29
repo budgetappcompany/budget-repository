@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     
     
     // Alteracao do yuRI ultima
+    
+    //alteracao master
 
     override func viewDidLoad() {
         super.viewDidLoad()
