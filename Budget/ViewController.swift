@@ -23,6 +23,9 @@ class ViewController: UIViewController {
     // Alteracao do yuRI ultima
     
     //alteracao master
+    
+    // fizemos um monte de coisas hoje foda pra caralho
+    // mais numa alteracao yuri
 
     override func viewDidLoad() {
         super.viewDidLoad()
