@@ -9,24 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    // Github maldito
-    // teste3
-    // teste4
-    // teste5
-    // teste novo yuri
-    
-    //alteração calebe
-    
-    
-    
-    // Alteracao do yuRI ultima
-    
-    //alteracao master
-    
-    //caracowf fasdjfk tam muitoasfn mentoiasd
-    // fizemos um monte de coisas hoje foda pra caralho
-    // mais numa alteracao yuri
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
