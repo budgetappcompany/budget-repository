@@ -10,12 +10,6 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    // Menu
-	//Testes! Vamos lá
-	//Segundo teste
-	//Terceiro teste
-    //Quarto teste
-    //Quinto teste
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
