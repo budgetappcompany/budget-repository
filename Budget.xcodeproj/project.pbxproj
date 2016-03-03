@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */; };
+		0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8951C88E90800EC224D /* Calculadora.swift */; };
 		4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72141C86393E001522DB /* AppDelegate.swift */; };
 		4E6C72171C86393E001522DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72161C86393E001522DB /* ViewController.swift */; };
 		4E6C721A1C86393E001522DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72181C86393E001522DB /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculadoraController.swift; sourceTree = "<group>"; };
+		0DCEC8951C88E90800EC224D /* Calculadora.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculadora.swift; sourceTree = "<group>"; };
 		4E6C72111C86393E001522DB /* Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Budget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6C72141C86393E001522DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E6C72161C86393E001522DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DCEC88E1C88E6D000EC224D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0DCEC8951C88E90800EC224D /* Calculadora.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0DCEC8921C88E7CA00EC224D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		4E6C72081C86393E001522DB = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +133,8 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				0DCEC8921C88E7CA00EC224D /* Controller */,
+				0DCEC88E1C88E6D000EC224D /* Model */,
 				4E6C72141C86393E001522DB /* AppDelegate.swift */,
 				4E6C72161C86393E001522DB /* ViewController.swift */,
 				4E6C72181C86393E001522DB /* Main.storyboard */,
@@ -303,6 +325,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */,
+				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
@@ -532,6 +556,7 @@
 				4E6C723E1C86393E001522DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E6C723F1C86393E001522DB /* Build configuration list for PBXNativeTarget "BudgetTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +565,7 @@
 				4E6C72411C86393E001522DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E6C72421C86393E001522DB /* Build configuration list for PBXNativeTarget "BudgetUITests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +574,7 @@
 				4E6C72441C86393E001522DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
