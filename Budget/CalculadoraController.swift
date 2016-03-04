@@ -12,13 +12,23 @@ extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
     }
+    var intValue: Int {
+        return (self as NSString).integerValue
+    }
+}
+
+extension Float {
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
 }
 
 class CalculadoraController: UIViewController {
 
-    @IBOutlet weak var lblPrimeiroValor: UILabel!
+    @IBOutlet weak var lblResultado: UILabel!
     @IBOutlet weak var lblOperador: UILabel!
     @IBOutlet weak var lblVisor: UILabel!
+    var teste:String? = nil
     var calculadora:Calculadora?
     
     override func viewDidLoad() {
@@ -33,47 +43,52 @@ class CalculadoraController: UIViewController {
     }
     
     @IBAction func inserirNumero(sender: UIButton) {
-        if(calculadora?.primeiroValor == 0){
+        if((calculadora?.numeroAtual == 0) && (!(lblVisor.text!.containsString("."))) && lblVisor.text != "-"){
             lblVisor.text = sender.currentTitle
         } else {
             lblVisor.text?.appendContentsOf(sender.currentTitle!)
         }
-        calculadora?.primeiroValor = lblVisor.text!.floatValue
+        if (lblVisor.text!.floatValue != 0) {
+            calculadora?.numeroAtual = lblVisor.text!.floatValue
+        }
     }
     
     @IBAction func inserirDecimal(sender: UIButton) {
-    }
-    
-    func atualizarLabels() {
-        calculadora?.segundoValor = calculadora!.primeiroValor
-        lblVisor.text = "0"
-        lblPrimeiroValor.text = "\(calculadora!.segundoValor)"
-        calculadora?.primeiroValor = 0
-    }
-    
-    func limparLabels() {
-        calculadora?.primeiroValor = 0;
-        calculadora?.segundoValor = 0;
-        lblPrimeiroValor.text = ""
-        lblOperador.text = ""
+        print(lblVisor.text!.containsString("."))
+        if (!(lblVisor.text!.containsString("."))) {
+            lblVisor.text?.appendContentsOf(".")
+        }
     }
 
     @IBAction func inserirOperacao(sender: UIButton) {
-        calculadora?.primeiroValor = lblVisor.text!.floatValue
-        lblOperador.text = sender.currentTitle
-        calculadora?.opcao = sender.tag
-        atualizarLabels()
+        if(sender.currentTitle == "-" && calculadora?.numeroAtual == 0){
+            lblVisor.text = sender.currentTitle!
+        }else{
+            if(calculadora?.resultadoOp == 0){
+                calculadora?.resultadoOp = calculadora!.numeroAtual
+                lblResultado.text = calculadora!.resultadoOp.stringValue
+            } else {
+                lblResultado.text = calculadora!.calcularOperacao().stringValue
+            }
+            lblVisor.text = "0"
+            lblOperador.text = sender.currentTitle
+            calculadora?.opcao = sender.tag
+            calculadora?.numeroAtual = 0
+        }
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-        lblVisor.text = "\(calculadora!.calcularOperacao())"
-        limparLabels()
+        lblVisor.text = calculadora!.calcularOperacao().stringValue
+        calculadora?.numeroAtual = lblVisor.text!.floatValue
+        calculadora?.resultadoOp = 0
+        lblResultado.text = ""
+        lblOperador.text = ""
     }
     
     @IBAction func limparVisor(sender: UIButton) {
-        calculadora?.primeiroValor = 0;
-        calculadora?.segundoValor = 0;
-        lblPrimeiroValor.text = ""
+        calculadora?.numeroAtual = 0
+        calculadora?.resultadoOp = 0
+        lblResultado.text = ""
         lblOperador.text = ""
         lblVisor.text = "0"
     }
