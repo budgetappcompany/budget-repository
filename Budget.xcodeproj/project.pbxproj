@@ -24,6 +24,8 @@
 		4E6C72541C863AD1001522DB /* despesas.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C724E1C863AD1001522DB /* despesas.png */; };
 		4E6C72551C863AD1001522DB /* investimentos.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C724F1C863AD1001522DB /* investimentos.png */; };
 		4E6C72561C863AD1001522DB /* receitas.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72501C863AD1001522DB /* receitas.png */; };
+		A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840814F1C8E0EC700186308 /* PorcentagemController.swift */; };
+		A84081521C8E201E00186308 /* Porcentagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84081511C8E201E00186308 /* Porcentagem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		4E6C724E1C863AD1001522DB /* despesas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = despesas.png; path = Imagens/icon/despesas.png; sourceTree = "<group>"; };
 		4E6C724F1C863AD1001522DB /* investimentos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = investimentos.png; path = Imagens/icon/investimentos.png; sourceTree = "<group>"; };
 		4E6C72501C863AD1001522DB /* receitas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receitas.png; path = Imagens/icon/receitas.png; sourceTree = "<group>"; };
+		A840814F1C8E0EC700186308 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PorcentagemController.swift; sourceTree = "<group>"; };
+		A84081511C8E201E00186308 /* Porcentagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Porcentagem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,22 +98,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0DCEC88E1C88E6D000EC224D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0DCEC8951C88E90800EC224D /* Calculadora.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		0DCEC8921C88E7CA00EC224D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
 		4E6C72081C86393E001522DB = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +121,7 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
-				0DCEC8921C88E7CA00EC224D /* Controller */,
-				0DCEC88E1C88E6D000EC224D /* Model */,
+				A84081531C8E472C00186308 /* Calculadora */,
 				4E6C72141C86393E001522DB /* AppDelegate.swift */,
 				4E6C72161C86393E001522DB /* ViewController.swift */,
 				4E6C72181C86393E001522DB /* Main.storyboard */,
@@ -185,6 +172,25 @@
 				4E6C72501C863AD1001522DB /* receitas.png */,
 			);
 			name = icon;
+			sourceTree = "<group>";
+		};
+		A84081531C8E472C00186308 /* Calculadora */ = {
+			isa = PBXGroup;
+			children = (
+				A84081541C8E474A00186308 /* Porcentagem */,
+				0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */,
+				0DCEC8951C88E90800EC224D /* Calculadora.swift */,
+			);
+			name = Calculadora;
+			sourceTree = "<group>";
+		};
+		A84081541C8E474A00186308 /* Porcentagem */ = {
+			isa = PBXGroup;
+			children = (
+				A84081511C8E201E00186308 /* Porcentagem.swift */,
+				A840814F1C8E0EC700186308 /* PorcentagemController.swift */,
+			);
+			name = Porcentagem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,10 +331,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */,
 				0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */,
 				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
+				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,30 +8,30 @@
 
 import UIKit
 
-class Calculadora: NSObject {
+class Calculadora {
     var numeroAtual:Float = 0
 //    var segundoValor:Float = 0
-    var resultadoOp:Float = 0
+    var numeroFinal:Float = 0
     var opcao:Int = 0
     
     func calcularOperacao() -> Float {
         switch(opcao){
             case 1:
-                resultadoOp += numeroAtual
+                numeroFinal += numeroAtual
                 break;
             case 2:
-                resultadoOp -= numeroAtual
+                numeroFinal -= numeroAtual
                 break;
             case 3:
-                resultadoOp /= numeroAtual
+                numeroFinal /= numeroAtual
                 break;
             case 4:
-                resultadoOp *= numeroAtual
+                numeroFinal *= numeroAtual
                 break;
             default:
                 break;
         }
         
-        return resultadoOp
+        return numeroFinal
     }
 }

@@ -64,9 +64,9 @@ class CalculadoraController: UIViewController {
         if(sender.currentTitle == "-" && calculadora?.numeroAtual == 0){
             lblVisor.text = sender.currentTitle!
         }else{
-            if(calculadora?.resultadoOp == 0){
-                calculadora?.resultadoOp = calculadora!.numeroAtual
-                lblResultado.text = calculadora!.resultadoOp.stringValue
+            if(calculadora?.numeroFinal == 0){
+                calculadora?.numeroFinal = calculadora!.numeroAtual
+                lblResultado.text = calculadora!.numeroFinal.stringValue
             } else {
                 lblResultado.text = calculadora!.calcularOperacao().stringValue
             }
@@ -80,14 +80,14 @@ class CalculadoraController: UIViewController {
     @IBAction func realizarOperacao(sender: UIButton) {
         lblVisor.text = calculadora!.calcularOperacao().stringValue
         calculadora?.numeroAtual = lblVisor.text!.floatValue
-        calculadora?.resultadoOp = 0
+        calculadora?.numeroFinal = 0
         lblResultado.text = ""
         lblOperador.text = ""
     }
     
     @IBAction func limparVisor(sender: UIButton) {
         calculadora?.numeroAtual = 0
-        calculadora?.resultadoOp = 0
+        calculadora?.numeroFinal = 0
         lblResultado.text = ""
         lblOperador.text = ""
         lblVisor.text = "0"
