@@ -30,11 +30,12 @@ class PorcentagemController: UIViewController {
     
     @IBAction func calcularValorPorcentagem(sender: UIButton) {
         //Porcentagem do valor
+        
         calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtSegundoValor.text!.floatValue
-            print(calculadora.calcularPorcentagemDoValor())
+            lblResultado.text = calculadora.calcularPorcentagemDoValor().stringValue
         }
     }
     
@@ -42,25 +43,39 @@ class PorcentagemController: UIViewController {
         //Valor porcentagem
         calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
         calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
+        
         if let calculadora = calculadora as? Porcentagem {
-            print(calculadora.calcularValorPorcentagem())
+            lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"
+        }
+    }
+    
+    @IBAction func changePlaceholderVariacao(sender: UISegmentedControl) {
+        if (sgmTipo.selectedSegmentIndex == 0) {
+            txtSegundoValor.placeholder = "Valor aumentado"
+        } else {
+            txtSegundoValor.placeholder = "Valor reduzido"
         }
     }
     
     @IBAction func calcularVariacao(sender: UIButton) {
         //Aumento percentual
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
-        if let calculadora = calculadora as? Porcentagem {
-            print(calculadora.calcularAumentoPercentual())
-        }
+        calculadora?.numeroAtual = txtSegundoValor.text!.floatValue
+        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatValue
         
-        //Diminuição percentual
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
         if let calculadora = calculadora as? Porcentagem {
-            print(calculadora.calcularDiminuicaoPercentual())
+            if (sgmTipo.selectedSegmentIndex == 0) {
+                lblResultado.text = String(format: "%.4g", calculadora.calcularAumentoPercentual()) + "%"
+            } else {
+                lblResultado.text = String(format: "%.4g", calculadora.calcularDiminuicaoPercentual()) + "%"
+            }
         }
+//        
+//        //Diminuição percentual
+//        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
+//        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
+//        if let calculadora = calculadora as? Porcentagem {
+//            print(calculadora.calcularDiminuicaoPercentual())
+//        }
     }
     
     @IBAction func calcularValorInicial(sender: UIButton) {
@@ -69,30 +84,36 @@ class PorcentagemController: UIViewController {
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtSegundoValor.text!.floatValue
-            if (true) {
-                print(calculadora.calcularValorInicialAumentado())
+            
+            if (sgmTipo.selectedSegmentIndex == 0) {
+                lblResultado.text = calculadora.calcularValorInicialAumentado().stringValue
             } else {
-                print(calculadora.calcularValorInicialDiminuido())
+                lblResultado.text = calculadora.calcularValorInicialDiminuido().stringValue
             }
         }
     }
     
     @IBAction func calcularJurosDescontos(sender: UIButton) {
         //Juros
-        calculadora?.numeroAtual = 1000
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
         
         if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = 15
-            print(calculadora.calcularValorComJuros())
+            calculadora.porcentagem = txtSegundoValor.text!.floatValue
+            
+            if (sgmTipo.selectedSegmentIndex == 0) {
+                lblResultado.text = calculadora.calcularValorComJuros().stringValue
+            } else {
+                lblResultado.text = calculadora.calcularValorComDesconto().stringValue
+            }
         }
         
         //Desconto
-        calculadora?.numeroAtual = 1000
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = 15
-            print(calculadora.calcularValorComDesconto())
-        }
+//        calculadora?.numeroAtual = 1000
+//        
+//        if let calculadora = calculadora as? Porcentagem {
+//            calculadora.porcentagem = 15
+//            print(calculadora.calcularValorComDesconto())
+//        }
     }
     
     
