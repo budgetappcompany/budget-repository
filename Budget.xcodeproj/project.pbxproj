@@ -26,6 +26,14 @@
 		4E6C72561C863AD1001522DB /* receitas.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72501C863AD1001522DB /* receitas.png */; };
 		A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840814F1C8E0EC700186308 /* PorcentagemController.swift */; };
 		A84081521C8E201E00186308 /* Porcentagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84081511C8E201E00186308 /* Porcentagem.swift */; };
+		A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6F91C927955005386C3 /* Conta+CoreDataProperties.swift */; };
+		A87DB6FE1C927955005386C3 /* Conta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6FA1C927955005386C3 /* Conta.swift */; };
+		A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6FB1C927955005386C3 /* TipoConta+CoreDataProperties.swift */; };
+		A87DB7001C927955005386C3 /* TipoConta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6FC1C927955005386C3 /* TipoConta.swift */; };
+		A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7031C927A1E005386C3 /* ContaViewController.swift */; };
+		A87DB7061C927A71005386C3 /* ContasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7051C927A71005386C3 /* ContasTableViewController.swift */; };
+		A87DB7081C9282EA005386C3 /* TipoContasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7071C9282EA005386C3 /* TipoContasTableViewController.swift */; };
+		A87DB70A1C9285CF005386C3 /* TipoContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7091C9285CF005386C3 /* TipoContaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +79,14 @@
 		4E6C72501C863AD1001522DB /* receitas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receitas.png; path = Imagens/icon/receitas.png; sourceTree = "<group>"; };
 		A840814F1C8E0EC700186308 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PorcentagemController.swift; sourceTree = "<group>"; };
 		A84081511C8E201E00186308 /* Porcentagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Porcentagem.swift; sourceTree = "<group>"; };
+		A87DB6F91C927955005386C3 /* Conta+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conta+CoreDataProperties.swift"; path = "Budget/Conta+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A87DB6FA1C927955005386C3 /* Conta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conta.swift; path = Budget/Conta.swift; sourceTree = "<group>"; };
+		A87DB6FB1C927955005386C3 /* TipoConta+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TipoConta+CoreDataProperties.swift"; path = "Budget/TipoConta+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A87DB6FC1C927955005386C3 /* TipoConta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoConta.swift; path = Budget/TipoConta.swift; sourceTree = "<group>"; };
+		A87DB7031C927A1E005386C3 /* ContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContaViewController.swift; path = Budget/ContaViewController.swift; sourceTree = "<group>"; };
+		A87DB7051C927A71005386C3 /* ContasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContasTableViewController.swift; sourceTree = "<group>"; };
+		A87DB7071C9282EA005386C3 /* TipoContasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipoContasTableViewController.swift; sourceTree = "<group>"; };
+		A87DB7091C9285CF005386C3 /* TipoContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipoContaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +137,8 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				A87DB7021C927970005386C3 /* Tipo Contas */,
+				A87DB7011C927961005386C3 /* Contas */,
 				A84081531C8E472C00186308 /* Calculadora */,
 				4E6C72141C86393E001522DB /* AppDelegate.swift */,
 				4E6C72161C86393E001522DB /* ViewController.swift */,
@@ -191,6 +209,30 @@
 				A840814F1C8E0EC700186308 /* PorcentagemController.swift */,
 			);
 			name = Porcentagem;
+			sourceTree = "<group>";
+		};
+		A87DB7011C927961005386C3 /* Contas */ = {
+			isa = PBXGroup;
+			children = (
+				A87DB6F91C927955005386C3 /* Conta+CoreDataProperties.swift */,
+				A87DB6FA1C927955005386C3 /* Conta.swift */,
+				A87DB7031C927A1E005386C3 /* ContaViewController.swift */,
+				A87DB7051C927A71005386C3 /* ContasTableViewController.swift */,
+			);
+			name = Contas;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A87DB7021C927970005386C3 /* Tipo Contas */ = {
+			isa = PBXGroup;
+			children = (
+				A87DB6FB1C927955005386C3 /* TipoConta+CoreDataProperties.swift */,
+				A87DB6FC1C927955005386C3 /* TipoConta.swift */,
+				A87DB7071C9282EA005386C3 /* TipoContasTableViewController.swift */,
+				A87DB7091C9285CF005386C3 /* TipoContaViewController.swift */,
+			);
+			name = "Tipo Contas";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,11 +373,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A87DB70A1C9285CF005386C3 /* TipoContaViewController.swift in Sources */,
+				A87DB6FE1C927955005386C3 /* Conta.swift in Sources */,
 				A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */,
+				A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */,
 				0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */,
+				A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */,
+				A87DB7001C927955005386C3 /* TipoConta.swift in Sources */,
 				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
+				A87DB7081C9282EA005386C3 /* TipoContasTableViewController.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
+				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
+				A87DB7061C927A71005386C3 /* ContasTableViewController.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 			);
