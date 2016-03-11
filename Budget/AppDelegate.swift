@@ -17,6 +17,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        //Create Managed Object
+//        let conta = NSEntityDescription.entityForName("Conta", inManagedObjectContext: self.managedObjectContext)
+//        let newConta = NSManagedObject(entity: conta!, insertIntoManagedObjectContext: self.managedObjectContext)
+//        
+//        //Configure new person
+//        newConta.setValue("Bradesco", forKey: "nome")
+//        newConta.setValue(1500, forKey: "saldo")
+//        
+//        let tipoConta = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: self.managedObjectContext)
+//        let newTipoConta = NSManagedObject(entity: tipoConta!, insertIntoManagedObjectContext: self.managedObjectContext)
+//        
+//        newTipoConta.setValue("Poupança", forKey: "nome")
+//        
+//        newConta.setValue(newTipoConta, forKey: "tipoconta")
+//        
+//        do{
+//            try newTipoConta.managedObjectContext?.save()
+//        }catch{
+//            print(error)
+//        }
+        
         return true
     }
 
