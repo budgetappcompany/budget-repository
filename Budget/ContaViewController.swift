@@ -15,24 +15,22 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     
     var conta: Conta? = nil
     var tipoConta: TipoConta? = nil
-    //var alterar: Bool = false
     
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtSaldo: UITextField!
     @IBOutlet weak var txtTipo: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         if let conta = conta {
             txtNome.text = conta.nome!
             txtSaldo.text = String(conta.saldo!)
+            tipoConta = conta.tipoconta as? TipoConta
         }
-        if let tipoConta = tipoConta {
-            txtTipo.text = tipoConta.nome
-        } else {
-            txtTipo.text = conta?.tipoconta?.valueForKey("nome") as? String
-        }
+        
+        txtTipo.text = tipoConta?.nome
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,12 +63,12 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         let context = self.context
         let contaEntity = NSEntityDescription.entityForName("Conta", inManagedObjectContext: context)
         let newConta = NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: context)
-            
-            
+
+        
         newConta.setValue(txtNome.text, forKey: "nome")
         newConta.setValue(Float(txtSaldo.text!), forKey: "saldo")
         newConta.setValue(tipoConta, forKey: "tipoconta")
-            
+        
         do{
             try newConta.managedObjectContext?.save()
         }catch{
@@ -98,7 +96,10 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     // Define Delegate Method
     func tipoContasViewControllerResponse(tipoConta: TipoConta) {
         self.tipoConta = tipoConta
+        txtTipo.text = tipoConta.nome
     }
+
+    
 
     // MARK: - Navigation
 /*
@@ -115,6 +116,8 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         if segue.identifier == "alterarTipoConta"{
             let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
             tipoContasController.conta = self.conta
+            tipoContasController.delegate = self
         }
+        
     }
 }

@@ -12,6 +12,13 @@ import CoreData
 
 class Conta: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
-
+    let formatter = NSNumberFormatter()
+    
+    func moeda(valor: Float) -> String{
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        return formatter.stringFromNumber(valor)!
+    }
+    
+    
 }
