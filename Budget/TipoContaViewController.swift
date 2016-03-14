@@ -40,13 +40,15 @@ class TipoContaViewController: UIViewController {
     
     @IBAction func btnSave(sender: AnyObject) {
         
-        if tipoConta != nil {
-            updateConta()
-        }else{
+//        if tipoConta != nil {
+//            updateConta()
+//            
+//        }else{
             addConta()
-        }
+//          navigationController?.popViewControllerAnimated(true)
+//        }
         
-        dissmissViewController()
+//        dissmissViewController()
     }
     
     func dissmissViewController(){
@@ -63,21 +65,38 @@ class TipoContaViewController: UIViewController {
         
         do{
             try newTipoConta.managedObjectContext?.save()
+            
+            
         }catch{
-            print(error)
+            mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
         }
+        
+        
     }
     
-    func updateConta(){
+    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
         
-        tipoConta?.nome = txtNome.text
+        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
         
-        do{
-            try self.context.save()
-        }catch{
-            print(error)
-        }
+        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+        detalhes.addAction(cancelar)
+        
+        presentViewController(detalhes, animated: true, completion: nil)
+        
     }
+    
+//    func updateConta(){
+//        
+//        tipoConta?.nome = txtNome.text
+//        
+//        do{
+//            try self.context.save()
+//        }catch{
+//            print(error)
+//        }
+//        
+//        
+//    }
     
     
 //    // Define Delegate Method
