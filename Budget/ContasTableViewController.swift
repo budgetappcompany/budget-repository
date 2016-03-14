@@ -43,7 +43,8 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     func contasFetchRequest() -> NSFetchRequest{
         let fetchRequest = NSFetchRequest(entityName: "Conta")
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let secondarySortDescriptor = NSSortDescriptor(key: "tipoconta.nome", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor, secondarySortDescriptor]
         return fetchRequest
     }
     
@@ -63,14 +64,23 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        let numberOfSections = frc.sections?.count
-        return numberOfSections!
+        
+        if let sections = frc.sections {
+            return sections.count
+        }
+        
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let numberOfRowsInSection = frc.sections?[section].numberOfObjects
-        return numberOfRowsInSection!
+       
+        if let sections = frc.sections {
+            let currentSection = sections[section]
+            return currentSection.numberOfObjects
+        }
+        
+        return 0
     }
 
     
@@ -104,17 +114,41 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
             let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-            context.deleteObject(managedObject)
             
-            do{
-                try context.save()
-            }catch{
-                print(error)
+            // Método para ser chamado ao deletar item
+            func removerSelecionado(action:UIAlertAction){
+                do{
+                    context.deleteObject(managedObject)
+                    try context.save()
+                }catch{
+                    mostrarErro()
+                }
             }
+            
+            let detalhes = UIAlertController(title: "Deletar", message: "Você quer mesmo deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+            detalhes.addAction(cancelar)
+            
+            let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+            detalhes.addAction(deletar)
+            
+            presentViewController(detalhes, animated: true, completion: nil)
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+        
+        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+        detalhes.addAction(cancelar)
+        
+        presentViewController(detalhes, animated: true, completion: nil)
+        
     }
 
     /*

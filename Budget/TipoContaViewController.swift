@@ -45,7 +45,7 @@ class TipoContaViewController: UIViewController {
 //            
 //        }else{
             addConta()
-//          navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewControllerAnimated(true)
 //        }
         
 //        dissmissViewController()
