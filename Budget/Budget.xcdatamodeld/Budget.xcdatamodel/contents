@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15A284" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
     <entity name="Conta" representedClassName=".Conta" syncable="YES">
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="saldo" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="tipoconta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
+        <relationship name="tipoconta" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
     </entity>
     <entity name="TipoConta" representedClassName=".TipoConta" syncable="YES">
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,6 +11,6 @@
     </entity>
     <elements>
         <element name="Conta" positionX="-279" positionY="-126" width="128" height="90"/>
-        <element name="TipoConta" positionX="-99" positionY="-109" width="128" height="73"/>
+        <element name="TipoConta" positionX="-99" positionY="-109" width="128" height="75"/>
     </elements>
 </model>

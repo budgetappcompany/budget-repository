@@ -16,22 +16,16 @@ protocol TipoContasViewControllerDelegate: class {
 class TipoContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     weak var delegate: TipoContasViewControllerDelegate?
-    var conta: Conta?
-
+    var alfabeto: [String] = ["A", "B", "C"]
     
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var frc = NSFetchedResultsController()
+//    var tipoContas:[TipoConta]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        frc = getFetchedResultsController()
+        let frc = getFetchedResultsController()
         frc.delegate = self
         
         do{
@@ -58,7 +52,6 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     func getFetchedResultsController() -> NSFetchedResultsController {
         
         frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        
         return frc
     }
     
@@ -106,26 +99,45 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
         return true
     }
     */
-/*
+
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-            context.deleteObject(managedObject)
             
-            do{
-                try context.save()
-            }catch{
-                print(error)
+//            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+            
+            let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
+            
+            if (tipoConta.conta?.count > 0){
+                mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
+            }else{
+                context.deleteObject(tipoConta)
+                do{
+                    try context.save()
+                }catch{
+                    print(error)
+                }
             }
+            
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-*/
+    
+    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+        
+        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+        detalhes.addAction(cancelar)
+        
+        presentViewController(detalhes, animated: true, completion: nil)
+        
+    }
+
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -146,13 +158,12 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     // In a storyboard-based application, you will often want to do a little preparation before navigation
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //
-//        if segue.identifier == "encaminharCellTipoConta"{
+//        if segue.identifier == "editar"{
 //            let cell = sender as! UITableViewCell
 //            let indexPath = tableView.indexPathForCell(cell)
-//            let contaController : ContaViewController = segue.destinationViewController as! ContaViewController
+//            let contaController : TipoContaViewController = segue.destinationViewController as! TipoContaViewController
 //            let tipoConta: TipoConta = frc.objectAtIndexPath(indexPath!) as! TipoConta
 //            contaController.tipoConta = tipoConta
-//            contaController.conta = self.conta
 //        }
 //        // Get the new view controller using segue.destinationViewController.
 //        // Pass the selected object to the new view controller.

@@ -49,7 +49,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     
     func getFetchedResultsController() -> NSFetchedResultsController {
         
-        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "tipoconta.nome", cacheName: nil)
         
         return frc
     }

@@ -98,6 +98,17 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         self.tipoConta = tipoConta
         txtTipo.text = tipoConta.nome
     }
+    
+    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+        
+        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+        detalhes.addAction(cancelar)
+        
+        presentViewController(detalhes, animated: true, completion: nil)
+        
+    }
 
     
 
@@ -115,7 +126,6 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         
         if segue.identifier == "alterarTipoConta"{
             let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
-            tipoContasController.conta = self.conta
             tipoContasController.delegate = self
         }
         
