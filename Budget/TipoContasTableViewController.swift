@@ -125,7 +125,7 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
                 mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
             }else{
                 
-                let detalhes = UIAlertController(title: "Deletar", message: "Você quer mesmo deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+                let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
                 detalhes.addAction(cancelar)

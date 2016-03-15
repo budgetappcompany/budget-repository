@@ -66,7 +66,7 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
 
         
         newConta.setValue(txtNome.text, forKey: "nome")
-        newConta.setValue(Float(txtSaldo.text!), forKey: "saldo")
+        newConta.setValue(txtSaldo.text?.floatConverter, forKey: "saldo")
         newConta.setValue(tipoConta, forKey: "tipoconta")
         
         do{

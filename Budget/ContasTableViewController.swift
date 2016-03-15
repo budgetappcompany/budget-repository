@@ -85,14 +85,17 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        
+//        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell: PlaceTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PlaceTableViewCell
         // Configure the cell...
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
 
+        cell.txtConta?.text = conta.nome
+        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
         
-        cell.textLabel?.text = conta.nome
-        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
+//        cell.textLabel?.text = conta.nome
+//        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
             //String("R$ \(conta.saldo!)")
         
         
@@ -125,7 +128,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
                 }
             }
             
-            let detalhes = UIAlertController(title: "Deletar", message: "Você quer mesmo deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
             
             let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
             detalhes.addAction(cancelar)
