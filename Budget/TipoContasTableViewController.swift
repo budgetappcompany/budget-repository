@@ -110,15 +110,31 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             
             let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
             
+            // Método para ser chamado ao deletar item
+            func removerSelecionado(action:UIAlertAction){
+                do{
+                    context.deleteObject(tipoConta)
+                    try context.save()
+                }catch{
+                    mostrarErro()
+                }
+            }
+            
+            // Verifica se tem alguma conta associada, se não tiver permite deletarß
             if (tipoConta.conta?.count > 0){
                 mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
             }else{
-                context.deleteObject(tipoConta)
-                do{
-                    try context.save()
-                }catch{
-                    print(error)
-                }
+                
+                let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+                detalhes.addAction(cancelar)
+                
+                let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+                detalhes.addAction(deletar)
+                
+                presentViewController(detalhes, animated: true, completion: nil)
+                
             }
             
             
