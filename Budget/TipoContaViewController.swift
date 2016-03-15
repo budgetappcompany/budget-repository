@@ -11,7 +11,7 @@ import CoreData
 
 class TipoContaViewController: UIViewController {
 
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var tipoConta: TipoConta?
     
@@ -45,7 +45,7 @@ class TipoContaViewController: UIViewController {
 //            
 //        }else{
             addConta()
-//          navigationController?.popViewControllerAnimated(true)
+          navigationController?.popViewControllerAnimated(true)
 //        }
         
 //        dissmissViewController()
@@ -56,33 +56,21 @@ class TipoContaViewController: UIViewController {
     }
     
     func addConta(){
-        let context = self.context
-        let tipoContaEntity = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: context)
-        let newTipoConta = NSManagedObject(entity: tipoContaEntity!, insertIntoManagedObjectContext: context)
+//        let context = self.context
+//        let tipoContaEntity = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: context)
+//        let newTipoConta = NSManagedObject(entity: tipoContaEntity!, insertIntoManagedObjectContext: context)
         
+        tipoConta = TipoConta.getTipoConta()
         
-        newTipoConta.setValue(txtNome.text, forKey: "nome")
+//        tipoConta.setValue(txtNome.text, forKey: "nome")
         
+        tipoConta?.nome = txtNome.text
         do{
-            try newTipoConta.managedObjectContext?.save()
-            
-            
+            try tipoConta?.managedObjectContext?.save()
         }catch{
-            mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+            presentViewController(alert, animated: true, completion: nil)
         }
-        
-        
-    }
-    
-    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-        
-        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-        detalhes.addAction(cancelar)
-        
-        presentViewController(detalhes, animated: true, completion: nil)
-        
     }
     
 //    func updateConta(){

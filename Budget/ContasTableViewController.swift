@@ -11,7 +11,8 @@ import CoreData
 
 class ContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let context = ContextFactory.getContext()
     var frc = NSFetchedResultsController()
     
     override func viewDidLoad() {
