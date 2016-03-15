@@ -11,7 +11,7 @@ import CoreData
 
 class TipoContaViewController: UIViewController {
 
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var tipoConta: TipoConta?
     
@@ -40,13 +40,15 @@ class TipoContaViewController: UIViewController {
     
     @IBAction func btnSave(sender: AnyObject) {
         
-        if tipoConta != nil {
-            updateConta()
-        }else{
+//        if tipoConta != nil {
+//            updateConta()
+//            
+//        }else{
             addConta()
-        }
+            navigationController?.popViewControllerAnimated(true)
+//        }
         
-        dissmissViewController()
+//        dissmissViewController()
     }
     
     func dissmissViewController(){
@@ -54,30 +56,35 @@ class TipoContaViewController: UIViewController {
     }
     
     func addConta(){
-        let context = self.context
-        let tipoContaEntity = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: context)
-        let newTipoConta = NSManagedObject(entity: tipoContaEntity!, insertIntoManagedObjectContext: context)
+//        let context = self.context
+//        let tipoContaEntity = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: context)
+//        let newTipoConta = NSManagedObject(entity: tipoContaEntity!, insertIntoManagedObjectContext: context)
         
+        tipoConta = TipoConta.getTipoConta()
         
-        newTipoConta.setValue(txtNome.text, forKey: "nome")
+//        tipoConta.setValue(txtNome.text, forKey: "nome")
         
+        tipoConta?.nome = txtNome.text
         do{
-            try newTipoConta.managedObjectContext?.save()
+            try tipoConta?.managedObjectContext?.save()
         }catch{
-            print(error)
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
-    func updateConta(){
-        
-        tipoConta?.nome = txtNome.text
-        
-        do{
-            try self.context.save()
-        }catch{
-            print(error)
-        }
-    }
+//    func updateConta(){
+//        
+//        tipoConta?.nome = txtNome.text
+//        
+//        do{
+//            try self.context.save()
+//        }catch{
+//            print(error)
+//        }
+//        
+//        
+//    }
     
     
 //    // Define Delegate Method

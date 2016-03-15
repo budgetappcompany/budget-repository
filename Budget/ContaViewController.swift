@@ -11,9 +11,9 @@ import CoreData
 
 class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//    let context = ContextFactory.getContext()
     
-    var conta: Conta? = nil
+    var conta: Conta?
     var tipoConta: TipoConta? = nil
     
     @IBOutlet weak var txtNome: UITextField!
@@ -39,7 +39,6 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     }
     
     @IBAction func btnCancel(sender: AnyObject) {
-        
         dissmissViewController()
     }
     
@@ -60,17 +59,20 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     }
     
     func addConta(){
-        let context = self.context
-        let contaEntity = NSEntityDescription.entityForName("Conta", inManagedObjectContext: context)
-        let newConta = NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: context)
-
+//        let context = self.context
+//        let contaEntity = NSEntityDescription.entityForName("Conta", inManagedObjectContext: context)
         
-        newConta.setValue(txtNome.text, forKey: "nome")
-        newConta.setValue(Float(txtSaldo.text!), forKey: "saldo")
-        newConta.setValue(tipoConta, forKey: "tipoconta")
+        conta = Conta.getConta()
+        conta?.nome = txtNome.text
+        conta?.saldo = txtSaldo.text!.floatConverter
+        conta?.tipoconta = tipoConta
+        
+//        conta?.setValue(txtNome.text, forKey: "nome")
+//        conta.setValue(Float(txtSaldo.text!), forKey: "saldo")
+//        newConta.setValue(tipoConta, forKey: "tipoconta")
         
         do{
-            try newConta.managedObjectContext?.save()
+            try conta?.managedObjectContext?.save()
         }catch{
             print(error)
         }
@@ -86,7 +88,7 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         }
         
         do{
-            try self.context.save()
+            try conta?.managedObjectContext?.save()
         }catch{
             print(error)
         }
@@ -97,6 +99,17 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     func tipoContasViewControllerResponse(tipoConta: TipoConta) {
         self.tipoConta = tipoConta
         txtTipo.text = tipoConta.nome
+    }
+    
+    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+        
+        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+        detalhes.addAction(cancelar)
+        
+        presentViewController(detalhes, animated: true, completion: nil)
+        
     }
 
     
@@ -115,7 +128,6 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         
         if segue.identifier == "alterarTipoConta"{
             let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
-            tipoContasController.conta = self.conta
             tipoContasController.delegate = self
         }
         

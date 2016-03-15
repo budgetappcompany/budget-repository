@@ -12,6 +12,8 @@ import CoreData
 
 class TipoConta: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    static func getTipoConta() -> TipoConta{
+        return ContextFactory.getManagedObject("TipoConta") as! TipoConta
+    }
 
 }
