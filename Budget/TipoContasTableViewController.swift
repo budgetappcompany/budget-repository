@@ -116,13 +116,14 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
                     context.deleteObject(tipoConta)
                     try context.save()
                 }catch{
-                    mostrarErro()
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
                 }
             }
             
             // Verifica se tem alguma conta associada, se não tiver permite deletarß
             if (tipoConta.conta?.count > 0){
-                mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
             }else{
                 
                 let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -143,16 +144,16 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-        
-        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-        detalhes.addAction(cancelar)
-        
-        presentViewController(detalhes, animated: true, completion: nil)
-        
-    }
+//    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+//        
+//        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+//        detalhes.addAction(cancelar)
+//        
+//        
+//        
+//    }
 
     /*
     // Override to support rearranging the table view.

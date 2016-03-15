@@ -39,4 +39,8 @@ class Conta: NSManagedObject {
         formatter.locale = NSLocale(localeIdentifier: "pt_BR")
         return (formatter.stringFromNumber(valor))!
     }
+    
+
+    
+    
 }

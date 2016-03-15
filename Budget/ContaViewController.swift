@@ -64,7 +64,7 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         
         conta = Conta.getConta()
         conta?.nome = txtNome.text
-        conta?.saldo = Float(txtSaldo.text!)
+        conta?.saldo = txtSaldo.text!.floatConverter
         conta?.tipoconta = tipoConta
         
 //        conta?.setValue(txtNome.text, forKey: "nome")
