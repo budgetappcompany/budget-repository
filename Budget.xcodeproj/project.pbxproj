@@ -28,11 +28,6 @@
 		A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6FB1C927955005386C3 /* TipoConta+CoreDataProperties.swift */; };
 		A87DB7001C927955005386C3 /* TipoConta.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6FC1C927955005386C3 /* TipoConta.swift */; };
 		A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7031C927A1E005386C3 /* ContaViewController.swift */; };
-		A89D52881C98BE920006A565 /* AKMaskField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D52821C98BE920006A565 /* AKMaskField.swift */; };
-		A89D52891C98BE920006A565 /* AKMaskFieldBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D52831C98BE920006A565 /* AKMaskFieldBlock.swift */; };
-		A89D528A1C98BE920006A565 /* AKMaskFieldBlockChars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D52841C98BE920006A565 /* AKMaskFieldBlockChars.swift */; };
-		A89D528B1C98BE920006A565 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D52861C98BE920006A565 /* Range.swift */; };
-		A89D528C1C98BE920006A565 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D52871C98BE920006A565 /* String.swift */; };
 		A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */; };
 		A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BF21C97819700E5FFD6 /* Notification.swift */; };
 /* End PBXBuildFile section */
@@ -82,11 +77,6 @@
 		A87DB6FB1C927955005386C3 /* TipoConta+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TipoConta+CoreDataProperties.swift"; path = "Budget/TipoConta+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A87DB6FC1C927955005386C3 /* TipoConta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoConta.swift; path = Budget/TipoConta.swift; sourceTree = "<group>"; };
 		A87DB7031C927A1E005386C3 /* ContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContaViewController.swift; path = Budget/ContaViewController.swift; sourceTree = "<group>"; };
-		A89D52821C98BE920006A565 /* AKMaskField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskField.swift; sourceTree = "<group>"; };
-		A89D52831C98BE920006A565 /* AKMaskFieldBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskFieldBlock.swift; sourceTree = "<group>"; };
-		A89D52841C98BE920006A565 /* AKMaskFieldBlockChars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskFieldBlockChars.swift; sourceTree = "<group>"; };
-		A89D52861C98BE920006A565 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
-		A89D52871C98BE920006A565 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextFactory.swift; sourceTree = "<group>"; };
 		A8AF9BF21C97819700E5FFD6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,7 +129,6 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
-				A89D52811C98BE920006A565 /* AKMaskField */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
 				A87DB7021C927970005386C3 /* Tipo Contas */,
 				A87DB7011C927961005386C3 /* Contas */,
@@ -215,26 +204,6 @@
 			);
 			name = "Tipo Contas";
 			path = ..;
-			sourceTree = "<group>";
-		};
-		A89D52811C98BE920006A565 /* AKMaskField */ = {
-			isa = PBXGroup;
-			children = (
-				A89D52821C98BE920006A565 /* AKMaskField.swift */,
-				A89D52831C98BE920006A565 /* AKMaskFieldBlock.swift */,
-				A89D52841C98BE920006A565 /* AKMaskFieldBlockChars.swift */,
-				A89D52851C98BE920006A565 /* SwiftExtensions */,
-			);
-			path = AKMaskField;
-			sourceTree = "<group>";
-		};
-		A89D52851C98BE920006A565 /* SwiftExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				A89D52861C98BE920006A565 /* Range.swift */,
-				A89D52871C98BE920006A565 /* String.swift */,
-			);
-			path = SwiftExtensions;
 			sourceTree = "<group>";
 		};
 		A8AF9BED1C97713A00E5FFD6 /* Factory */ = {
@@ -378,14 +347,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E5FFAA81C935E0F00C50F03 /* TipoContaViewController.swift in Sources */,
-				A89D528B1C98BE920006A565 /* Range.swift in Sources */,
-				A89D528C1C98BE920006A565 /* String.swift in Sources */,
 				A87DB6FE1C927955005386C3 /* Conta.swift in Sources */,
 				A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */,
 				A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */,
-				A89D52881C98BE920006A565 /* AKMaskField.swift in Sources */,
 				4E5FFAA71C935E0F00C50F03 /* TipoContasTableViewController.swift in Sources */,
-				A89D528A1C98BE920006A565 /* AKMaskFieldBlockChars.swift in Sources */,
 				A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */,
 				0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */,
 				A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */,
@@ -396,7 +361,6 @@
 				4E67768C1C97765A00388045 /* PlaceTableViewCell.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
-				A89D52891C98BE920006A565 /* AKMaskFieldBlock.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 				A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */,
