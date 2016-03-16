@@ -42,19 +42,38 @@ class CalculadoraController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func pegarValor() -> String{
+        let string = lblVisor.text
+//        print(lblVisor.text)
+        print(lblOperador.text!)
+        let index2 = string!.rangeOfString(lblOperador.text!, options: .BackwardsSearch)?.startIndex
+        if let index = index2?.advancedBy(1){
+            
+            return (string!.substringWithRange(Range<String.Index>(start: index, end: lblVisor.text!.endIndex)))
+        }
+        return lblVisor.text!
+    }
+    
     @IBAction func inserirNumero(sender: UIButton) {
-        if((calculadora?.numeroAtual == 0) && (!(lblVisor.text!.containsString("."))) && lblVisor.text != "-"){
+//        if((calculadora?.numeroAtual == 0)){
+//            lblVisor.text = sender.currentTitle
+//        } else {
+//            lblVisor.text?.appendContentsOf(sender.currentTitle!)
+//        }
+        
+        if((lblVisor.text == "0")){
             lblVisor.text = sender.currentTitle
         } else {
             lblVisor.text?.appendContentsOf(sender.currentTitle!)
         }
         if (lblVisor.text!.floatValue != 0) {
-            calculadora?.numeroAtual = lblVisor.text!.floatValue
+            calculadora?.numeroAtual = pegarValor().floatValue
+            print(lblVisor.text)
+            print(calculadora?.numeroAtual)
         }
     }
     
     @IBAction func inserirDecimal(sender: UIButton) {
-        print(lblVisor.text!.containsString("."))
         if (!(lblVisor.text!.containsString("."))) {
             lblVisor.text?.appendContentsOf(".")
         }
@@ -70,7 +89,9 @@ class CalculadoraController: UIViewController {
             } else {
                 lblResultado.text = calculadora!.calcularOperacao().stringValue
             }
-            lblVisor.text = "0"
+//            lblVisor.text = "0"
+            lblVisor.text?.appendContentsOf(sender.currentTitle!)
+            
             lblOperador.text = sender.currentTitle
             calculadora?.opcao = sender.tag
             calculadora?.numeroAtual = 0
@@ -78,11 +99,11 @@ class CalculadoraController: UIViewController {
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-        lblVisor.text = calculadora!.calcularOperacao().stringValue
+//        lblVisor.text = calculadora!.calcularOperacao().stringValue
         calculadora?.numeroAtual = lblVisor.text!.floatValue
         calculadora?.numeroFinal = 0
-        lblResultado.text = ""
-        lblOperador.text = ""
+//        lblResultado.text = ""
+//        lblOperador.text = ""
     }
     
     @IBAction func limparVisor(sender: UIButton) {
@@ -90,7 +111,7 @@ class CalculadoraController: UIViewController {
         calculadora?.numeroFinal = 0
         lblResultado.text = ""
         lblOperador.text = ""
-        lblVisor.text = "0"
+//        lblVisor.text = "0"
     }
     
     /*

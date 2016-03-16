@@ -9,24 +9,43 @@
 import Foundation
 import CoreData
 
+enum VendingMachineError: ErrorType {
+    case InvalidSelection
+    case InsufficientFunds(coinsNeeded: Int)
+    case OutOfStock
+}
+
 extension String {
     var floatConverter: Float {
         let converter = NSNumberFormatter()
         converter.decimalSeparator = "."
+        
+        var decimal:NSNumber?
+        
         if let result = converter.numberFromString(self) {
-            return result.floatValue
+            decimal = result
         } else {
             converter.decimalSeparator = ","
             if let result = converter.numberFromString(self) {
-                return result.floatValue
+                decimal = result
             }
         }
+        
+        if let decimalConverter = decimal?.floatValue {
+            return decimalConverter
+        }
+        
+        print("Erro floatConverter")
         return 0
     }
     
     func floatConverterMoeda() -> Float {
         var result = self
-        result.removeRange(result.rangeOfString("R$")!)
+        
+        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
+
         return result.floatConverter
     }
 }
