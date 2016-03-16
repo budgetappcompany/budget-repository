@@ -21,6 +21,10 @@
 		4E6C72221C86393E001522DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72201C86393E001522DB /* LaunchScreen.storyboard */; };
 		4E6C722D1C86393E001522DB /* BudgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C722C1C86393E001522DB /* BudgetTests.swift */; };
 		4E6C72381C86393E001522DB /* BudgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72371C86393E001522DB /* BudgetUITests.swift */; };
+		4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */; };
+		4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113871C99D9F200B7A4B4 /* Receita.swift */; };
+		4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */; };
+		4EC38F4B1C99F5720079F381 /* ReceitaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC38F4A1C99F5720079F381 /* ReceitaViewController.swift */; };
 		A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840814F1C8E0EC700186308 /* PorcentagemController.swift */; };
 		A84081521C8E201E00186308 /* Porcentagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84081511C8E201E00186308 /* Porcentagem.swift */; };
 		A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB6F91C927955005386C3 /* Conta+CoreDataProperties.swift */; };
@@ -70,6 +74,10 @@
 		4E6C72331C86393E001522DB /* BudgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BudgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6C72371C86393E001522DB /* BudgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetUITests.swift; sourceTree = "<group>"; };
 		4E6C72391C86393E001522DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receita+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4E8113871C99D9F200B7A4B4 /* Receita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receita.swift; sourceTree = "<group>"; };
+		4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceitasTableViewController.swift; sourceTree = "<group>"; };
+		4EC38F4A1C99F5720079F381 /* ReceitaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceitaViewController.swift; sourceTree = "<group>"; };
 		A840814F1C8E0EC700186308 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PorcentagemController.swift; sourceTree = "<group>"; };
 		A84081511C8E201E00186308 /* Porcentagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Porcentagem.swift; sourceTree = "<group>"; };
 		A87DB6F91C927955005386C3 /* Conta+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conta+CoreDataProperties.swift"; path = "Budget/Conta+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -129,6 +137,7 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				4E8113851C99D83900B7A4B4 /* Receitas */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
 				A87DB7021C927970005386C3 /* Tipo Contas */,
 				A87DB7011C927961005386C3 /* Contas */,
@@ -160,6 +169,17 @@
 				4E6C72391C86393E001522DB /* Info.plist */,
 			);
 			path = BudgetUITests;
+			sourceTree = "<group>";
+		};
+		4E8113851C99D83900B7A4B4 /* Receitas */ = {
+			isa = PBXGroup;
+			children = (
+				4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */,
+				4E8113871C99D9F200B7A4B4 /* Receita.swift */,
+				4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */,
+				4EC38F4A1C99F5720079F381 /* ReceitaViewController.swift */,
+			);
+			name = Receitas;
 			sourceTree = "<group>";
 		};
 		A84081531C8E472C00186308 /* Calculadora */ = {
@@ -347,8 +367,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E5FFAA81C935E0F00C50F03 /* TipoContaViewController.swift in Sources */,
+				4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */,
 				A87DB6FE1C927955005386C3 /* Conta.swift in Sources */,
 				A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */,
+				4EC38F4B1C99F5720079F381 /* ReceitaViewController.swift in Sources */,
 				A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */,
 				4E5FFAA71C935E0F00C50F03 /* TipoContasTableViewController.swift in Sources */,
 				A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */,
@@ -358,10 +380,12 @@
 				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
 				4E5FFAA61C935E0F00C50F03 /* ContasTableViewController.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
+				4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */,
 				4E67768C1C97765A00388045 /* PlaceTableViewCell.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
+				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 				A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */,
 			);

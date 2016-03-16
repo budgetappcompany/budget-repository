@@ -15,7 +15,9 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     
     var conta: Conta?
     var tipoConta: TipoConta? = nil
+  
     
+    @IBOutlet weak var navegacao: UINavigationItem!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtSaldo: UITextField!
     @IBOutlet weak var txtTipo: UITextField!
@@ -28,6 +30,7 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
             txtNome.text = conta.nome!
             txtSaldo.text = String(conta.saldo!)
             tipoConta = conta.tipoconta as? TipoConta
+            navegacao.title = "Alterar conta"
         }
         
         txtTipo.text = tipoConta?.nome
@@ -74,7 +77,8 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         do{
             try conta?.managedObjectContext?.save()
         }catch{
-            print(error)
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -90,7 +94,8 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         do{
             try conta?.managedObjectContext?.save()
         }catch{
-            print(error)
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -101,16 +106,16 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         txtTipo.text = tipoConta.nome
     }
     
-    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-        
-        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-        detalhes.addAction(cancelar)
-        
-        presentViewController(detalhes, animated: true, completion: nil)
-        
-    }
+//    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+//        
+//        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+//        detalhes.addAction(cancelar)
+//        
+//        presentViewController(detalhes, animated: true, completion: nil)
+//        
+//    }
 
     
 
