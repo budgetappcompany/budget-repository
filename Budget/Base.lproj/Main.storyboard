@@ -290,7 +290,13 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saldo atual" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QYY-SD-cne">
                                 <rect key="frame" x="20" y="120" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="mask" value="{ddd}.{ddd},{dd}"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="maskTextField:" destination="AiM-Mv-JLb" eventType="editingChanged" id="8Rl-ge-WWC"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIC-Hc-7NM">
                                 <rect key="frame" x="20" y="160" width="173" height="30"/>
@@ -333,7 +339,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="txtNome" destination="ILw-CD-aS2" id="je8-Qa-UH1"/>
-                        <outlet property="txtSaldo" destination="QYY-SD-cne" id="chk-dS-bKJ"/>
+                        <outlet property="txtSaldo" destination="QYY-SD-cne" id="uK6-D3-s80"/>
                         <outlet property="txtTipo" destination="qIC-Hc-7NM" id="Tcv-cs-NgW"/>
                     </connections>
                 </viewController>
@@ -1371,7 +1377,7 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="caZ-4V-o87"/>
         <segue reference="72z-HH-3p2"/>
+        <segue reference="zJW-sh-t72"/>
     </inferredMetricsTieBreakers>
 </document>

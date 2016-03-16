@@ -93,7 +93,9 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
 
         cell.txtConta?.text = conta.nome
         cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
-        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+        if let saldo = conta.saldo?.floatValue {
+            cell.txtSaldo.text = conta.moeda(saldo)
+        }
         
 //        cell.textLabel?.text = conta.nome
 //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))

@@ -9,9 +9,86 @@
 import UIKit
 import CoreData
 
-class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
+class ContaViewController: UIViewController, TipoContasViewControllerDelegate, UITextFieldDelegate {
     
 //    let context = ContextFactory.getContext()
+    
+    
+    
+    @IBOutlet weak var textField: UITextField!
+    var currentString = ""
+    
+    //Textfield delegates
+//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+//
+//    }
+    
+    @IBAction func maskTextField(sender: UITextField) {
+        if var textField = sender.text {
+            let char = textField.substringFromIndex((textField.endIndex.predecessor()))
+            
+            switch char {
+            case "0","1","2","3","4","5","6","7","8","9":
+                textField = formatCurrency(textField)
+                print(textField)
+                break;
+            default:
+                if (char == "") {
+                    textField.removeAtIndex(textField.endIndex.predecessor())
+                }
+                break;
+            }
+            sender.text = textField
+//        print(char
+        }
+//        print(sender.text)
+    }
+    
+//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool { // return NO to not change text
+//        
+//        textField.text?.appendContentsOf(string)
+//        print(textField.text)
+//        
+//        switch string {
+//        case "0","1","2","3","4","5","6","7","8","9":
+//            textField.text?.appendContentsOf(string)
+//            
+//            break;
+//        default:
+//            if ((string == "") && (textField.text != nil)) {
+//                textField.text?.removeAtIndex(textField.text!.endIndex.predecessor())
+//            }
+//            break;
+//        }
+//        
+////        let numberFromField = textField.text!.floatValue/100
+////        textField.text = numberFromField.convertToMoedaBr()
+//        
+//        return false
+//    }
+    
+    func formatCurrency(string: String) -> String{
+//        let formatter = NSNumberFormatter()
+//        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+//        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        
+        var numberFromField1 = string
+        if ((string.rangeOfString("R$") != nil && string.rangeOfString(",") != nil)){
+            numberFromField1.removeRange(string.rangeOfString("R$")!)
+//            numberFromField1.removeRange(string.rangeOfString(".")!)
+            numberFromField1.removeAtIndex((string.rangeOfString(",")?.startIndex)!)
+            print(numberFromField1)
+            return numberFromField1.floatConverter.convertToMoedaBr()
+        }
+        
+        let numberFromField = string.floatValue/100
+        return numberFromField.convertToMoedaBr()
+    }
+    
+    
+    
+    
+    
     
     var conta: Conta?
     var tipoConta: TipoConta? = nil
@@ -23,10 +100,14 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.txtSaldo.delegate = self
         
         if let conta = conta {
             txtNome.text = conta.nome!
-            txtSaldo.text = String(conta.saldo!)
+            if let saldo = conta.saldo?.floatValue{
+                txtSaldo.text = saldo.convertToMoedaBr()
+            }
+            
             tipoConta = conta.tipoconta as? TipoConta
         }
         
@@ -64,7 +145,11 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         
         conta = Conta.getConta()
         conta?.nome = txtNome.text
-        conta?.saldo = txtSaldo.text!.floatConverter
+        if let saldo = txtSaldo.text?.floatConverterMoeda(){
+            conta?.saldo = saldo
+        } else {
+            Notification.mostrarErro()
+        }
         conta?.tipoconta = tipoConta
         
 //        conta?.setValue(txtNome.text, forKey: "nome")
@@ -81,7 +166,7 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
     func updateConta(){
         
         conta?.nome = txtNome.text
-        conta?.saldo = Float(txtSaldo.text!)
+        conta?.saldo = txtSaldo.text!.floatConverterMoeda()
         
         if let tipoConta = tipoConta {
             conta?.tipoconta? = tipoConta

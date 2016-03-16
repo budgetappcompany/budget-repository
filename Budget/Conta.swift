@@ -23,6 +23,21 @@ extension String {
         }
         return 0
     }
+    
+    func floatConverterMoeda() -> Float {
+        var result = self
+        result.removeRange(result.rangeOfString("R$")!)
+        return result.floatConverter
+    }
+}
+
+extension Float {
+    func convertToMoedaBr() -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        return (formatter.stringFromNumber(self))!
+    }
 }
 
 class Conta: NSManagedObject {
