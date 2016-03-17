@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PlaceTableViewCell: UITableViewCell {
+class PlaceContaTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var txtTipConta: UILabel!
-    @IBOutlet weak var txtConta: UILabel!
-    @IBOutlet weak var txtSaldo: UILabel!
+    @IBOutlet weak var lblTipConta: UILabel!
+    @IBOutlet weak var lblConta: UILabel!
+    @IBOutlet weak var lblSaldo: UILabel!
     
     override func awakeFromNib() {
         

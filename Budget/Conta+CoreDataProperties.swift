@@ -17,5 +17,6 @@ extension Conta {
     @NSManaged var nome: String?
     @NSManaged var saldo: NSNumber?
     @NSManaged var tipoconta: NSManagedObject?
+    @NSManaged var receita: NSSet?
 
 }

@@ -9,9 +9,17 @@
 import UIKit
 import CoreData
 
+protocol ContasViewControllerDelegate: class {
+    func contasViewControllerResponse(conta: Conta)
+}
+
 class ContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
 //    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    weak var delegate: ContasViewControllerDelegate?
+    
+    // Variável de escape para verificar se está vindo da tela ReceitaViewController
+    var telaReceita: Bool = false
     let context = ContextFactory.getContext()
     var frc = NSFetchedResultsController()
     
@@ -27,10 +35,13 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         frc = getFetchedResultsController()
         frc.delegate = self
         
+
+        
         do{
             try frc.performFetch()
         }catch{
-            print(error)
+            let alert = Notification.mostrarErro()
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -87,7 +98,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let cell: PlaceTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PlaceTableViewCell
+        let cell: PlaceContaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PlaceContaTableViewCell
         // Configure the cell...
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
 
@@ -119,43 +130,92 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
             // Delete the row from the data source
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
-            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+//            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+//            
+//            // Método para ser chamado ao deletar item
+//            func removerSelecionado(action:UIAlertAction){
+//                do{
+//                    context.deleteObject(managedObject)
+//                    try context.save()
+//                }catch{
+//                    let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
+//                    presentViewController(alert, animated: true, completion: nil)
+//                }
+//            }
+//            
+//            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+//            
+//            let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+//            detalhes.addAction(cancelar)
+//            
+//            let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+//            detalhes.addAction(deletar)
+//            
+//            presentViewController(detalhes, animated: true, completion: nil)
+            
+            
+            
+            
+            
+            let conta = frc.objectAtIndexPath(indexPath) as! Conta
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
                 do{
-                    context.deleteObject(managedObject)
+                    context.deleteObject(conta)
                     try context.save()
                 }catch{
-                    mostrarErro()
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
                 }
             }
             
-            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+            // Verifica se tem alguma receita associada, se não tiver permite deletarß
+            if (conta.receita?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else{
+                
+                let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+                detalhes.addAction(cancelar)
+                
+                let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+                detalhes.addAction(deletar)
+                
+                presentViewController(detalhes, animated: true, completion: nil)
+                
+            }
             
-            let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-            detalhes.addAction(cancelar)
             
-            let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-            detalhes.addAction(deletar)
             
-            presentViewController(detalhes, animated: true, completion: nil)
+            
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
     
-    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            let conta = frc.objectAtIndexPath(indexPath) as! Conta
+            delegate?.contasViewControllerResponse(conta)
         
-        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-        detalhes.addAction(cancelar)
-        
-        presentViewController(detalhes, animated: true, completion: nil)
+        if telaReceita == true{
+            navigationController?.popViewControllerAnimated(true)
+        }
         
     }
+    
+//    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
+//        
+//        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
+//        detalhes.addAction(cancelar)
+//        
+//        presentViewController(detalhes, animated: true, completion: nil)
+//        
+//    }
 
     /*
     // Override to support rearranging the table view.
@@ -173,9 +233,10 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     */
 
     // MARK: - Navigation
+    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
+
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
@@ -183,6 +244,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
             let conta: Conta = frc.objectAtIndexPath(indexPath!) as! Conta
             contaController.conta = conta
         }
+        
     
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
