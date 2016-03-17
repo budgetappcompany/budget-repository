@@ -102,11 +102,9 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         // Configure the cell...
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
 
-        cell.txtConta?.text = conta.nome
-        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
-        if let saldo = conta.saldo?.floatValue {
-            cell.txtSaldo.text = conta.moeda(saldo)
-        }
+        cell.lblConta?.text = conta.nome
+        cell.lblTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+        cell.lblSaldo.text = conta.moeda(Float(conta.saldo!))
         
 //        cell.textLabel?.text = conta.nome
 //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))

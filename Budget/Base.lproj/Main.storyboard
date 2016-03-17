@@ -1651,6 +1651,9 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="caZ-4V-o87"/>
+        <segue reference="sLp-b3-VHG"/>
+        <segue reference="pcW-uo-KPo"/>
         <segue reference="72z-HH-3p2"/>
         <segue reference="zJW-sh-t72"/>
     </inferredMetricsTieBreakers>

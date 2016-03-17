@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D336E651C9B77C9008B0F4E /* PlaceContaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67768B1C97765A00388045 /* PlaceContaTableViewCell.swift */; };
 		0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */; };
 		0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8951C88E90800EC224D /* Calculadora.swift */; };
 		0DE9761F1C9B7124001FA054 /* calcs.js in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9761D1C9B7124001FA054 /* calcs.js */; };
@@ -16,7 +17,6 @@
 		4E5FFAA61C935E0F00C50F03 /* ContasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5FFAA31C935E0F00C50F03 /* ContasTableViewController.swift */; };
 		4E5FFAA71C935E0F00C50F03 /* TipoContasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5FFAA41C935E0F00C50F03 /* TipoContasTableViewController.swift */; };
 		4E5FFAA81C935E0F00C50F03 /* TipoContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5FFAA51C935E0F00C50F03 /* TipoContaViewController.swift */; };
-		4E67768C1C97765A00388045 /* PlaceContaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67768B1C97765A00388045 /* PlaceContaTableViewCell.swift */; };
 		4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72141C86393E001522DB /* AppDelegate.swift */; };
 		4E6C72171C86393E001522DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72161C86393E001522DB /* ViewController.swift */; };
 		4E6C721A1C86393E001522DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72181C86393E001522DB /* Main.storyboard */; };
@@ -165,6 +165,7 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				4E8113851C99D83900B7A4B4 /* Receitas */,
 				0DE976211C9B7128001FA054 /* FAZACONTA */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
 				A87DB7021C927970005386C3 /* Tipo Contas */,
@@ -398,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D336E651C9B77C9008B0F4E /* PlaceContaTableViewCell.swift in Sources */,
 				4E5FFAA81C935E0F00C50F03 /* TipoContaViewController.swift in Sources */,
 				4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */,
 				A87DB6FE1C927955005386C3 /* Conta.swift in Sources */,
@@ -413,8 +415,8 @@
 				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
 				4E5FFAA61C935E0F00C50F03 /* ContasTableViewController.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
+				4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */,
 				0DE976241C9B7185001FA054 /* CompraPrazoVistaViewController.swift in Sources */,
-				4E67768C1C97765A00388045 /* PlaceTableViewCell.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
