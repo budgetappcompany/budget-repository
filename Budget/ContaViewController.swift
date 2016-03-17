@@ -50,11 +50,13 @@ class ContaViewController: UIViewController, TipoContasViewControllerDelegate {
         
         if conta != nil {
             updateConta()
+            navigationController?.popViewControllerAnimated(true)
         }else{
             addConta()
+            dissmissViewController()
         }
         
-        dissmissViewController()
+        
     }
     
     func dissmissViewController(){

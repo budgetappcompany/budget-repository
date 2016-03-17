@@ -43,13 +43,14 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     func contasFetchRequest() -> NSFetchRequest{
         let fetchRequest = NSFetchRequest(entityName: "Receita")
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
         return fetchRequest
     }
     
     func getFetchedResultsController() -> NSFetchedResultsController {
         
-        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
         
         return frc
     }
@@ -67,7 +68,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             return sections.count
         }
         
-        return 0
+        return (frc.sections?.count)!
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +79,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             return currentSection.numberOfObjects
         }
         
-        return 0
+        return frc.sections![section].numberOfObjects
     }
     
     
@@ -86,11 +87,13 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         //        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         
-        let cell: PlaceTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellReceita", forIndexPath: indexPath) as! PlaceTableViewCell
+        let cell: PlaceReceitaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellReceita", forIndexPath: indexPath) as! PlaceReceitaTableViewCell
         // Configure the cell...
         let receita = frc.objectAtIndexPath(indexPath) as! Receita
         
-        cell.textLabel?.text = receita.nome
+//        cell.textLabel?.text = receita.nome
+        
+        cell.lblNome.text = receita.nome
         
 //        cell.txtConta?.text = conta.nome
 //        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
@@ -111,18 +114,41 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         return true
     }
     */
+    
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+//        
+//        let valorReceita = managedObject.valueForKey("valor")
+//        let valorConta = managedObject.valueForKey("conta")
+//        
+//        print("\(valorReceita) \(valorConta)")
+//        
+//    }
 
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+            let receita : Receita = frc.objectAtIndexPath(indexPath) as! Receita
+            
+            // Pega o valor da receita e o saldo da conta.
+            let valorReceita = receita.valueForKey("valor")
+            let valorConta = receita.conta!.valueForKey("saldo")
+            
+            // Subtrai o saldo da conta pelo valor da receita
+            let saldoAtualConta = valorConta!.floatValue - valorReceita!.floatValue
+            
+
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
                 do{
-                    context.deleteObject(managedObject)
+                    context.deleteObject(receita)
+                    
+                    // Atualiza o saldo da conta removendo o valor da receita que estava cadastrada
+                    receita.conta!.setValue(saldoAtualConta, forKey: "saldo")
+                    
                     try context.save()
                 }catch{
                     let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
@@ -130,7 +156,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
                 }
             }
             
-            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar? \n O salda da sua conta será atualizado!", preferredStyle: UIAlertControllerStyle.Alert)
             
             let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
             detalhes.addAction(cancelar)
@@ -139,6 +165,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             detalhes.addAction(deletar)
             
             presentViewController(detalhes, animated: true, completion: nil)
+            
+            
+            
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -164,18 +193,18 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     
     // MARK: - Navigation
 
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        
-//        if segue.identifier == "editar"{
-//            let cell = sender as! UITableViewCell
-//            let indexPath = tableView.indexPathForCell(cell)
-//            let contaController : ContaViewController = segue.destinationViewController as! ContaViewController
-//            let conta: Conta = frc.objectAtIndexPath(indexPath!) as! Conta
-//            contaController.conta = conta
-//        }
-//        
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "editar"{
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let contaController : ReceitaViewController = segue.destinationViewController as! ReceitaViewController
+            let receita: Receita = frc.objectAtIndexPath(indexPath!) as! Receita
+            contaController.receita = receita
+        }
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
 
 }

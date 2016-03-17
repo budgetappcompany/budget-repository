@@ -7,7 +7,7 @@
         <relationship name="tipoconta" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
     </entity>
     <entity name="Receita" representedClassName=".Receita" syncable="YES">
-        <attribute name="data" optional="YES" attributeType="Date" minDateTimeInterval="479852700" defaultDateTimeInterval="479852820" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>

@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 class Receita: NSManagedObject {
 
     static func getReceita() -> Receita{

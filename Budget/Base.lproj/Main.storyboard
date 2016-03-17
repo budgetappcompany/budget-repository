@@ -212,7 +212,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="FpC-H8-ix2" customClass="PlaceTableViewCell" customModule="Budget" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="FpC-H8-ix2" customClass="PlaceContaTableViewCell" customModule="Budget" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FpC-H8-ix2" id="xqt-tj-am7">
@@ -241,9 +241,9 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="txtConta" destination="un3-f5-udD" id="aBG-Sg-oE2"/>
-                                    <outlet property="txtSaldo" destination="dus-Lv-TSI" id="TI1-9B-Bzq"/>
-                                    <outlet property="txtTipConta" destination="3P5-bR-ESh" id="h3c-wj-J4T"/>
+                                    <outlet property="lblConta" destination="un3-f5-udD" id="HxG-Qh-FFT"/>
+                                    <outlet property="lblSaldo" destination="dus-Lv-TSI" id="WLX-Hv-veX"/>
+                                    <outlet property="lblTipConta" destination="3P5-bR-ESh" id="uPe-Sv-pjv"/>
                                     <segue destination="AiM-Mv-JLb" kind="show" identifier="editar" id="gb4-P6-Lhq"/>
                                 </connections>
                             </tableViewCell>
@@ -283,33 +283,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="nome" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpX-6z-Vpq">
-                                <rect key="frame" x="20" y="102" width="280" height="30"/>
+                                <rect key="frame" x="20" y="83" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MTN-9O-Njg">
-                                <rect key="frame" x="20" y="148" width="280" height="30"/>
+                                <rect key="frame" x="20" y="129" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="endereco" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ziQ-JY-xtV">
-                                <rect key="frame" x="20" y="197" width="280" height="30"/>
+                                <rect key="frame" x="20" y="178" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Descrição" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Roe-JA-W9e">
-                                <rect key="frame" x="20" y="357" width="280" height="85"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="conta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYO-rv-TgC">
-                                <rect key="frame" x="20" y="300" width="170" height="30"/>
+                                <rect key="frame" x="20" y="223" width="170" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5s-U9-ioU">
-                                <rect key="frame" x="200" y="299" width="100" height="30"/>
+                                <rect key="frame" x="200" y="222" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.14117647059999999" green="0.19215686269999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Selecionar">
@@ -324,8 +318,15 @@
                                     <segue destination="3Tg-Bd-AQb" kind="show" identifier="alterarConta" id="9mW-cx-u8Z"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="data" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbE-wi-cyg">
-                                <rect key="frame" x="20" y="251" width="280" height="30"/>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-b7-FXm">
+                                <rect key="frame" x="10" y="327" width="300" height="100"/>
+                                <date key="date" timeIntervalSinceReferenceDate="479942247.54187298">
+                                    <!--2016-03-17 21:17:27 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="pt_BR"/>
+                            </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WaQ-if-BnR">
+                                <rect key="frame" x="20" y="275" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -350,9 +351,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="navegacao" destination="2na-3R-jqX" id="acw-ns-HL9"/>
+                        <outlet property="pickerView" destination="ApV-b7-FXm" id="OjM-xs-Sow"/>
                         <outlet property="txtConta" destination="bYO-rv-TgC" id="c0r-Hg-pID"/>
-                        <outlet property="txtData" destination="pbE-wi-cyg" id="fR0-wI-C8j"/>
-                        <outlet property="txtDescricao" destination="Roe-JA-W9e" id="X8Z-yR-p2Y"/>
+                        <outlet property="txtDescricao" destination="WaQ-if-BnR" id="Sxf-sn-1pF"/>
                         <outlet property="txtEndereco" destination="ziQ-JY-xtV" id="61D-C7-4tO"/>
                         <outlet property="txtNome" destination="hpX-6z-Vpq" id="CaP-m0-gzS"/>
                         <outlet property="txtValor" destination="MTN-9O-Njg" id="s2U-aZ-bRF"/>
@@ -715,29 +716,32 @@
         <scene sceneID="VTj-KN-yOx">
             <objects>
                 <tableViewController id="nSB-OO-Ynt" customClass="ReceitasTableViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydK-8O-znG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydK-8O-znG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReceita" textLabel="tDK-ff-DDy" style="IBUITableViewCellStyleDefault" id="o0p-9L-WSL">
-                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReceita" rowHeight="90" id="o0p-9L-WSL" customClass="PlaceReceitaTableViewCell" customModule="Budget" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o0p-9L-WSL" id="fuh-VV-CeW">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tDK-ff-DDy">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcf-T8-sO5">
+                                            <rect key="frame" x="26" y="8" width="154" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="lblNome" destination="Lcf-T8-sO5" id="moC-Fh-SMJ"/>
+                                    <segue destination="QXB-xw-cUU" kind="show" identifier="editar" id="sLp-b3-VHG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -761,7 +765,9 @@
         <scene sceneID="KDO-zu-MBQ">
             <objects>
                 <navigationController id="WUt-0F-bLE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Receitas" image="receita" id="hnj-UK-Hhx"/>
+                    <tabBarItem key="tabBarItem" title="Receitas" image="receita" id="hnj-UK-Hhx">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ft5-RN-ZJJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1507,7 +1513,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="MvX-cC-9KA" customClass="PlaceTableViewCell" customModule="Budget" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="MvX-cC-9KA" customClass="PlaceContaTableViewCell" customModule="Budget" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MvX-cC-9KA" id="2Wr-pj-L7c">
@@ -1536,9 +1542,9 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="txtConta" destination="eV8-11-mb4" id="Y8A-hy-GeH"/>
-                                    <outlet property="txtSaldo" destination="kic-z4-mai" id="KRH-9m-vLs"/>
-                                    <outlet property="txtTipConta" destination="rtC-TW-lFH" id="tmt-Nj-3BI"/>
+                                    <outlet property="lblConta" destination="eV8-11-mb4" id="Og1-In-6yF"/>
+                                    <outlet property="lblSaldo" destination="kic-z4-mai" id="q2A-0U-bky"/>
+                                    <outlet property="lblTipConta" destination="rtC-TW-lFH" id="eMg-aA-DOY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1547,9 +1553,13 @@
                             <outlet property="delegate" destination="3Tg-Bd-AQb" id="LOS-yM-VAP"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Contas" id="bOI-eQ-dha">
-                        <barButtonItem key="leftBarButtonItem" title="Tipo da Conta" id="rCX-i5-h4X"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UDJ-dO-QGb"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UDJ-dO-QGb">
+                            <connections>
+                                <segue destination="AiM-Mv-JLb" kind="show" id="pcW-uo-KPo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTd-hN-EW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1567,6 +1577,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="caZ-4V-o87"/>
-        <segue reference="gb4-P6-Lhq"/>
+        <segue reference="sLp-b3-VHG"/>
+        <segue reference="pcW-uo-KPo"/>
     </inferredMetricsTieBreakers>
 </document>
