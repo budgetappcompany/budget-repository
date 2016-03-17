@@ -28,7 +28,11 @@ class CalculadoraController: UIViewController {
     @IBOutlet weak var lblResultado: UILabel!
     @IBOutlet weak var lblOperador: UILabel!
     @IBOutlet weak var lblVisor: UILabel!
-    var teste:String? = nil
+    
+    var numberInText:String = ""
+    var operatorInText:String = ""
+    var resultado:Bool = false
+    
     var calculadora:Calculadora?
     
     override func viewDidLoad() {
@@ -42,16 +46,18 @@ class CalculadoraController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func pegarValor() -> String{
-        let string = lblVisor.text
-//        print(lblVisor.text)
-        print(lblOperador.text!)
-        let index2 = string!.rangeOfString(lblOperador.text!, options: .BackwardsSearch)?.startIndex
-        if let index = index2?.advancedBy(1){
-            
-            return (string!.substringWithRange(Range<String.Index>(start: index, end: lblVisor.text!.endIndex)))
-        }
-        return lblVisor.text!
+    func getLastChar(string: String) -> String{
+        
+//        let string = lblVisor.text
+        
+        return string.substringFromIndex(string.endIndex.predecessor())
+        
+//        let index2 = string!.rangeOfString(lblOperador.text!, options: .BackwardsSearch)?.startIndex
+//        if let index = index2?.advancedBy(1){
+//            
+//            return (string!.substringWithRange(Range<String.Index>(start: index, end: lblVisor.text!.endIndex)))
+//        }
+//        return lblVisor.text!
     }
     
     @IBAction func inserirNumero(sender: UIButton) {
@@ -60,48 +66,91 @@ class CalculadoraController: UIViewController {
 //        } else {
 //            lblVisor.text?.appendContentsOf(sender.currentTitle!)
 //        }
+        if(numberInText == ""){
+            numberInText = sender.currentTitle!
+        } else {
+            numberInText.appendContentsOf(sender.currentTitle!)
+        }
         
-        if((lblVisor.text == "0")){
-            lblVisor.text = sender.currentTitle
+        calculadora?.numeroAtual = numberInText.floatValue
+        
+        if ((lblVisor.text == "0") || (resultado)) {
+            lblVisor.text = sender.currentTitle!
         } else {
             lblVisor.text?.appendContentsOf(sender.currentTitle!)
         }
-        if (lblVisor.text!.floatValue != 0) {
-            calculadora?.numeroAtual = pegarValor().floatValue
-            print(lblVisor.text)
-            print(calculadora?.numeroAtual)
-        }
+        resultado = false
     }
     
     @IBAction func inserirDecimal(sender: UIButton) {
-        if (!(lblVisor.text!.containsString("."))) {
+        if (!(numberInText.containsString("."))) {
             lblVisor.text?.appendContentsOf(".")
+            numberInText.appendContentsOf(".")
         }
+        resultado = false
     }
 
     @IBAction func inserirOperacao(sender: UIButton) {
-        if(sender.currentTitle == "-" && calculadora?.numeroAtual == 0){
-            lblVisor.text = sender.currentTitle!
-        }else{
-            if(calculadora?.numeroFinal == 0){
-                calculadora?.numeroFinal = calculadora!.numeroAtual
-                lblResultado.text = calculadora!.numeroFinal.stringValue
+        
+        
+        resultado = false
+        if let operatorInText = sender.currentTitle {
+            if(operatorInText == "-" && lblVisor.text == "0"){
+                lblVisor.text = operatorInText
+                numberInText = operatorInText
             } else {
-                lblResultado.text = calculadora!.calcularOperacao().stringValue
+            let lastChar = getLastChar(lblVisor.text!)
+            switch(lastChar){
+                case "-":
+                    
+                    break;
+                case "+","/","x":
+                    
+                    break;
+            default:
+                lblVisor.text?.appendContentsOf(operatorInText)
+                break;
             }
-//            lblVisor.text = "0"
-            lblVisor.text?.appendContentsOf(sender.currentTitle!)
+                calculadora?.numeroAtual = numberInText.floatValue
+                if(calculadora?.numeroFinal == 0){
+                    calculadora?.numeroFinal = calculadora!.numeroAtual
+                    
+                    //                    lblResultado.text = calculadora!.numeroFinal.stringValue
+                } else if(calculadora?.numeroAtual != 0){
+                    
+                    lblResultado.text = calculadora!.calcularOperacao().stringValue
+                }
+                
+                calculadora?.opcao = sender.tag
+                calculadora?.numeroAtual = 0
+                numberInText = ""
+            }
+//            if(sender.currentTitle == "-" && calculadora?.numeroAtual == 0){
+//                lblVisor.text = sender.currentTitle!
+//            }else{
             
-            lblOperador.text = sender.currentTitle
-            calculadora?.opcao = sender.tag
-            calculadora?.numeroAtual = 0
+//            lblVisor.text = "0"
+//                lblVisor.text?.appendContentsOf(sender.currentTitle!)
+            
+//                lblOperador.text = sender.currentTitle
+            
+            
+            
+//            }
         }
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-//        lblVisor.text = calculadora!.calcularOperacao().stringValue
-        calculadora?.numeroAtual = lblVisor.text!.floatValue
+//        calculadora?.numeroFinal = calculadora!.numeroAtual
+//        calculadora?.numeroFinal = lblResultado.text!.floatValue
+        lblVisor.text = calculadora!.calcularOperacao().stringValue
+        
         calculadora?.numeroFinal = 0
+        lblResultado.text = ""
+        
+        numberInText = ""
+        calculadora?.numeroAtual = 0
+        resultado = true
 //        lblResultado.text = ""
 //        lblOperador.text = ""
     }
@@ -110,8 +159,8 @@ class CalculadoraController: UIViewController {
         calculadora?.numeroAtual = 0
         calculadora?.numeroFinal = 0
         lblResultado.text = ""
-        lblOperador.text = ""
-//        lblVisor.text = "0"
+        lblVisor.text = "0"
+        numberInText = ""
     }
     
     /*
