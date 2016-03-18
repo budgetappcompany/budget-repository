@@ -52,7 +52,7 @@ class Finance {
             taxaDeJuros = taxaDeJurosNova
         }
         
-        return Double(round(100000*taxaDeJuros)/100)
+        return Double(round(10000*taxaDeJuros)/100)
     }
     
 //    var valorAVista = 1499.99;

@@ -33,6 +33,11 @@ class CompraPrazoVistaViewController: UIViewController {
     @IBOutlet weak var calcularJuros: UIButton!
 
     @IBAction func calcularJuros(sender: AnyObject) {
+        let parcelas: Int = Int(txtParcelas.text!)!
+        let valorParcela: Double = Double(txtValorParcela.text!)!
+        let valorFinanciado: Double = Double(txtValorFinanciado.text!)!
+        
+        lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
 //        print(finance.cagr(704.28, 30000, 3))
     }
     
