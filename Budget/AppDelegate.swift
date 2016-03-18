@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        //Comentário aquifasdf
+        //Comentário aqui
 //        //Create Managed Object
 //        let conta = NSEntityDescription.entityForName("Conta", inManagedObjectContext: self.managedObjectContext)
 //        let newConta = NSManagedObject(entity: conta!, insertIntoManagedObjectContext: self.managedObjectContext)
