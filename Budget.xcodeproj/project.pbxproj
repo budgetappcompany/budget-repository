@@ -10,8 +10,6 @@
 		0D336E651C9B77C9008B0F4E /* PlaceContaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67768B1C97765A00388045 /* PlaceContaTableViewCell.swift */; };
 		0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */; };
 		0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8951C88E90800EC224D /* Calculadora.swift */; };
-		0DE9761F1C9B7124001FA054 /* calcs.js in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9761D1C9B7124001FA054 /* calcs.js */; };
-		0DE976201C9B7124001FA054 /* fazaconta-v6.js in Resources */ = {isa = PBXBuildFile; fileRef = 0DE9761E1C9B7124001FA054 /* fazaconta-v6.js */; };
 		0DE976241C9B7185001FA054 /* CompraPrazoVistaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE976231C9B7185001FA054 /* CompraPrazoVistaViewController.swift */; };
 		0DE976261C9B7198001FA054 /* CompraPrazoVista.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE976251C9B7198001FA054 /* CompraPrazoVista.swift */; };
 		4E5FFAA61C935E0F00C50F03 /* ContasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5FFAA31C935E0F00C50F03 /* ContasTableViewController.swift */; };
@@ -39,6 +37,8 @@
 		A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7031C927A1E005386C3 /* ContaViewController.swift */; };
 		A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */; };
 		A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BF21C97819700E5FFD6 /* Notification.swift */; };
+		A8D7D9E11C9C8CCF00A7D09D /* finance.js in Resources */ = {isa = PBXBuildFile; fileRef = A8D7D9E01C9C8CCF00A7D09D /* finance.js */; };
+		A8D7D9E51C9C8DBF00A7D09D /* FinanceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7D9E41C9C8DBF00A7D09D /* FinanceFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +61,6 @@
 /* Begin PBXFileReference section */
 		0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculadoraController.swift; sourceTree = "<group>"; };
 		0DCEC8951C88E90800EC224D /* Calculadora.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculadora.swift; sourceTree = "<group>"; };
-		0DE9761D1C9B7124001FA054 /* calcs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calcs.js; sourceTree = "<group>"; };
-		0DE9761E1C9B7124001FA054 /* fazaconta-v6.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "fazaconta-v6.js"; sourceTree = "<group>"; };
 		0DE976231C9B7185001FA054 /* CompraPrazoVistaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompraPrazoVistaViewController.swift; sourceTree = "<group>"; };
 		0DE976251C9B7198001FA054 /* CompraPrazoVista.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompraPrazoVista.swift; sourceTree = "<group>"; };
 		4E5FFAA31C935E0F00C50F03 /* ContasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContasTableViewController.swift; path = Budget/ContasTableViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +95,8 @@
 		A87DB7031C927A1E005386C3 /* ContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContaViewController.swift; path = Budget/ContaViewController.swift; sourceTree = "<group>"; };
 		A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextFactory.swift; sourceTree = "<group>"; };
 		A8AF9BF21C97819700E5FFD6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		A8D7D9E01C9C8CCF00A7D09D /* finance.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = finance.js; sourceTree = "<group>"; };
+		A8D7D9E41C9C8DBF00A7D09D /* FinanceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,15 +124,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0DE976211C9B7128001FA054 /* FAZACONTA */ = {
-			isa = PBXGroup;
-			children = (
-				0DE9761D1C9B7124001FA054 /* calcs.js */,
-				0DE9761E1C9B7124001FA054 /* fazaconta-v6.js */,
-			);
-			name = FAZACONTA;
-			sourceTree = "<group>";
-		};
 		0DE976221C9B713F001FA054 /* Calculo Prazo Vista */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,8 +156,8 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				A8D7D9E31C9C8D2800A7D09D /* FinanceJS */,
 				4E8113851C99D83900B7A4B4 /* Receitas */,
-				0DE976211C9B7128001FA054 /* FAZACONTA */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
 				A87DB7021C927970005386C3 /* Tipo Contas */,
 				A87DB7011C927961005386C3 /* Contas */,
@@ -264,6 +255,15 @@
 				A8AF9BF21C97819700E5FFD6 /* Notification.swift */,
 			);
 			name = Factory;
+			sourceTree = "<group>";
+		};
+		A8D7D9E31C9C8D2800A7D09D /* FinanceJS */ = {
+			isa = PBXGroup;
+			children = (
+				A8D7D9E01C9C8CCF00A7D09D /* finance.js */,
+				A8D7D9E41C9C8DBF00A7D09D /* FinanceFactory.swift */,
+			);
+			name = FinanceJS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,9 +371,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E6C72221C86393E001522DB /* LaunchScreen.storyboard in Resources */,
-				0DE9761F1C9B7124001FA054 /* calcs.js in Resources */,
+				A8D7D9E11C9C8CCF00A7D09D /* finance.js in Resources */,
 				4E6C721F1C86393E001522DB /* Assets.xcassets in Resources */,
-				0DE976201C9B7124001FA054 /* fazaconta-v6.js in Resources */,
 				4E6C721A1C86393E001522DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +421,7 @@
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */,
 				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
+				A8D7D9E51C9C8DBF00A7D09D /* FinanceFactory.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 				A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */,
 			);

@@ -16,30 +16,13 @@ class CompraPrazoVistaViewController: UIViewController {
     @IBOutlet weak var txtValorFinanciado: UITextField!
     @IBOutlet weak var lblResultadoJuros: UILabel!
     
-    let contextJS = JSContext()
+    var finance: Finance!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        do{
-            var path = NSBundle.mainBundle().pathForResource("calcs",
-                ofType: "js")
-            
-            var url = NSURL(fileURLWithPath: path!)
-            var jscript = try String.init(contentsOfURL: url)
-            
-            
-            contextJS.evaluateScript(jscript)
-            
-            path = NSBundle.mainBundle().pathForResource("fazaconta-v6",
-                ofType: "js")
-            
-            url = NSURL(fileURLWithPath: path!)
-            jscript = try String.init(contentsOfURL: url)
-            contextJS.evaluateScript(jscript)
-        }catch{
-            print(error)
-        }
+        finance = Finance()
+//        print(finance.cagr(704.28, 30000, 3))
+        print(finance.calculateCompoundInterest(720, 12, 62.5))
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,16 +33,9 @@ class CompraPrazoVistaViewController: UIViewController {
     @IBOutlet weak var calcularJuros: UIButton!
 
     @IBAction func calcularJuros(sender: AnyObject) {
-        let methodTest = contextJS.objectForKeyedSubscript("tucalc2")
-        
-//        let parc = "6"
-//        let prest = "704,28"
-//        let vf = "-30.000"
-        
-        let param:String = "RATE("+txtParcelas.text!+"|"+txtValorParcela.text!+"|"+txtValorFinanciado.text!+")"
-        
-        lblResultadoJuros.text = methodTest.callWithArguments([param,2, true, "", ""]).toString()
+//        print(finance.cagr(704.28, 30000, 3))
     }
+    
     /*
     // MARK: - Navigation
 
