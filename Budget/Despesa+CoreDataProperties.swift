@@ -1,8 +1,8 @@
 //
-//  Receita+CoreDataProperties.swift
+//  Despesa+CoreDataProperties.swift
 //  Budget
 //
-//  Created by Yuri Pereira on 3/16/16.
+//  Created by md10 on 3/18/16.
 //  Copyright © 2016 Budget. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,16 +12,17 @@
 import Foundation
 import CoreData
 
-extension Receita {
+extension Despesa {
 
     @NSManaged var nome: String?
     @NSManaged var descricao: String?
     @NSManaged var valor: NSNumber?
-    @NSManaged var data: NSDate?
     @NSManaged var endereco: String?
-    @NSManaged var latitude: NSNumber?
-    @NSManaged var longitude: NSNumber?
-    @NSManaged var conta: NSManagedObject?
+    @NSManaged var longitude: String?
+    @NSManaged var latitude: String?
+    @NSManaged var flgTipo: String?
+    @NSManaged var data: NSDate?
     @NSManaged var categoria: NSManagedObject?
+    @NSManaged var conta: NSManagedObject?
 
 }

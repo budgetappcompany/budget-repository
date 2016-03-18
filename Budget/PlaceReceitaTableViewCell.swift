@@ -11,6 +11,9 @@ import UIKit
 class PlaceReceitaTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblNome: UILabel!
+    @IBOutlet weak var lblCategoria: UILabel!
+    @IBOutlet weak var lblValor: UILabel!
+    @IBOutlet weak var lblConta: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

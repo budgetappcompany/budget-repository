@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 
-class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
+class ReceitaViewController: UIViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate {
 
     var conta: Conta? = nil
+    var categoria: Categoria? = nil
     var receita: Receita?
     
     @IBOutlet weak var pickerView: UIDatePicker!
@@ -21,6 +22,7 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
     @IBOutlet weak var txtValor: UITextField!
     @IBOutlet weak var txtEndereco: UITextField!
     @IBOutlet weak var txtConta: UITextField!
+    @IBOutlet weak var txtCategoria: UITextField!
     
     
     override func viewDidLoad() {
@@ -33,10 +35,12 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
             txtDescricao.text = receita.descricao!
             pickerView.setDate(receita.data!, animated: false)
             conta = receita.conta as? Conta
+            categoria = receita.categoria as? Categoria
             navegacao.title = "Alterar receita"
         }
         
         txtConta.text = self.conta?.nome!
+        txtCategoria.text = self.categoria?.nome!
         
         // Do any additional setup after loading the view.
     }
@@ -76,7 +80,10 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
         receita?.valor = Float(txtValor.text!)
         receita?.endereco = txtEndereco.text
         receita?.conta = conta
+        receita?.categoria = categoria
         receita?.data = pickerView.date
+
+        
         
         // Atualizar o saldo da conta referente
         conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
@@ -105,6 +112,10 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
             receita?.conta? = conta
         }
         
+        if let categoria = categoria{
+            receita?.categoria = categoria
+        }
+        
         do{
             try receita?.managedObjectContext?.save()
             navigationController?.popViewControllerAnimated(true)
@@ -118,6 +129,11 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
     func contasViewControllerResponse(conta: Conta) {
         self.conta = conta
         txtConta.text = conta.nome
+    }
+    
+    func categoriaViewControllerResponse(categoria:Categoria){
+        self.categoria = categoria
+        txtCategoria.text = categoria.nome
     }
     
 
@@ -137,6 +153,10 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate {
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
             contasController.delegate = self
             contasController.telaReceita = true
+        }else if segue.identifier == "alterarCategoriaReceita"{
+            let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
+            categoriasController.delegate = self
+            
         }
         
     }

@@ -1,21 +1,21 @@
 //
-//  TipoContaTableViewController.swift
+//  CategoriaTableViewController.swift
 //  Budget
 //
-//  Created by Calebe Santos on 3/10/16.
+//  Created by md10 on 3/18/16.
 //  Copyright © 2016 Budget. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-protocol TipoContasViewControllerDelegate: class {
-    func tipoContasViewControllerResponse(tipoConta:TipoConta)
+protocol CategoriaViewControllerDelegate: class {
+    func categoriaViewControllerResponse(categoria:Categoria)
 }
 
-class TipoContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class CategoriaTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    weak var delegate: TipoContasViewControllerDelegate?
+    weak var delegate: CategoriaViewControllerDelegate?
     
     let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var frc = NSFetchedResultsController()
@@ -32,16 +32,15 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             print(error)
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
     // MARK: - Core Data source
     func tipoContasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "TipoConta")
+        let fetchRequest = NSFetchRequest(entityName: "Categoria")
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
@@ -59,13 +58,13 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     
     
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         let numbersOfSections = frc.sections?.count
         return numbersOfSections!
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let numberOfRowsInSection = frc.sections?[section].numberOfObjects
@@ -73,22 +72,21 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
-        delegate?.tipoContasViewControllerResponse(tipoConta)
+        let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
+        delegate?.categoriaViewControllerResponse(categoria)
         navigationController?.popViewControllerAnimated(true)
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cellTipoConta", forIndexPath: indexPath)
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("cellCategoria", forIndexPath: indexPath)
+        
         // Configure the cell...
-        let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
-        cell.textLabel?.text = tipoConta.nome
+        let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
+        cell.textLabel?.text = categoria.nome
+        
         
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -98,20 +96,21 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     }
     */
 
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
             //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
-//            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+            //            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
             
-            let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
+            let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
                 do{
-                    context.deleteObject(tipoConta)
+                    context.deleteObject(categoria)
                     try context.save()
                 }catch{
                     presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
@@ -119,8 +118,8 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             }
             
             // Verifica se tem alguma conta associada, se não tiver permite deletarß
-            if (tipoConta.conta?.count > 0){
-                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
+            if (categoria.receita?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
             }else{
                 
@@ -141,17 +140,7 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-//    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-//        
-//        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-//        
-//        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-//        detalhes.addAction(cancelar)
-//        
-//        
-//        
-//    }
+
 
     /*
     // Override to support rearranging the table view.
@@ -168,20 +157,14 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//
-//        if segue.identifier == "editar"{
-//            let cell = sender as! UITableViewCell
-//            let indexPath = tableView.indexPathForCell(cell)
-//            let contaController : TipoContaViewController = segue.destinationViewController as! TipoContaViewController
-//            let tipoConta: TipoConta = frc.objectAtIndexPath(indexPath!) as! TipoConta
-//            contaController.tipoConta = tipoConta
-//        }
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

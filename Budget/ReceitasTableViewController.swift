@@ -43,7 +43,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     func contasFetchRequest() -> NSFetchRequest{
         let fetchRequest = NSFetchRequest(entityName: "Receita")
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: true)
+        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
         return fetchRequest
     }
@@ -68,7 +68,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             return sections.count
         }
         
-        return (frc.sections?.count)!
+        return 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,7 +79,34 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             return currentSection.numberOfObjects
         }
         
-        return frc.sections![section].numberOfObjects
+        return 0
+    }
+    
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = frc.sections {
+            let currentSection = sections[section]
+            sections[section]
+            
+            
+            let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
+            
+            let dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "yyyy-MM-dd"
+            let ddd = dateFormat.dateFromString(string)
+
+            
+            
+            dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
+            dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
+            dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
+            
+            let dateString = dateFormat.stringFromDate(ddd!)
+            
+            return dateString
+        }
+        
+        return nil
     }
     
     
@@ -89,6 +116,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         let cell: PlaceReceitaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellReceita", forIndexPath: indexPath) as! PlaceReceitaTableViewCell
         // Configure the cell...
+        
         let receita = frc.objectAtIndexPath(indexPath) as! Receita
         
 //        cell.textLabel?.text = receita.nome
@@ -106,6 +134,19 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        var color: UIColor?
+        
+        
+        if (indexPath.row % 2 == 0){
+            cell.backgroundColor = UIColor.blueColor()
+        }else{
+            cell.backgroundColor = UIColor.greenColor()
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

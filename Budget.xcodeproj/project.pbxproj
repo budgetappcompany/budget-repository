@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D069C891C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C871C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift */; };
+		0D069C8A1C9CB4470027A6A2 /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C881C9CB4470027A6A2 /* Categoria.swift */; };
+		0D069C8C1C9CB5050027A6A2 /* CategoriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C8B1C9CB5050027A6A2 /* CategoriaViewController.swift */; };
+		0D069C8E1C9CB52B0027A6A2 /* CategoriaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C8D1C9CB52B0027A6A2 /* CategoriaTableViewController.swift */; };
+		0D069C921C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C901C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift */; };
+		0D069C931C9CC96B0027A6A2 /* Despesa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D069C911C9CC96B0027A6A2 /* Despesa.swift */; };
 		0D336E651C9B77C9008B0F4E /* PlaceContaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67768B1C97765A00388045 /* PlaceContaTableViewCell.swift */; };
 		0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */; };
 		0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEC8951C88E90800EC224D /* Calculadora.swift */; };
@@ -59,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D069C871C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Categoria+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0D069C881C9CB4470027A6A2 /* Categoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categoria.swift; sourceTree = "<group>"; };
+		0D069C8B1C9CB5050027A6A2 /* CategoriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaViewController.swift; sourceTree = "<group>"; };
+		0D069C8D1C9CB52B0027A6A2 /* CategoriaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaTableViewController.swift; sourceTree = "<group>"; };
+		0D069C901C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Despesa+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0D069C911C9CC96B0027A6A2 /* Despesa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Despesa.swift; sourceTree = "<group>"; };
 		0DCEC8931C88E88A00EC224D /* CalculadoraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculadoraController.swift; sourceTree = "<group>"; };
 		0DCEC8951C88E90800EC224D /* Calculadora.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculadora.swift; sourceTree = "<group>"; };
 		0DE9761D1C9B7124001FA054 /* calcs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calcs.js; sourceTree = "<group>"; };
@@ -124,6 +136,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D069C861C9CB35E0027A6A2 /* Categoria */ = {
+			isa = PBXGroup;
+			children = (
+				0D069C871C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift */,
+				0D069C881C9CB4470027A6A2 /* Categoria.swift */,
+				0D069C8B1C9CB5050027A6A2 /* CategoriaViewController.swift */,
+				0D069C8D1C9CB52B0027A6A2 /* CategoriaTableViewController.swift */,
+			);
+			name = Categoria;
+			sourceTree = "<group>";
+		};
+		0D069C8F1C9CC9540027A6A2 /* Despesa */ = {
+			isa = PBXGroup;
+			children = (
+				0D069C901C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift */,
+				0D069C911C9CC96B0027A6A2 /* Despesa.swift */,
+			);
+			name = Despesa;
+			sourceTree = "<group>";
+		};
 		0DE976211C9B7128001FA054 /* FAZACONTA */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +197,8 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				0D069C8F1C9CC9540027A6A2 /* Despesa */,
+				0D069C861C9CB35E0027A6A2 /* Categoria */,
 				4E8113851C99D83900B7A4B4 /* Receitas */,
 				0DE976211C9B7128001FA054 /* FAZACONTA */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
@@ -409,18 +443,24 @@
 				4E5FFAA71C935E0F00C50F03 /* TipoContasTableViewController.swift in Sources */,
 				A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */,
 				0DE976261C9B7198001FA054 /* CompraPrazoVista.swift in Sources */,
+				0D069C921C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift in Sources */,
 				0DCEC8941C88E88A00EC224D /* CalculadoraController.swift in Sources */,
 				A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */,
 				A87DB7001C927955005386C3 /* TipoConta.swift in Sources */,
 				0DCEC8961C88E90800EC224D /* Calculadora.swift in Sources */,
+				0D069C8E1C9CB52B0027A6A2 /* CategoriaTableViewController.swift in Sources */,
 				4E5FFAA61C935E0F00C50F03 /* ContasTableViewController.swift in Sources */,
 				4E6C72171C86393E001522DB /* ViewController.swift in Sources */,
 				4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */,
+				0D069C891C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift in Sources */,
+				0D069C8C1C9CB5050027A6A2 /* CategoriaViewController.swift in Sources */,
 				0DE976241C9B7185001FA054 /* CompraPrazoVistaViewController.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */,
+				0D069C931C9CC96B0027A6A2 /* Despesa.swift in Sources */,
+				0D069C8A1C9CB4470027A6A2 /* Categoria.swift in Sources */,
 				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 				A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */,
@@ -565,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
@@ -576,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
