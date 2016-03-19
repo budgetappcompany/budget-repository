@@ -1,51 +1,21 @@
 //
-//  ReceitasTableViewController.swift
+//  DespesasTableViewController.swift
 //  Budget
 //
-//  Created by Yuri Pereira on 3/16/16.
+//  Created by Yuri Pereira on 3/19/16.
 //  Copyright © 2016 Budget. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class ReceitasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
+class DespesasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-
-    var tabBar: UITabBar?
-    
     let context = ContextFactory.getContext()
     var frc = NSFetchedResultsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Personalizar TabBar
-        tabBar = self.tabBarController!.tabBar
-        CustomTabBar.custom(&tabBar!)
-
-        
-
-        
-//        self.navigationController?.navigationBar.barTintColor = UIColor(red:75.0/255.0, green:195.0/255.0, blue:181.0/255.0, alpha:1.0)
-        
-//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
-        
-        
-//        var navigationBarAppearace = UINavigationBar.appearance()
-//        
-//        navigationBarAppearace.tintColor = UIColor.
-//            uicolorFromHex(0xffffff)
-//        navigationBarAppearace.barTintColor = uicolorFromHex(0x034517)
-        
-//        let navBgImage:UIImage = UIImage(named: "backgroundBar.jpg")!
-//        UINavigationBar.appearance().setBackgroundImage(navBgImage, forBarMetrics: .Default)
-        
-//        UINavigationBar.appearance().tintColor = UIColor(red: 0.62, green: 0.67, blue: 0.67, alpha: 1.0)
-//        UINavigationBar.appearance().translucent = false
-//
-//        [self.navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
-//        [self.navigationController.navigationBar setTranslucent:NO];
         
         frc = getFetchedResultsController()
         frc.delegate = self
@@ -56,10 +26,10 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             let alert = Notification.mostrarErro()
             presentViewController(alert, animated: true, completion: nil)
         }
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
@@ -71,7 +41,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     
     // MARK: - Core Data source
     func contasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "Receita")
+        let fetchRequest = NSFetchRequest(entityName: "Despesa")
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
@@ -90,7 +60,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     // MARK: - Table view data source
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
@@ -124,7 +94,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "yyyy-MM-dd"
             let ddd = dateFormat.dateFromString(string)
-
+            
             
             
             dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
@@ -138,24 +108,23 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         return nil
     }
-    
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         
-        let cell: PlaceReceitaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellReceita", forIndexPath: indexPath) as! PlaceReceitaTableViewCell
+        let cell: PlaceDespesaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellDespesa", forIndexPath: indexPath) as! PlaceDespesaTableViewCell
         // Configure the cell...
         
-        let receita = frc.objectAtIndexPath(indexPath) as! Receita
+        let despesa = frc.objectAtIndexPath(indexPath) as! Despesa
         
-//        cell.textLabel?.text = receita.nome
+        //        cell.textLabel?.text = receita.nome
         
-        cell.lblNome.text = receita.nome
+        cell.lblNome.text = despesa.nome
         
-//        cell.txtConta?.text = conta.nome
-//        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
-//        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+        //        cell.txtConta?.text = conta.nome
+        //        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+        //        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
         
         //        cell.textLabel?.text = conta.nome
         //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
@@ -165,22 +134,17 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 14)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0x44a499)
-    }
-    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
+        //        var color: UIColor?
+        
+        
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = UIColor(red: 158.0/255.0, green: 172.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+            cell.backgroundColor = UIColor.blueColor()
         }else{
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.greenColor()
         }
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -189,40 +153,29 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         return true
     }
     */
-    
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-//        
-//        let valorReceita = managedObject.valueForKey("valor")
-//        let valorConta = managedObject.valueForKey("conta")
-//        
-//        print("\(valorReceita) \(valorConta)")
-//        
-//    }
 
-    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            let receita : Receita = frc.objectAtIndexPath(indexPath) as! Receita
+            let despesa : Despesa = frc.objectAtIndexPath(indexPath) as! Despesa
             
-            // Pega o valor da receita e o saldo da conta.
-            let valorReceita = receita.valueForKey("valor")
-            let valorConta = receita.conta!.valueForKey("saldo")
+            // Pega o valor da despesa e o saldo da conta.
+            let valorDespesa = despesa.valueForKey("valor")
+            let valorConta = despesa.conta!.valueForKey("saldo")
             
-            // Subtrai o saldo da conta pelo valor da receita
-            let saldoAtualConta = valorConta!.floatValue - valorReceita!.floatValue
+            // Soma o saldo da conta pelo valor da despesa
+            let saldoAtualConta = valorConta!.floatValue + valorDespesa!.floatValue
             
-
+            
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
                 do{
-                    context.deleteObject(receita)
+                    context.deleteObject(despesa)
                     
-                    // Atualiza o saldo da conta removendo o valor da receita que estava cadastrada
-                    receita.conta!.setValue(saldoAtualConta, forKey: "saldo")
+                    // Atualiza o saldo da conta somando o valor da despesa que estava cadastrada
+                    despesa.conta!.setValue(saldoAtualConta, forKey: "saldo")
                     
                     try context.save()
                 }catch{
@@ -248,7 +201,6 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
 
     /*
     // Override to support rearranging the table view.
@@ -273,9 +225,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : ReceitaViewController = segue.destinationViewController as! ReceitaViewController
-            let receita: Receita = frc.objectAtIndexPath(indexPath!) as! Receita
-            contaController.receita = receita
+            let contaController : DespesaViewController = segue.destinationViewController as! DespesaViewController
+            let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
+            contaController.despesa = despesa
         }
         
         // Get the new view controller using segue.destinationViewController.

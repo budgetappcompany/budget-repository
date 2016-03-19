@@ -268,7 +268,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EXw-QU-DH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="1878"/>
+            <point key="canvasLocation" x="2690" y="1878"/>
         </scene>
         <!--Receitas-->
         <scene sceneID="kl0-21-r2R">
@@ -383,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tas-s4-fua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1878" y="2573"/>
+            <point key="canvasLocation" x="1779" y="3301"/>
         </scene>
         <!--InserirConta-->
         <scene sceneID="bQz-dx-RfU">
@@ -462,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YPJ-gh-8BM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313" y="2652"/>
+            <point key="canvasLocation" x="2658" y="2682"/>
         </scene>
         <!--Tipos de Conta-->
         <scene sceneID="Pg6-CN-xdK">
@@ -507,7 +507,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iY5-Xc-ATK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2634" y="1860"/>
+            <point key="canvasLocation" x="3166" y="1860"/>
         </scene>
         <!--Adicionar Tipo de Conta-->
         <scene sceneID="Bpf-vs-0EH">
@@ -547,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7bz-A9-r5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3032" y="1860"/>
+            <point key="canvasLocation" x="3564" y="1860"/>
         </scene>
         <!--Contas-->
         <scene sceneID="R00-Z2-7eg">
@@ -560,13 +560,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Isi-gd-YMr">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="MeI-Tg-F0g" kind="relationship" relationship="rootViewController" id="gKi-sR-ByE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2z1-nL-kdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1722" y="1883"/>
+            <point key="canvasLocation" x="2254" y="1883"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WVk-AJ-feH">
@@ -588,27 +592,6 @@
             </objects>
             <point key="canvasLocation" x="1722" y="1053"/>
         </scene>
-        <!--Despesas-->
-        <scene sceneID="NpW-dd-OSA">
-            <objects>
-                <viewController title="Despesas" id="iem-aS-s7g" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="g4M-68-827"/>
-                        <viewControllerLayoutGuide type="bottom" id="beF-Vl-r4P"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="clk-cs-mmr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Despesas" image="despesas" id="fsz-jG-pBa">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d8O-3Z-NIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="806" y="1860"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Up9-gM-KSU">
             <objects>
@@ -617,12 +600,16 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="t63-yZ-KPz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.042716490999278101" blue="0.10423798148132246" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="LaB-zI-qJB" kind="relationship" relationship="viewControllers" id="llN-IW-BQd"/>
                         <segue destination="WUt-0F-bLE" kind="relationship" relationship="viewControllers" id="MOw-lr-sfg"/>
-                        <segue destination="iem-aS-s7g" kind="relationship" relationship="viewControllers" id="ES8-MB-g69"/>
+                        <segue destination="PLr-yv-a0d" kind="relationship" relationship="viewControllers" id="ES8-MB-g69"/>
                         <segue destination="dWL-1r-jqJ" kind="relationship" relationship="viewControllers" id="HEQ-AR-ZRL"/>
                         <segue destination="DWF-hB-IjX" kind="relationship" relationship="viewControllers" id="hg6-tj-phP"/>
                         <segue destination="Q5h-xZ-E1t" kind="relationship" relationship="viewControllers" id="bXD-Br-OqZ"/>
@@ -834,25 +821,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcf-T8-sO5">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcf-T8-sO5">
                                             <rect key="frame" x="24" y="21" width="154" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3M-z7-uGB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="categoria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3M-z7-uGB">
                                             <rect key="frame" x="24" y="50" width="114" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fn-9w-KZL">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Valor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fn-9w-KZL">
                                             <rect key="frame" x="250" y="34" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4A-eM-Ae3">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Conta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4A-eM-Ae3">
                                             <rect key="frame" x="250" y="54" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -885,7 +872,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucp-B7-EQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1475" y="2557"/>
+            <point key="canvasLocation" x="1397" y="3295"/>
         </scene>
         <!--Receitas-->
         <scene sceneID="KDO-zu-MBQ">
@@ -1682,7 +1669,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTd-hN-EW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862" y="3311"/>
+            <point key="canvasLocation" x="2314" y="2668"/>
         </scene>
         <!--Categorias-->
         <scene sceneID="mP7-sB-w5K">
@@ -1728,7 +1715,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mo1-bL-wX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="3342"/>
+            <point key="canvasLocation" x="1518" y="2585"/>
         </scene>
         <!--Adicionar Categoria-->
         <scene sceneID="Yi6-Z4-GRC">
@@ -1768,7 +1755,226 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTH-bs-97X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2863" y="3342"/>
+            <point key="canvasLocation" x="1905" y="2585"/>
+        </scene>
+        <!--Despesas-->
+        <scene sceneID="Kuv-LX-Exm">
+            <objects>
+                <viewController title="Despesas" id="U41-U5-LtR" customClass="DespesaViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u8p-x8-i9a"/>
+                        <viewControllerLayoutGuide type="bottom" id="PS4-1I-Mip"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M1e-wD-lrR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="nome" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fee-hi-24t">
+                                <rect key="frame" x="20" y="83" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z98-St-9xh">
+                                <rect key="frame" x="20" y="129" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="endereco" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJ5-Bk-QXs">
+                                <rect key="frame" x="20" y="178" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="conta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="abp-Gf-jeq">
+                                <rect key="frame" x="20" y="223" width="170" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pog-HQ-oY6">
+                                <rect key="frame" x="200" y="222" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.14117647059999999" green="0.19215686269999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Selecionar">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="3Tg-Bd-AQb" kind="show" identifier="alterarConta" id="3sH-rW-cgW"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="USG-UJ-aTB">
+                                <rect key="frame" x="10" y="395" width="300" height="100"/>
+                                <date key="date" timeIntervalSinceReferenceDate="479942247.54187298">
+                                    <!--2016-03-17 21:17:27 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="pt_BR"/>
+                            </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="categoria" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="efY-4c-yaG">
+                                <rect key="frame" x="20" y="269" width="170" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6v-pq-h1b">
+                                <rect key="frame" x="200" y="268" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.14117647059999999" green="0.19215686269999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Selecionar">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Efn-xv-EIu" kind="show" identifier="alterarCategoriaDespesa" id="Dxz-sf-Osr"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-qG-GAa">
+                                <rect key="frame" x="20" y="318" width="280" height="29"/>
+                                <segments>
+                                    <segment title="Fixa"/>
+                                    <segment title="Variável"/>
+                                    <segment title="Adicional"/>
+                                </segments>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="descricao" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qum-Au-MLr">
+                                <rect key="frame" x="20" y="359" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Inserir despesa" id="8cc-Vn-Dqv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancelar" id="TYd-se-f9j">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="btnCancel:" destination="U41-U5-LtR" id="DpS-1y-uPw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="hom-Ei-sLq">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="btnSave:" destination="U41-U5-LtR" id="6ao-nC-rHT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navegacao" destination="8cc-Vn-Dqv" id="2Vx-Ji-Rlv"/>
+                        <outlet property="pickerView" destination="USG-UJ-aTB" id="For-F0-m96"/>
+                        <outlet property="sgFglTipo" destination="Yds-qG-GAa" id="Zb3-kY-CbM"/>
+                        <outlet property="txtCategoria" destination="efY-4c-yaG" id="WP9-AK-Xqy"/>
+                        <outlet property="txtConta" destination="abp-Gf-jeq" id="QSf-I7-08v"/>
+                        <outlet property="txtDescricao" destination="Qum-Au-MLr" id="leE-PX-lE3"/>
+                        <outlet property="txtEndereco" destination="PJ5-Bk-QXs" id="YlZ-HM-BpR"/>
+                        <outlet property="txtNome" destination="Fee-hi-24t" id="F8H-Uq-3qk"/>
+                        <outlet property="txtValor" destination="Z98-St-9xh" id="WIh-zm-9yO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNn-hP-Xtx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1614" y="1889"/>
+        </scene>
+        <!--Despesas-->
+        <scene sceneID="il8-yc-uXr">
+            <objects>
+                <tableViewController title="Despesas" id="Mps-Eq-Kl6" customClass="DespesasTableViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="LKE-xh-9Q1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellDespesa" rowHeight="90" id="K0W-y7-sh4" customClass="PlaceDespesaTableViewCell" customModule="Budget" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0W-y7-sh4" id="f4A-NJ-qXX">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7l-n8-yle">
+                                            <rect key="frame" x="24" y="21" width="154" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="categoria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3F-ff-D0I">
+                                            <rect key="frame" x="24" y="50" width="114" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Valor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJF-8r-Rcu">
+                                            <rect key="frame" x="250" y="34" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Conta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRN-Ak-4Fl">
+                                            <rect key="frame" x="250" y="54" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="lblCategoria" destination="r3F-ff-D0I" id="180-K8-Bh5"/>
+                                    <outlet property="lblConta" destination="QRN-Ak-4Fl" id="eLp-WW-THe"/>
+                                    <outlet property="lblNome" destination="h7l-n8-yle" id="mp6-Xk-rTQ"/>
+                                    <outlet property="lblValor" destination="wJF-8r-Rcu" id="Fci-MT-V5B"/>
+                                    <segue destination="U41-U5-LtR" kind="show" identifier="editar" id="s4x-Yi-7Oi">
+                                        <nil key="action"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mps-Eq-Kl6" id="gt1-Tc-gsg"/>
+                            <outlet property="delegate" destination="Mps-Eq-Kl6" id="4rh-Dk-2aG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Despesas" id="f0Y-Md-hTu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zmf-AC-rSk">
+                            <connections>
+                                <segue destination="U41-U5-LtR" kind="show" id="zzc-nu-Vdg">
+                                    <nil key="action"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ijn-Mz-Bsj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1179" y="1889"/>
+        </scene>
+        <!--Despesas-->
+        <scene sceneID="sd2-dH-uEM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PLr-yv-a0d" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Despesas" image="despesas" id="fsz-jG-pBa">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y1f-di-drs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mps-Eq-Kl6" kind="relationship" relationship="rootViewController" id="0y7-xL-vkj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CfP-N3-pZ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="741" y="1878"/>
         </scene>
     </scenes>
     <resources>
@@ -1780,8 +1986,11 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vzQ-GW-SRi"/>
-        <segue reference="pcW-uo-KPo"/>
-        <segue reference="zJW-sh-t72"/>
+        <segue reference="gb4-P6-Lhq"/>
+        <segue reference="caZ-4V-o87"/>
+        <segue reference="sLp-b3-VHG"/>
+        <segue reference="s4x-Yi-7Oi"/>
+        <segue reference="Dxz-sf-Osr"/>
+        <segue reference="3sH-rW-cgW"/>
     </inferredMetricsTieBreakers>
 </document>

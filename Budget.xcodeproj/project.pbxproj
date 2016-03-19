@@ -31,6 +31,11 @@
 		4E6C72221C86393E001522DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6C72201C86393E001522DB /* LaunchScreen.storyboard */; };
 		4E6C722D1C86393E001522DB /* BudgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C722C1C86393E001522DB /* BudgetTests.swift */; };
 		4E6C72381C86393E001522DB /* BudgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6C72371C86393E001522DB /* BudgetUITests.swift */; };
+		4E7679911C9DB95400924536 /* PlaceDespesaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7679901C9DB95400924536 /* PlaceDespesaTableViewCell.swift */; };
+		4E7679931C9DB99C00924536 /* DespesasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7679921C9DB99C00924536 /* DespesasTableViewController.swift */; };
+		4E7679951C9DB9AB00924536 /* DespesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7679941C9DB9AB00924536 /* DespesaViewController.swift */; };
+		4E7679971C9DD70800924536 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7679961C9DD70800924536 /* Color.swift */; };
+		4E76799B1C9DEFD200924536 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76799A1C9DEFD200924536 /* CustomTabBar.swift */; };
 		4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */; };
 		4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113871C99D9F200B7A4B4 /* Receita.swift */; };
 		4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */; };
@@ -95,6 +100,11 @@
 		4E6C72331C86393E001522DB /* BudgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BudgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6C72371C86393E001522DB /* BudgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetUITests.swift; sourceTree = "<group>"; };
 		4E6C72391C86393E001522DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E7679901C9DB95400924536 /* PlaceDespesaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceDespesaTableViewCell.swift; sourceTree = "<group>"; };
+		4E7679921C9DB99C00924536 /* DespesasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DespesasTableViewController.swift; sourceTree = "<group>"; };
+		4E7679941C9DB9AB00924536 /* DespesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DespesaViewController.swift; sourceTree = "<group>"; };
+		4E7679961C9DD70800924536 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4E76799A1C9DEFD200924536 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receita+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E8113871C99D9F200B7A4B4 /* Receita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receita.swift; sourceTree = "<group>"; };
 		4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceReceitaTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +162,9 @@
 			children = (
 				0D069C901C9CC96B0027A6A2 /* Despesa+CoreDataProperties.swift */,
 				0D069C911C9CC96B0027A6A2 /* Despesa.swift */,
+				4E7679901C9DB95400924536 /* PlaceDespesaTableViewCell.swift */,
+				4E7679921C9DB99C00924536 /* DespesasTableViewController.swift */,
+				4E7679941C9DB9AB00924536 /* DespesaViewController.swift */,
 			);
 			name = Despesa;
 			sourceTree = "<group>";
@@ -240,9 +253,9 @@
 			children = (
 				4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */,
 				4E8113871C99D9F200B7A4B4 /* Receita.swift */,
+				4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */,
 				4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */,
 				4EC38F4A1C99F5720079F381 /* ReceitaViewController.swift */,
-				4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */,
 			);
 			name = Receitas;
 			sourceTree = "<group>";
@@ -296,6 +309,8 @@
 			children = (
 				A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */,
 				A8AF9BF21C97819700E5FFD6 /* Notification.swift */,
+				4E7679961C9DD70800924536 /* Color.swift */,
+				4E76799A1C9DEFD200924536 /* CustomTabBar.swift */,
 			);
 			name = Factory;
 			sourceTree = "<group>";
@@ -437,9 +452,11 @@
 				4E5FFAA81C935E0F00C50F03 /* TipoContaViewController.swift in Sources */,
 				4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */,
 				A87DB6FE1C927955005386C3 /* Conta.swift in Sources */,
+				4E76799B1C9DEFD200924536 /* CustomTabBar.swift in Sources */,
 				A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */,
 				4EC38F4B1C99F5720079F381 /* ReceitaViewController.swift in Sources */,
 				A87DB6FD1C927955005386C3 /* Conta+CoreDataProperties.swift in Sources */,
+				4E7679911C9DB95400924536 /* PlaceDespesaTableViewCell.swift in Sources */,
 				4E5FFAA71C935E0F00C50F03 /* TipoContasTableViewController.swift in Sources */,
 				A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */,
 				0DE976261C9B7198001FA054 /* CompraPrazoVista.swift in Sources */,
@@ -455,12 +472,15 @@
 				0D069C891C9CB4470027A6A2 /* Categoria+CoreDataProperties.swift in Sources */,
 				0D069C8C1C9CB5050027A6A2 /* CategoriaViewController.swift in Sources */,
 				0DE976241C9B7185001FA054 /* CompraPrazoVistaViewController.swift in Sources */,
+				4E7679971C9DD70800924536 /* Color.swift in Sources */,
 				4E6C72151C86393E001522DB /* AppDelegate.swift in Sources */,
+				4E7679931C9DB99C00924536 /* DespesasTableViewController.swift in Sources */,
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */,
 				0D069C931C9CC96B0027A6A2 /* Despesa.swift in Sources */,
 				0D069C8A1C9CB4470027A6A2 /* Categoria.swift in Sources */,
+				4E7679951C9DB9AB00924536 /* DespesaViewController.swift in Sources */,
 				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
 				A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */,

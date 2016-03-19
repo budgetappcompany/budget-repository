@@ -12,6 +12,8 @@ import CoreData
 
 class Despesa: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    static func getDespesa() -> Despesa{
+        return ContextFactory.getManagedObject("Despesa") as! Despesa
+    }
 
 }
