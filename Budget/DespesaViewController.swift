@@ -36,6 +36,7 @@ class DespesaViewController: UIViewController, ContasViewControllerDelegate, Cat
             pickerView.setDate(despesa.data!, animated: false)
             conta = despesa.conta as? Conta
             categoria = despesa.categoria as? Categoria
+            sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
             navegacao.title = "Alterar despesa"
         }
         
@@ -66,9 +67,21 @@ class DespesaViewController: UIViewController, ContasViewControllerDelegate, Cat
         }else{
             addConta()
             
-        }
-        
-        
+        }  
+    }
+    
+    @IBAction func indexChanged(sender:UISegmentedControl){
+        switch sgFglTipo.selectedSegmentIndex{
+            case 0:
+                despesa?.flgTipo = "0"; // Fixa
+            case 1:
+                despesa?.flgTipo = "1"; // Variável
+            case 2:
+                despesa?.flgTipo = "2" // Adicional
+            default:
+                break;
+    }
+    
     }
     
     func addConta(){
@@ -82,7 +95,7 @@ class DespesaViewController: UIViewController, ContasViewControllerDelegate, Cat
         despesa?.categoria = categoria
         despesa?.data = pickerView.date
         
-        
+        indexChanged(sgFglTipo)
         
         // Atualizar o saldo da conta referente
         conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
@@ -104,6 +117,7 @@ class DespesaViewController: UIViewController, ContasViewControllerDelegate, Cat
         despesa?.descricao = txtDescricao.text
         despesa?.data = pickerView.date
         
+        indexChanged(sgFglTipo)
         
         if let conta = conta {
             despesa?.conta? = conta

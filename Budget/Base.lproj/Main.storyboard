@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6En-Fc-d8i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6En-Fc-d8i">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -607,8 +607,8 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
-                        <segue destination="LaB-zI-qJB" kind="relationship" relationship="viewControllers" id="llN-IW-BQd"/>
                         <segue destination="WUt-0F-bLE" kind="relationship" relationship="viewControllers" id="MOw-lr-sfg"/>
+                        <segue destination="LaB-zI-qJB" kind="relationship" relationship="viewControllers" id="llN-IW-BQd"/>
                         <segue destination="PLr-yv-a0d" kind="relationship" relationship="viewControllers" id="ES8-MB-g69"/>
                         <segue destination="dWL-1r-jqJ" kind="relationship" relationship="viewControllers" id="HEQ-AR-ZRL"/>
                         <segue destination="DWF-hB-IjX" kind="relationship" relationship="viewControllers" id="hg6-tj-phP"/>
@@ -1840,6 +1840,9 @@
                                     <segment title="Variável"/>
                                     <segment title="Adicional"/>
                                 </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="U41-U5-LtR" eventType="valueChanged" id="4S1-BW-TzD"/>
+                                </connections>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="descricao" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qum-Au-MLr">
                                 <rect key="frame" x="20" y="359" width="280" height="30"/>
@@ -1852,13 +1855,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Inserir despesa" id="8cc-Vn-Dqv">
                         <barButtonItem key="leftBarButtonItem" title="Cancelar" id="TYd-se-f9j">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="btnCancel:" destination="U41-U5-LtR" id="DpS-1y-uPw"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Salvar" id="hom-Ei-sLq">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="btnSave:" destination="U41-U5-LtR" id="6ao-nC-rHT"/>
                             </connections>
@@ -1986,11 +1987,11 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gb4-P6-Lhq"/>
-        <segue reference="caZ-4V-o87"/>
-        <segue reference="sLp-b3-VHG"/>
         <segue reference="s4x-Yi-7Oi"/>
         <segue reference="Dxz-sf-Osr"/>
         <segue reference="3sH-rW-cgW"/>
+        <segue reference="sLp-b3-VHG"/>
+        <segue reference="caZ-4V-o87"/>
+        <segue reference="gb4-P6-Lhq"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,27 +25,6 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         CustomTabBar.custom(&tabBar!)
 
         
-
-        
-//        self.navigationController?.navigationBar.barTintColor = UIColor(red:75.0/255.0, green:195.0/255.0, blue:181.0/255.0, alpha:1.0)
-        
-//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
-        
-        
-//        var navigationBarAppearace = UINavigationBar.appearance()
-//        
-//        navigationBarAppearace.tintColor = UIColor.
-//            uicolorFromHex(0xffffff)
-//        navigationBarAppearace.barTintColor = uicolorFromHex(0x034517)
-        
-//        let navBgImage:UIImage = UIImage(named: "backgroundBar.jpg")!
-//        UINavigationBar.appearance().setBackgroundImage(navBgImage, forBarMetrics: .Default)
-        
-//        UINavigationBar.appearance().tintColor = UIColor(red: 0.62, green: 0.67, blue: 0.67, alpha: 1.0)
-//        UINavigationBar.appearance().translucent = false
-//
-//        [self.navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
-//        [self.navigationController.navigationBar setTranslucent:NO];
         
         frc = getFetchedResultsController()
         frc.delegate = self
@@ -174,10 +153,11 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
+        
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = UIColor(red: 158.0/255.0, green: 172.0/255.0, blue: 170.0/255.0, alpha: 1.0)
+            cell.backgroundColor = Color.uicolorFromHex(0xfff000)
         }else{
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = Color.uicolorFromHex(0xff9999)
         }
     }
     
