@@ -1987,11 +1987,11 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="s4x-Yi-7Oi"/>
-        <segue reference="Dxz-sf-Osr"/>
-        <segue reference="3sH-rW-cgW"/>
-        <segue reference="sLp-b3-VHG"/>
         <segue reference="caZ-4V-o87"/>
+        <segue reference="s4x-Yi-7Oi"/>
+        <segue reference="sLp-b3-VHG"/>
+        <segue reference="9mW-cx-u8Z"/>
+        <segue reference="7aV-hY-oio"/>
         <segue reference="gb4-P6-Lhq"/>
     </inferredMetricsTieBreakers>
 </document>
