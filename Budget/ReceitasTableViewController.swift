@@ -16,7 +16,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         frc = getFetchedResultsController()
         frc.delegate = self
         

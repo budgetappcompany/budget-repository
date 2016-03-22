@@ -39,6 +39,7 @@
 		A87DB7041C927A1E005386C3 /* ContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87DB7031C927A1E005386C3 /* ContaViewController.swift */; };
 		A8AF9BEF1C97714E00E5FFD6 /* ContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */; };
 		A8AF9BF31C97819700E5FFD6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AF9BF21C97819700E5FFD6 /* Notification.swift */; };
+		A8D79C421CA1D9E000FD4609 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D79C411CA1D9E000FD4609 /* SWRevealViewController.m */; };
 		A8D7D9E11C9C8CCF00A7D09D /* finance.js in Resources */ = {isa = PBXBuildFile; fileRef = A8D7D9E01C9C8CCF00A7D09D /* finance.js */; };
 		A8D7D9E51C9C8DBF00A7D09D /* FinanceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D7D9E41C9C8DBF00A7D09D /* FinanceFactory.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,9 @@
 		A87DB7031C927A1E005386C3 /* ContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContaViewController.swift; path = Budget/ContaViewController.swift; sourceTree = "<group>"; };
 		A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextFactory.swift; sourceTree = "<group>"; };
 		A8AF9BF21C97819700E5FFD6 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		A8D79C3F1CA1D9E000FD4609 /* Budget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Budget-Bridging-Header.h"; sourceTree = "<group>"; };
+		A8D79C401CA1D9E000FD4609 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A8D79C411CA1D9E000FD4609 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A8D7D9E01C9C8CCF00A7D09D /* finance.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = finance.js; sourceTree = "<group>"; };
 		A8D7D9E41C9C8DBF00A7D09D /* FinanceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +173,7 @@
 		4E6C72131C86393E001522DB /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				A8D79C431CA1DEB300FD4609 /* SWReveal */,
 				0DFFEB7C1C9CB5D000AE9595 /* Dashboard */,
 				A8D7D9E31C9C8D2800A7D09D /* FinanceJS */,
 				4E8113851C99D83900B7A4B4 /* Receitas */,
@@ -269,6 +274,16 @@
 				A8AF9BF21C97819700E5FFD6 /* Notification.swift */,
 			);
 			name = Factory;
+			sourceTree = "<group>";
+		};
+		A8D79C431CA1DEB300FD4609 /* SWReveal */ = {
+			isa = PBXGroup;
+			children = (
+				A8D79C3F1CA1D9E000FD4609 /* Budget-Bridging-Header.h */,
+				A8D79C401CA1D9E000FD4609 /* SWRevealViewController.h */,
+				A8D79C411CA1D9E000FD4609 /* SWRevealViewController.m */,
+			);
+			name = SWReveal;
 			sourceTree = "<group>";
 		};
 		A8D7D9E31C9C8D2800A7D09D /* FinanceJS */ = {
@@ -435,6 +450,7 @@
 				A87DB6FF1C927955005386C3 /* TipoConta+CoreDataProperties.swift in Sources */,
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */,
+				A8D79C421CA1D9E000FD4609 /* SWRevealViewController.m in Sources */,
 				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
 				A8D7D9E51C9C8DBF00A7D09D /* FinanceFactory.swift in Sources */,
 				4E6C721D1C86393E001522DB /* Budget.xcdatamodeld in Sources */,
@@ -581,10 +597,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Budget/Budget-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -592,10 +611,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Budget/Budget-Bridging-Header.h";
 			};
 			name = Release;
 		};

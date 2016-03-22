@@ -13,6 +13,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var lblBalancoTotal: UILabel!
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
+    @IBOutlet var btnMenuSidebar: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,9 @@ class DashboardViewController: UIViewController {
         lblTotalReceitas.text = Dashboard.getTotalReceitas().convertToMoedaBr()
         lblTotalDespesas.text = "R$0,00"
         
+        btnMenuSidebar.target = self.revealViewController()
+        btnMenuSidebar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     }
 
     override func viewWillAppear(animated: Bool) {
