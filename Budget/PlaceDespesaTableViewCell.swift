@@ -1,14 +1,14 @@
 //
-//  PlaceReceitaTableViewCell.swift
+//  PlaceDespesaTableViewCell.swift
 //  Budget
 //
-//  Created by Yuri Pereira on 3/17/16.
+//  Created by Yuri Pereira on 3/19/16.
 //  Copyright © 2016 Budget. All rights reserved.
 //
 
 import UIKit
 
-class PlaceReceitaTableViewCell: UITableViewCell {
+class PlaceDespesaTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblNome: UILabel!
     @IBOutlet weak var lblCategoria: UILabel!

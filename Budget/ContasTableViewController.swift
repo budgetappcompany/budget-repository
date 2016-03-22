@@ -25,7 +25,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -170,6 +170,9 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
             // Verifica se tem alguma receita associada, se não tiver permite deletarß
             if (conta.receita?.count > 0){
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else if(conta.despesa?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
             }else{
                 
