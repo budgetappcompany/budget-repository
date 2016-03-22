@@ -9,37 +9,44 @@
 import UIKit
 import CoreData
 
+
+
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
-
+    var tabBar: UIViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        //Comentário aqui
-//        //Create Managed Object
-//        let conta = NSEntityDescription.entityForName("Conta", inManagedObjectContext: self.managedObjectContext)
-//        let newConta = NSManagedObject(entity: conta!, insertIntoManagedObjectContext: self.managedObjectContext)
-//        
-//        //Configure new person
-//        newConta.setValue("Bradesco", forKey: "nome")
-//        newConta.setValue(1500, forKey: "saldo")
-//        
-//        let tipoConta = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: self.managedObjectContext)
-//        let newTipoConta = NSManagedObject(entity: tipoConta!, insertIntoManagedObjectContext: self.managedObjectContext)
-//        
-//        newTipoConta.setValue("Poupança", forKey: "nome")
-//        
-//        newConta.setValue(newTipoConta, forKey: "tipoconta")
-//        
-//        do{
-//            try newTipoConta.managedObjectContext?.save()
-//        }catch{
-//            print(error)
-//        }
+        
+        
+        // TabBar - Rodape - Personalizacao
+        UITabBar.appearance().tintColor = uicolorFromHex(0x44a499)
+        //UITabBar.appearance().barTintColor = uicolorFromHex(0x44a499)
+        //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : uicolorFromHex(0xffffff)], forState: UIControlState.Normal)
+        
+        
+        // NavigationBar - Topo - Personalizacao
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        navigationBarAppearace.tintColor = uicolorFromHex(0xffffff)
+        navigationBarAppearace.barTintColor = uicolorFromHex(0x44a499)
+        // 44a499
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         return true
+    }
+    
+    func uicolorFromHex(rgbValue:UInt32)->UIColor{
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:1.0)
     }
 
     func applicationWillResignActive(application: UIApplication) {

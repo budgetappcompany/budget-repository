@@ -1,8 +1,8 @@
 //
-//  Conta+CoreDataProperties.swift
+//  Categoria+CoreDataProperties.swift
 //  Budget
 //
-//  Created by Calebe Santos on 3/10/16.
+//  Created by md10 on 3/18/16.
 //  Copyright © 2016 Budget. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,11 +12,9 @@
 import Foundation
 import CoreData
 
-extension Conta {
+extension Categoria {
 
     @NSManaged var nome: String?
-    @NSManaged var saldo: NSNumber?
-    @NSManaged var tipoconta: NSManagedObject?
     @NSManaged var receita: NSSet?
     @NSManaged var despesa: NSSet?
 
