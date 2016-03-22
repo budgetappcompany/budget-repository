@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
-    <entity name="Categoria" representedClassName=".Categoria" syncable="YES">
-        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="despesa" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Despesa" inverseName="categoria" inverseEntity="Despesa" syncable="YES"/>
-        <relationship name="receita" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receita" inverseName="categoria" inverseEntity="Receita" syncable="YES"/>
-    </entity>
     <entity name="Conta" representedClassName=".Conta" syncable="YES">
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="saldo" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="despesa" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Despesa" inverseName="conta" inverseEntity="Despesa" syncable="YES"/>
         <relationship name="receita" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receita" inverseName="conta" inverseEntity="Receita" syncable="YES"/>
         <relationship name="tipoconta" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
-    </entity>
-    <entity name="Despesa" representedClassName=".Despesa" syncable="YES">
-        <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="flgTipo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="despesa" inverseEntity="Categoria" syncable="YES"/>
-        <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="despesa" inverseEntity="Conta" syncable="YES"/>
     </entity>
     <entity name="Receita" representedClassName=".Receita" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
@@ -32,7 +14,6 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="receita" inverseEntity="Categoria" syncable="YES"/>
         <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="receita" inverseEntity="Conta" syncable="YES"/>
     </entity>
     <entity name="TipoConta" representedClassName=".TipoConta" syncable="YES">
@@ -40,10 +21,8 @@
         <relationship name="conta" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conta" inverseName="tipoconta" inverseEntity="Conta" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Conta" positionX="-279" positionY="-126" width="128" height="120"/>
-        <element name="Receita" positionX="-189" positionY="-90" width="128" height="180"/>
+        <element name="Conta" positionX="-279" positionY="-126" width="128" height="105"/>
+        <element name="Receita" positionX="-189" positionY="-90" width="128" height="165"/>
         <element name="TipoConta" positionX="-99" positionY="-109" width="128" height="75"/>
-        <element name="Categoria" positionX="-189" positionY="-36" width="128" height="90"/>
-        <element name="Despesa" positionX="-180" positionY="-27" width="128" height="195"/>
     </elements>
 </model>
