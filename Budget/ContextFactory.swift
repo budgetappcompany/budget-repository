@@ -22,7 +22,19 @@ class ContextFactory {
     }
     
     static func getManagedObject(entityName: String) -> NSManagedObject{
-        let contaEntity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: ContextFactory.getContext())
-        return NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: ContextFactory.getContext())
+        let contaEntity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: getContext())
+        return NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: getContext())
     }
+    
+    static func getFetchedResultsController(entityName:String, firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
+        
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: true)
+        let sortDescriptor1 = NSSortDescriptor(key: secondSort, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
+        
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getContext(), sectionNameKeyPath: sectionName, cacheName: nil)
+        
+    }
+    
 }

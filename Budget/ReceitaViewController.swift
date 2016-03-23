@@ -84,10 +84,10 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate, Cat
         receita?.categoria = categoria
         
         
-        dateFormat.dateFormat = "MMM dd, yyyy"
-        let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
-        
-        receita?.data = data
+//        dateFormat.dateFormat = "MMM dd, yyyy"
+//        let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
+//        
+        receita?.data = Data.removerTime(pickerView.date)
         
 //        receita?.data = pickerView.date
 //        dateFormat
@@ -114,12 +114,8 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate, Cat
         receita?.descricao = txtDescricao.text
         
         
-        dateFormat.dateFormat = "MMM dd, yyyy"
-        let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
-        print("\(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)) ")
-        print("\(data)")
+        receita?.data = Data.removerTime(pickerView.date)
         
-        receita?.data = data
 //        let dateFormat = NSDateFormatter()
 //         dateFormat.dateFormat = NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)
 //        let ddd = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))

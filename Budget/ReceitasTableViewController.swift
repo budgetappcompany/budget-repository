@@ -14,7 +14,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
 
     var tabBar: UITabBar?
     
-    let context = ContextFactory.getContext()
+//    let context = ContextFactory.getContext()
     var frc = NSFetchedResultsController()
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
 
         
         
-        frc = getFetchedResultsController()
+        frc = Receita.getFetchedResultsReceita("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         
         do{
@@ -49,21 +49,21 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Core Data source
-    func contasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "Receita")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
-        return fetchRequest
-    }
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        
-        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
-        
-        return frc
-    }
+//    // MARK: - Core Data source
+//    func contasFetchRequest() -> NSFetchRequest{
+//        let fetchRequest = NSFetchRequest(entityName: "Receita")
+//        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+//        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
+//        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
+//        return fetchRequest
+//    }
+//    
+//    func getFetchedResultsController() -> NSFetchedResultsController {
+//        
+//        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
+//        
+//        return frc
+//    }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
@@ -99,21 +99,20 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
 //            sections[section]
             
             
-            let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
-            
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd"
-            let ddd = dateFormat.dateFromString(string)
-
-            
-            
-            dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
-            dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
-            dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
-            
-            let dateString = dateFormat.stringFromDate(ddd!)
-            
-            return dateString
+//            let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
+//            
+//            let dateFormat = NSDateFormatter()
+//            dateFormat.dateFormat = "yyyy-MM-dd"
+//            let ddd = dateFormat.dateFromString(string)
+//            
+//            
+//            dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
+//            dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
+//            dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
+//            
+//            let dateString = dateFormat.stringFromDate(ddd!)
+//            
+            return Data.sectionFormatarData(currentSection.name)
         }
         
 //        if let sections = frc.sections {
@@ -205,12 +204,12 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
                 do{
-                    context.deleteObject(receita)
+                    receita.managedObjectContext?.deleteObject(receita)
                     
                     // Atualiza o saldo da conta removendo o valor da receita que estava cadastrada
                     receita.conta!.setValue(saldoAtualConta, forKey: "saldo")
                     
-                    try context.save()
+                    try receita.managedObjectContext?.save()
                 }catch{
                     let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
                     presentViewController(alert, animated: true, completion: nil)

@@ -9,10 +9,30 @@
 import UIKit
 
 class Data{
+    static let dateFormat = NSDateFormatter()
     
-//   let dateFormat = NSDateFormatter()
-//    
-//    dateFormat.dateFormat = "MMM dd, yyyy"
-//    let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
+    static func sectionFormatarData(name: String) -> String{
+        
+        let string = name.substringWithRange(Range<String.Index>(start: name.startIndex, end: name.startIndex.advancedBy(10)))
+        
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        let ddd = dateFormat.dateFromString(string)
+        
+        
+        
+        dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
+        dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
+        
+        let dateString = dateFormat.stringFromDate(ddd!)
+        
+        return dateString
+        
+    }
     
+    static func removerTime(data:NSDate) -> NSDate {
+        dateFormat.dateFormat = "MMM dd, yyyy"
+        
+        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
+    }
 }
