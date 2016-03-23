@@ -14,6 +14,7 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate, Cat
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
+    let dateFormat = NSDateFormatter()
     
     @IBOutlet weak var pickerView: UIDatePicker!
     @IBOutlet weak var txtNome: UITextField!
@@ -81,8 +82,16 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate, Cat
         receita?.endereco = txtEndereco.text
         receita?.conta = conta
         receita?.categoria = categoria
-        receita?.data = pickerView.date
-
+        
+        
+        dateFormat.dateFormat = "MMM dd, yyyy"
+        let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
+        
+        receita?.data = data
+        
+//        receita?.data = pickerView.date
+//        dateFormat
+//         =
         
         
         // Atualizar o saldo da conta referente
@@ -103,8 +112,35 @@ class ReceitaViewController: UIViewController, ContasViewControllerDelegate, Cat
         receita?.valor = Float(txtValor.text!)
         receita?.endereco = txtEndereco.text
         receita?.descricao = txtDescricao.text
-        receita?.data = pickerView.date
-//            NSDateFormatter.localizedStringFromDate(, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)
+        
+        
+        dateFormat.dateFormat = "MMM dd, yyyy"
+        let data = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
+        print("\(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)) ")
+        print("\(data)")
+        
+        receita?.data = data
+//        let dateFormat = NSDateFormatter()
+//         dateFormat.dateFormat = NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)
+//        let ddd = dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(pickerView.date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))
+//        
+//        print("\(ddd)")
+        
+        
+        
+        
+        
+        //receita?.data = ddd
+        
+        
+//                    dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
+//                    dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
+//                    dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
+//                    
+//                    let dateString = dateFormat.stringFromDate(ddd!)
+        
+        
+        
 //            NSDateFormatter.
         
 

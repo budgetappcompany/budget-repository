@@ -20,9 +20,10 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Personalizar TabBar
-        tabBar = self.tabBarController!.tabBar
-        CustomTabBar.custom(&tabBar!)
+//        Personalizar TabBar
+//        É necessário colocar na table inicial para mudar em todas.
+//        tabBar = self.tabBarController!.tabBar
+//        CustomTabBar.custom(&tabBar!)
 
         
         
@@ -95,7 +96,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sections = frc.sections {
             let currentSection = sections[section]
-            sections[section]
+//            sections[section]
             
             
             let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
@@ -114,6 +115,11 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             
             return dateString
         }
+        
+//        if let sections = frc.sections {
+//            let currentSection = sections[section]
+//            return currentSection.name
+//        }
         
         return nil
     }
@@ -155,9 +161,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = Color.uicolorFromHex(0xfff000)
+            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
         }else{
-            cell.backgroundColor = Color.uicolorFromHex(0xff9999)
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }
     }
     
