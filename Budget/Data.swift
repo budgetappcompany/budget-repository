@@ -30,9 +30,15 @@ class Data{
         
     }
     
-    static func removerTime(data:NSDate) -> NSDate {
-        dateFormat.dateFormat = "MMM dd, yyyy"
+    static func removerTime(data:String) -> NSDate {
+        dateFormat.dateFormat = "dd-MM-yyyy"
         
-        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
+//        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
+        return dateFormat.dateFromString(data)!
+    }
+    
+    static func formatDateToString(data: NSDate) -> String{
+        dateFormat.dateFormat = "dd-MM-yyyy"
+        return dateFormat.stringFromDate(data)
     }
 }

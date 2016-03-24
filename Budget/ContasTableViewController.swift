@@ -113,6 +113,16 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if (indexPath.row % 2 == 0){
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -241,7 +251,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : ContaViewController = segue.destinationViewController as! ContaViewController
+            let contaController : ContasViewController = segue.destinationViewController as! ContasViewController
             let conta: Conta = frc.objectAtIndexPath(indexPath!) as! Conta
             contaController.conta = conta
         }

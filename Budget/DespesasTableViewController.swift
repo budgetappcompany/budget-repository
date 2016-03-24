@@ -134,15 +134,20 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         return cell
     }
     
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Futura", size: 14)!
+        header.textLabel?.textColor = Color.uicolorFromHex(0x44a499)
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        //        var color: UIColor?
         
         
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = UIColor.blueColor()
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }else{
-            cell.backgroundColor = UIColor.greenColor()
+            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
         }
     }
 
@@ -225,7 +230,7 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : DespesaViewController = segue.destinationViewController as! DespesaViewController
+            let contaController : DespesasViewController = segue.destinationViewController as! DespesasViewController
             let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
             contaController.despesa = despesa
         }

@@ -20,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
         // TabBar - Rodape - Personalizacao
-        UITabBar.appearance().tintColor = uicolorFromHex(0x44a499)
+        UITabBar.appearance().tintColor = uicolorFromHex(0x49A99E)
         //UITabBar.appearance().barTintColor = uicolorFromHex(0x44a499)
         //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : uicolorFromHex(0xffffff)], forState: UIControlState.Normal)
         
@@ -31,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let navigationBarAppearace = UINavigationBar.appearance()
         
         navigationBarAppearace.tintColor = uicolorFromHex(0xffffff)
-        navigationBarAppearace.barTintColor = uicolorFromHex(0x44a499)
+        navigationBarAppearace.barTintColor = uicolorFromHex(0x49A99E)
         // 44a499
         // change navigation item title color
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]

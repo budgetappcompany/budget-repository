@@ -160,9 +160,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
-        }else{
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
         }
     }
     
@@ -258,7 +258,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : ReceitaViewController = segue.destinationViewController as! ReceitaViewController
+            let contaController : ReceitasViewController = segue.destinationViewController as! ReceitasViewController
             let receita: Receita = frc.objectAtIndexPath(indexPath!) as! Receita
             contaController.receita = receita
         }
