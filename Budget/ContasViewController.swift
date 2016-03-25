@@ -11,6 +11,82 @@ import CoreData
 
 class ContasViewController: UITableViewController, TipoContasViewControllerDelegate, UITextFieldDelegate {
     
+    
+    var currentString = ""
+    
+    //Textfield delegates
+    //    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    //
+    //    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let currentCharacterCount = textField.text?.characters.count
+        //        let currentCharacterCount = textField.text?.characters.count ?? 0
+        //        if (range.length + range.location > currentCharacterCount){
+        //            return false
+        //        }
+        let newLength = currentCharacterCount! + string.characters.count - range.length
+        return newLength <= 14
+    }
+    
+    @IBAction func maskTextField(sender: UITextField) {
+        if var textField = sender.text {
+            
+            textField = formatText(textField)
+            let char = textField.substringFromIndex((textField.endIndex.predecessor()))
+            switch char {
+            case "0","1","2","3","4","5","6","7","8","9":
+                textField = formatCurrency(textField)
+                //                print(textField)
+                break;
+            case "-":
+                
+                if(textField != "-" && textField.floatValue != 0){
+                    textField.removeAtIndex(textField.endIndex.predecessor())
+                    textField = formatCurrency(textField)
+                } else {
+                    
+                    textField = formatCurrency("-1")
+                    print(textField)
+                }
+                break;
+                
+            default:
+                textField.removeAtIndex(textField.endIndex.predecessor())
+                textField = formatCurrency(textField)
+            }
+            sender.text = textField
+            //        print(char
+        }
+        //        print(sender.text)
+    }
+    
+    func formatText(var priceS: String) -> String{
+        priceS = priceS.stringByReplacingOccurrencesOfString("R$",withString:"")
+        //        priceS = priceS.stringByReplacingOccurrencesOfString(",00",withString:"")
+        priceS = priceS.stringByReplacingOccurrencesOfString(".",withString:"")
+        priceS = priceS.stringByReplacingOccurrencesOfString(",",withString:"")
+        return priceS
+    }
+    
+    func formatCurrency(string: String) -> String{
+        
+        //3        var numberFromField1 = string
+        //        if ((string.rangeOfString("R$") != nil && string.rangeOfString(",") != nil)){
+        //            numberFromField1.removeRange(string.rangeOfString("R$")!)
+        ////            numberFromField1.removeRange(string.rangeOfString(".")!)
+        //            numberFromField1.removeAtIndex((string.rangeOfString(",")?.startIndex)!)
+        //            return numberFromField1.floatConverter.convertToMoedaBr()
+        //        }
+        var numberFromField:Float?
+        //        print(string.floatConverter)
+        numberFromField = string.floatConverter/100
+        
+        return numberFromField!.convertToMoedaBr()
+        
+    }
+    
+    
     var conta: Conta?
     var tipoConta: TipoConta? = nil
     
