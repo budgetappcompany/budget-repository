@@ -34,6 +34,7 @@
 		4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113871C99D9F200B7A4B4 /* Receita.swift */; };
 		4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */; };
 		4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */; };
+		A83F43821CA8D939003FAD23 /* TextoMascara.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83F43811CA8D939003FAD23 /* TextoMascara.swift */; };
 		A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840814F1C8E0EC700186308 /* PorcentagemController.swift */; };
 		A84081521C8E201E00186308 /* Porcentagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84081511C8E201E00186308 /* Porcentagem.swift */; };
 		A85244211CA49BD100CAA26D /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A852441A1CA49BC300CAA26D /* Charts.framework */; };
@@ -159,6 +160,7 @@
 		4E8113871C99D9F200B7A4B4 /* Receita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receita.swift; sourceTree = "<group>"; };
 		4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceReceitaTableViewCell.swift; sourceTree = "<group>"; };
 		4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceitasTableViewController.swift; sourceTree = "<group>"; };
+		A83F43811CA8D939003FAD23 /* TextoMascara.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextoMascara.swift; sourceTree = "<group>"; };
 		A840814F1C8E0EC700186308 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PorcentagemController.swift; sourceTree = "<group>"; };
 		A84081511C8E201E00186308 /* Porcentagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Porcentagem.swift; sourceTree = "<group>"; };
 		A85244121CA49BC300CAA26D /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Budget/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
@@ -255,11 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				4EE5A6F61CA2282900EF5B22 /* Despesa */,
+				4E8113851C99D83900B7A4B4 /* Receita */,
 				4EE5A6F51CA2282900EF5B22 /* Categoria */,
 				A8D79C431CA1DEB300FD4609 /* SWReveal */,
 				0DFFEB7C1C9CB5D000AE9595 /* Dashboard */,
 				A8D7D9E31C9C8D2800A7D09D /* FinanceJS */,
-				4E8113851C99D83900B7A4B4 /* Receitas */,
 				A8AF9BED1C97713A00E5FFD6 /* Factory */,
 				A87DB7021C927970005386C3 /* Tipo Contas */,
 				A87DB7011C927961005386C3 /* Contas */,
@@ -294,7 +296,7 @@
 			path = BudgetUITests;
 			sourceTree = "<group>";
 		};
-		4E8113851C99D83900B7A4B4 /* Receitas */ = {
+		4E8113851C99D83900B7A4B4 /* Receita */ = {
 			isa = PBXGroup;
 			children = (
 				4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */,
@@ -303,7 +305,7 @@
 				4E60B0521CA33B52008994B7 /* ReceitasViewController.swift */,
 				4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */,
 			);
-			name = Receitas;
+			name = Receita;
 			sourceTree = "<group>";
 		};
 		4EE5A6F51CA2282900EF5B22 /* Categoria */ = {
@@ -392,6 +394,7 @@
 				A882C02A1CA20596000D57C5 /* Data.swift */,
 				A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */,
 				A8AF9BF21C97819700E5FFD6 /* Notification.swift */,
+				A83F43811CA8D939003FAD23 /* TextoMascara.swift */,
 			);
 			name = Factory;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				A84081521C8E201E00186308 /* Porcentagem.swift in Sources */,
 				4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */,
 				A8D79C421CA1D9E000FD4609 /* SWRevealViewController.m in Sources */,
+				A83F43821CA8D939003FAD23 /* TextoMascara.swift in Sources */,
 				4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */,
 				A8D7D9E51C9C8DBF00A7D09D /* FinanceFactory.swift in Sources */,
 				0DC584171CA36E3500DD8E5A /* ContasViewController.swift in Sources */,

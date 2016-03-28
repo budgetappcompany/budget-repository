@@ -46,22 +46,30 @@ class DashboardViewController: UIViewController {
     @IBOutlet var btnMenuSidebar: UIBarButtonItem!
     @IBOutlet var lineChart: LineChartView!
 //    var zoom:CGFloat = 0.0
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func initDashboard(){
         Dashboard.getTotalBalanco()
         
         lblBalancoTotal.text = Dashboard.getTotalBalanco().convertToMoedaBr()
         lblTotalReceitas.text = Dashboard.getTotalReceitas().convertToMoedaBr()
-        lblTotalDespesas.text = "R$0,00"
+        lblTotalDespesas.text = Dashboard.getTotalDespesas().convertToMoedaBr()
         
         btnMenuSidebar.target = self.revealViewController()
         btnMenuSidebar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-        let (balanco, months) = Dashboard.getBalancoAnual()
+        let (months, balanco) = Dashboard.getBalancoAnual()
+        
+        print(Dashboard.getDespesasPorCategoria())
+        print(Dashboard.getReceitasPorCategoria())
+        
         setChart(months, values: balanco)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+//        var month:Array<String> = months
+//        setChart(month, values: balanco)
         
     }
     func setChart(dataPoints: [String], values: [Double]) {
@@ -98,7 +106,8 @@ class DashboardViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.viewDidLoad()
+//        self.viewDidLoad()
+        initDashboard()
     }
 
     override func didReceiveMemoryWarning() {

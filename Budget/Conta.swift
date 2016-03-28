@@ -68,13 +68,17 @@ class Conta: NSManagedObject {
         return ContextFactory.getManagedObject("Conta") as! Conta
     }
     
+    static func salvar(conta:Conta) throws {
+        try conta.managedObjectContext?.save()
+    }
+
     func moeda(valor: Float) -> String{
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         formatter.locale = NSLocale(localeIdentifier: "pt_BR")
         return (formatter.stringFromNumber(valor))!
     }
     
-
+    
     
     
 }
