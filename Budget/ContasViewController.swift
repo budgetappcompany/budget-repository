@@ -11,6 +11,8 @@ import CoreData
 
 class ContasViewController: UITableViewController, TipoContasViewControllerDelegate, UITextFieldDelegate {
     
+    
+    var currentString = ""
     var conta: Conta?
     var tipoConta: TipoConta? = nil
     
@@ -46,6 +48,20 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let currentCharacterCount = textField.text?.characters.count
+        //        let currentCharacterCount = textField.text?.characters.count ?? 0
+        //        if (range.length + range.location > currentCharacterCount){
+        //            return false
+        //        }
+        
+        return currentCharacterCount < 14
+    }
+    
+    @IBAction func maskTextField(sender: UITextField) {
+        sender.text = TextoMascara.aplicarMascara(sender.text!)
+    }
+    
     
     @IBAction func btnCancel(sender: AnyObject) {
         dissmissViewController()
@@ -70,49 +86,42 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     func addConta(){
-        //        let context = self.context
-        //        let contaEntity = NSEntityDescription.entityForName("Conta", inManagedObjectContext: context)
-        
         conta = Conta.getConta()
         conta?.nome = txtNome.text
-        
-        if let saldo = txtSaldo.text?.floatConverterMoeda(){
-            conta?.saldo = saldo
-        } else {
-            Notification.mostrarErro()
-        }
+        conta?.saldo = txtSaldo.text?.floatConverterMoeda()
         conta?.tipoconta = tipoConta
         
-        //        conta?.setValue(txtNome.text, forKey: "nome")
-        //        conta.setValue(Float(txtSaldo.text!), forKey: "saldo")
-        //        newConta.setValue(tipoConta, forKey: "tipoconta")
+        salvarConta()
         
-        do{
-            try conta?.managedObjectContext?.save()
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-            presentViewController(alert, animated: true, completion: nil)
-        }
+//        if let saldo = txtSaldo.text?.floatConverterMoeda(){
+//            conta?.saldo = saldo
+//        } else {
+//            Notification.mostrarErro()
+//        }
     }
     
     func updateConta(){
         
         conta?.nome = txtNome.text
-        
         conta?.saldo = txtSaldo.text!.floatConverterMoeda()
-        print(txtSaldo.text!.floatConverterMoeda())
+        
         if let tipoConta = tipoConta {
             conta?.tipoconta? = tipoConta
         }
         
+        salvarConta()
+    }
+    
+    private func salvarConta(){
         do{
-            try conta?.managedObjectContext?.save()
+            
+            
+            try Conta.salvar(conta!)
         }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
         }
     }
-    
     
     // Define Delegate Method
     func tipoContasViewControllerResponse(tipoConta: TipoConta) {

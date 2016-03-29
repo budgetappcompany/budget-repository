@@ -11,7 +11,7 @@ import CoreData
 
 class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
 
-    
+    var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
@@ -43,11 +43,19 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta as? Conta
             categoria = receita.categoria as? Categoria
+            
             navegacao.title = "Alterar"
+            txtValor.enabled = false
+            txtData.enabled = false
+            txtConta.enabled = false
+            
+        } else {
+            txtData.text = Data.formatDateToString(pickerView.date)
         }
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        
         txtData.inputView = pickerView
         
         // Alinhar as labels
@@ -55,8 +63,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
 
     }
     
-    func updateTextField(sende:UIDatePicker){
-        txtData.text = Data.formatDateToString(sende.date)
+    func updateTextField(sender:UIDatePicker){
+        txtData.text = Data.formatDateToString(sender.date)
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,60 +94,114 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+        
+        if Validador.vazio(txtValor.text!){
+            erros.appendContentsOf("Preencha o campo Valor!\n")
+        }
+        
+        if Validador.vazio(txtEndereco.text!){
+            erros.appendContentsOf("Preencha o campo Endereço!\n")
+        }
+        
+        if Validador.vazio(txtDescricao.text!){
+            erros.appendContentsOf("Preencha o campo Descrição!\n")
+        }
+        
+        if Validador.vazio(txtConta.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
+        
+        if Validador.vazio(txtCategoria.text!){
+            erros.appendContentsOf("Selecione a Categoria!")
+        }
+    }
+    
     func addConta(){
         
-        receita = Receita.getReceita()
-        receita?.nome = txtNome.text
-        receita?.descricao = txtDescricao.text
-        receita?.valor = Float(txtValor.text!)
-        receita?.endereco = txtEndereco.text
-        receita?.conta = conta
-        receita?.categoria = categoria
+        validarCampos()
         
-
-        receita?.data = Data.removerTime(txtData.text!)
-        
-
-        
-        
-        // Atualizar o saldo da conta referente
-        conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
-        
-        do{
-            try receita?.managedObjectContext?.save()
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if(erros.isEmpty){
+            receita = Receita.getReceita()
+            receita?.nome = txtNome.text
+            receita?.descricao = txtDescricao.text
+            receita?.valor = Float(txtValor.text!)
+            receita?.endereco = txtEndereco.text
+            receita?.conta = conta
+            receita?.categoria = categoria
+            receita?.data = Data.removerTime(txtData.text!)
+            
+            // Atualizar o saldo da conta referente
+            conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
+            
+            do{
+                try receita?.managedObjectContext?.save()
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+
     }
     
     func updateConta(){
         
-        receita?.nome = txtNome.text
-        receita?.valor = Float(txtValor.text!)
-        receita?.endereco = txtEndereco.text
-        receita?.descricao = txtDescricao.text
+        validarCampos()
         
-        
-        receita?.data = Data.removerTime(txtData.text!)
-        
-        
-        if let conta = conta {
-            receita?.conta? = conta
-        }
-        
-        if let categoria = categoria{
-            receita?.categoria = categoria
-        }
-        
-        do{
-            try receita?.managedObjectContext?.save()
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+        if(erros.isEmpty){
+            receita?.nome = txtNome.text
+            receita?.endereco = txtEndereco.text
+            receita?.descricao = txtDescricao.text
+            
+            if let categoria = categoria{
+                receita?.categoria = categoria
+            }
+            
+            do{
+                try receita?.managedObjectContext?.save()
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
+        
+//        receita?.valor = Float(txtValor.text!)
+
+//        receita?.data = Data.removerTime(txtData.text!)
+        
+//        if let conta = conta {
+//            receita?.conta? = conta
+//        }
+        
+
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if receita == nil{
+            return true
+        }
+        
+        if identifier == "alterarCategoriaReceita"{
+            return true
+        }
+        
+        return false
     }
     
     // Define Delegate Method
@@ -168,17 +230,9 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         case 2: return 1    // section 2 has 1 row
         default: fatalError("Unknown number of sections")
         }
+        
+        
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
 
     /*
     // Override to support conditional editing of the table view.

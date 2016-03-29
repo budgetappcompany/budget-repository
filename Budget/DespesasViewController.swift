@@ -11,6 +11,7 @@ import CoreData
 
 class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
     
+    var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
@@ -43,7 +44,13 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             txtData.text = Data.formatDateToString(despesa.data!)
             categoria = despesa.categoria as? Categoria
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
+            
             navegacao.title = "Alterar"
+            txtValor.enabled = false
+            txtData.enabled = false
+            txtConta.enabled = false
+        } else {
+            txtData.text = Data.formatDateToString(pickerView.date)
         }
         
         txtConta.text = self.conta?.nome!
@@ -99,56 +106,106 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+        
+        if Validador.vazio(txtValor.text!){
+            erros.appendContentsOf("Preencha o campo Valor!\n")
+        }
+        
+        if Validador.vazio(txtEndereco.text!){
+            erros.appendContentsOf("Preencha o campo Endereço!\n")
+        }
+        
+        if Validador.vazio(txtDescricao.text!){
+            erros.appendContentsOf("Preencha o campo Descrição!\n")
+        }
+        
+        if Validador.vazio(txtConta.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
+        
+        if Validador.vazio(txtCategoria.text!){
+            erros.appendContentsOf("Selecione a Categoria!")
+        }
+    }
+    
     func addConta(){
         
-        despesa = Despesa.getDespesa()
-        despesa?.nome = txtNome.text
-        despesa?.descricao = txtDescricao.text
-        despesa?.valor = Float(txtValor.text!)
-        despesa?.endereco = txtEndereco.text
-        despesa?.conta = conta
-        despesa?.categoria = categoria
-        despesa?.data = Data.removerTime(txtData.text!)
+        validarCampos()
         
-        indexChanged(sgFglTipo)
-        
-        // Atualizar o saldo da conta referente
-        conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
-        
-        do{
-            try despesa?.managedObjectContext?.save()
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if(erros.isEmpty){
+            despesa = Despesa.getDespesa()
+            despesa?.nome = txtNome.text
+            despesa?.descricao = txtDescricao.text
+            despesa?.valor = Float(txtValor.text!)
+            despesa?.endereco = txtEndereco.text
+            despesa?.conta = conta
+            despesa?.categoria = categoria
+            despesa?.data = Data.removerTime(txtData.text!)
+            indexChanged(sgFglTipo)
+            
+            // Atualizar o saldo da conta referente
+            conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+            
+            do{
+                try despesa?.managedObjectContext?.save()
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
+
     }
     
     func updateConta(){
         
-        despesa?.nome = txtNome.text
-        despesa?.valor = Float(txtValor.text!)
-        despesa?.endereco = txtEndereco.text
-        despesa?.descricao = txtDescricao.text
-        despesa?.data = Data.removerTime(txtData.text!)
+        validarCampos()
         
-        indexChanged(sgFglTipo)
-        
-        if let conta = conta {
-            despesa?.conta? = conta
-        }
-        
-        if let categoria = categoria{
-            despesa?.categoria = categoria
-        }
-        
-        do{
-            try despesa?.managedObjectContext?.save()
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+        if(erros.isEmpty){
+            despesa?.nome = txtNome.text
+            despesa?.endereco = txtEndereco.text
+            despesa?.descricao = txtDescricao.text
+            indexChanged(sgFglTipo)
+            
+            if let categoria = categoria{
+                despesa?.categoria = categoria
+            }
+            
+            do{
+                try despesa?.managedObjectContext?.save()
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
+
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if despesa == nil{
+            return true
+        }
+        
+        if identifier == "alterarCategoriaDespesa"{
+            return true
+        }
+        
+        return false
     }
     
     // Define Delegate Method
