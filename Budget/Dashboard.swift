@@ -10,58 +10,64 @@ import UIKit
 import CoreData
 
 class Dashboard {
+    
     static func getTotalBalanco() -> Float {
-        var total:Float = 0.0
-        let fetchRequest = NSFetchRequest(entityName: "Conta")
-        do {
-            
-            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-            
-            for result in results {
-                total += result.valueForKey("saldo")! as! Float
-            }
-            
-        } catch {
-            print(error)
-        }
+        let contaDAO:ContaDAO = ContaDAO()
+//        let fetchRequest = NSFetchRequest(entityName: "Conta")
+//        do {
+//            
+//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+//            
+//            for result in results {
+//                total += result.valueForKey("saldo")! as! Float
+//            }
+//            
+//        } catch {
+//            print(error)
+//        }
         
-        return total
+        let saldo:[Float] = contaDAO.getListaContas().map({conta in conta.valueForKey("saldo") as! Float})
+        
+        return saldo.reduce(0.0, combine:+)
     }
     
     static func getTotalReceitas() -> Float {
-        var total:Float = 0.0
-        let fetchRequest = NSFetchRequest(entityName: "Receita")
-        do {
-            
-            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-            
-            for result in results {
-                total += result.valueForKey("valor")! as! Float
-            }
-            
-        } catch {
-            print(error)
-        }
-        
-        return total
+//        var total:Float = 0.0
+//        let fetchRequest = NSFetchRequest(entityName: "Receita")
+//        do {
+//            
+//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+//            
+//            for result in results {
+//                total += result.valueForKey("valor")! as! Float
+//            }
+//            
+//        } catch {
+//            print(error)
+//        }
+        let receitaDAO:ReceitaDAO = ReceitaDAO()
+        let saldo:[Float] = receitaDAO.getListaReceitas().map({receita in receita.valueForKey("valor") as! Float})
+        return saldo.reduce(0.0, combine: +)
     }
     
     static func getTotalDespesas() -> Float {
-        var total:Float = 0.0
-        let fetchRequest = NSFetchRequest(entityName: "Despesa")
-        do {
-            
-            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-            
-            for result in results {
-                total += result.valueForKey("valor")! as! Float
-            }
-            
-        } catch {
-            print(error)
-        }
+//        var total:Float = 0.0
+//        let fetchRequest = NSFetchRequest(entityName: "Despesa")
+//        do {
+//            
+//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+//            
+//            for result in results {
+//                total += result.valueForKey("valor")! as! Float
+//            }
+//            
+//        } catch {
+//            print(error)
+//        }
+        let despesaDAO:DespesaDAO = DespesaDAO()
+        let saldo:[Float] = despesaDAO.getListaDespesas().map({despesa in despesa.valueForKey("valor") as! Float})
         
-        return total
+        return saldo.reduce(0.0, combine: +)
     }
     
     static func getBalancoAnual() -> (Array<String>,[Double]){

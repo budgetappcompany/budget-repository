@@ -47,8 +47,6 @@ class DashboardViewController: UIViewController {
     @IBOutlet var lineChart: LineChartView!
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
-        Dashboard.getTotalBalanco()
-        
         lblBalancoTotal.text = Dashboard.getTotalBalanco().convertToMoedaBr()
         lblTotalReceitas.text = Dashboard.getTotalReceitas().convertToMoedaBr()
         lblTotalDespesas.text = Dashboard.getTotalDespesas().convertToMoedaBr()

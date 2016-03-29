@@ -14,6 +14,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
+    var despesaDAO: DespesaDAO = DespesaDAO()
     var pickerView: UIDatePicker!
     
     @IBOutlet var labels: [UILabel]!
@@ -102,6 +103,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     func addConta(){
         
         despesa = Despesa.getDespesa()
+        
         despesa?.nome = txtNome.text
         despesa?.descricao = txtDescricao.text
         despesa?.valor = Float(txtValor.text!)
@@ -116,7 +118,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
         
         do{
-            try despesa?.managedObjectContext?.save()
+            try despesaDAO.salvar(despesa!)
             navigationController?.popViewControllerAnimated(true)
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
@@ -143,7 +145,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         do{
-            try despesa?.managedObjectContext?.save()
+            try despesaDAO.salvar(despesa!)
             navigationController?.popViewControllerAnimated(true)
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")

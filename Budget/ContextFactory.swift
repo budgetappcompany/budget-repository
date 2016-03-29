@@ -37,4 +37,27 @@ class ContextFactory {
         
     }
     
+    static func getFetchedResultsControllerrr() -> NSFetchedResultsController {
+
+        let fetchRequest = NSFetchRequest(entityName: "Categoria")
+        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getContext(), sectionNameKeyPath: nil, cacheName: nil)
+    }
+    
+//    // MARK: - Core Data source
+//    func tipoContasFetchRequest() -> NSFetchRequest{
+//        let fetchRequest = NSFetchRequest(entityName: "Categoria")
+//        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+//        fetchRequest.sortDescriptors = [sortDescriptor]
+//        return fetchRequest
+//    }
+//    
+//    func getFetchedResultsController() -> NSFetchedResultsController {
+//        
+//        frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        return frc
+//    }
+    
 }

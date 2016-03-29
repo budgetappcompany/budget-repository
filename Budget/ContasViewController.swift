@@ -14,6 +14,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     var currentString = ""
     var conta: Conta?
+    let contaDAO:ContaDAO = ContaDAO()
     var tipoConta: TipoConta? = nil
     
     @IBOutlet var labels: [UILabel]!
@@ -54,12 +55,12 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         //        if (range.length + range.location > currentCharacterCount){
         //            return false
         //        }
-        
+        textField.text = TextoMascara.aplicarMascara(&textField.text!)
         return currentCharacterCount < 14
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        sender.text = TextoMascara.aplicarMascara(sender.text!)
+//        sender.text = TextoMascara.aplicarMascara(sender.text!)
     }
     
     
@@ -114,7 +115,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     private func salvarConta(){
         do{
-            try Conta.salvar(conta!)
+            try contaDAO.salvar(conta!)
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
