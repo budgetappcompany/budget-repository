@@ -192,7 +192,7 @@
 		A8FFBD201CA9D87300101100 /* DespesaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DespesaDAO.swift; sourceTree = "<group>"; };
 		A8FFBD251CA9E1BD00101100 /* ReceitaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceitaDAO.swift; sourceTree = "<group>"; };
 		A8FFBD271CA9E7F400101100 /* CategoriaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaDAO.swift; sourceTree = "<group>"; };
-		A8FFBD291CA9FA2E00101100 /* ContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContaDAO.swift; sourceTree = "<group>"; };
+		A8FFBD291CA9FA2E00101100 /* ContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContaDAO.swift; path = Budget/ContaDAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
