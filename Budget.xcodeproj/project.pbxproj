@@ -409,6 +409,7 @@
 				A8AF9BEE1C97714E00E5FFD6 /* ContextFactory.swift */,
 				A8AF9BF21C97819700E5FFD6 /* Notification.swift */,
 				A83F43811CA8D939003FAD23 /* TextoMascara.swift */,
+				4EB995881CA9D24B0031195D /* Validador.swift */,
 			);
 			name = Factory;
 			sourceTree = "<group>";
@@ -604,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB995891CA9D24B0031195D /* Validador.swift in Sources */,
 				A8FFBD211CA9D87300101100 /* DespesaDAO.swift in Sources */,
 				0D336E651C9B77C9008B0F4E /* PlaceContaTableViewCell.swift in Sources */,
 				0DFFEB7E1C9CB5F900AE9595 /* DashboardViewController.swift in Sources */,
@@ -798,6 +800,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -814,6 +818,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Budget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

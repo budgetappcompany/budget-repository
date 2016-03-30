@@ -13,6 +13,8 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     
     var frc = NSFetchedResultsController()
     var despesaDAO:DespesaDAO = DespesaDAO()
+    var categoria: Categoria?
+    var conta: Conta?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,10 +100,24 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         
         let despesa = frc.objectAtIndexPath(indexPath) as! Despesa
         
+        //        cell.textLabel?.text = receita.nome
+        
+        categoria = despesa.categoria as? Categoria
+        conta = despesa.conta as? Conta
+        
         cell.lblNome.text = despesa.nome
         cell.lblValor.text = despesa.valor!.floatValue.convertToMoedaBr()
         cell.lblCategoria.text = categoria?.nome
         cell.lblConta.text = conta?.nome
+        
+        
+        //        cell.txtConta?.text = conta.nome
+        //        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+        //        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+        
+        //        cell.textLabel?.text = conta.nome
+        //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
+        //String("R$ \(conta.saldo!)")
         
         
         return cell

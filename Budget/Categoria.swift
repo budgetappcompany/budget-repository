@@ -16,8 +16,8 @@ class Categoria: NSManagedObject {
         return ContextFactory.getManagedObject("Categoria") as! Categoria
     }
     
-    static func getCategoriasController() -> NSFetchedResultsController {
-        return ContextFactory.getFetchedResultsControllerrr()
+    static func getCategoriasController(firstSort:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("Categoria", firstSort: firstSort)
     }
 
 }

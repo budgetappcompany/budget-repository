@@ -13,6 +13,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     
     var currentString = ""
+    var erros: String = ""
     var conta: Conta?
     let contaDAO:ContaDAO = ContaDAO()
     var tipoConta: TipoConta? = nil
@@ -54,6 +55,10 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let currentCharacterCount = textField.text?.characters.count
+        //        let currentCharacterCount = textField.text?.characters.count ?? 0
+        //        if (range.length + range.location > currentCharacterCount){
+        //            return false
+        //        }
         
         if (range.length > 0){
             return true
@@ -88,6 +93,20 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+        
+        if Validador.vazio(txtSaldo.text!){
+            erros.appendContentsOf("Preencha o campo Saldo!\n")
+        }
+        
+        if Validador.vazio(txtTipo.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
+    }
+    
     func addConta(){
         conta = Conta.getConta()
         conta?.nome = txtNome.text
@@ -116,10 +135,18 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     private func salvarConta(){
-        do{
-            try contaDAO.salvar(conta!)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+        
+        validarCampos()
+        
+        if (erros.isEmpty){
+            do{
+                try contaDAO.salvar(conta!)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             erros.removeAll()
         }

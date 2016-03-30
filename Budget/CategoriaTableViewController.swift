@@ -18,9 +18,9 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     weak var delegate: CategoriaViewControllerDelegate?
     
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var frc = Categoria.getCategoriasController()
+    var frc = Categoria.getCategoriasController("nome")
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -100,24 +100,54 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             erros.appendContentsOf("Preencha o campo nome!\n")
         }
         
-        receita = Receita.getReceita()
-        receita?.nome = txtNome.text
-        receita?.descricao = txtDescricao.text
-        receita?.valor = Float(txtValor.text!)
-        receita?.endereco = txtEndereco.text
-        receita?.conta = conta
-        receita?.categoria = categoria
-
-        receita?.data = Data.removerTime(txtData.text!)
+        if Validador.vazio(txtValor.text!){
+            erros.appendContentsOf("Preencha o campo Valor!\n")
+        }
         
-        // Atualizar o saldo da conta referente
-        conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
+        if Validador.vazio(txtEndereco.text!){
+            erros.appendContentsOf("Preencha o campo Endereço!\n")
+        }
         
-        do{
-            try receitaDAO.salvar(receita!)
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if Validador.vazio(txtDescricao.text!){
+            erros.appendContentsOf("Preencha o campo Descrição!\n")
+        }
+        
+        if Validador.vazio(txtConta.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
+        
+        if Validador.vazio(txtCategoria.text!){
+            erros.appendContentsOf("Selecione a Categoria!")
+        }
+    }
+    
+    func addConta(){
+        
+        validarCampos()
+        
+        if(erros.isEmpty){
+            receita = Receita.getReceita()
+            receita?.nome = txtNome.text
+            receita?.descricao = txtDescricao.text
+            receita?.valor = Float(txtValor.text!)
+            receita?.endereco = txtEndereco.text
+            receita?.conta = conta
+            receita?.categoria = categoria
+            receita?.data = Data.removerTime(txtData.text!)
+            
+            // Atualizar o saldo da conta referente
+            conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
+            
+            do{
+                try receitaDAO.salvar(receita!)
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             erros.removeAll()
         }
@@ -138,7 +168,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             }
             
             do{
-                try receita?.managedObjectContext?.save()
+                try receitaDAO.salvar(receita!)
                 navigationController?.popViewControllerAnimated(true)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
@@ -168,12 +198,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             return true
         }
         
-        do{
-            try receitaDAO.salvar(receita!)
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-            presentViewController(alert, animated: true, completion: nil)
+        if identifier == "alterarCategoriaReceita"{
+            return true
         }
         
         return false

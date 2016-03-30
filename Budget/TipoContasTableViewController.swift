@@ -17,13 +17,13 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
 
     weak var delegate: TipoContasViewControllerDelegate?
     
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    var frc = NSFetchedResultsController()
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var frc = TipoConta.getTipoContasController("nome")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let frc = getFetchedResultsController()
+//        let frc = getFetchedResultsController()
         frc.delegate = self
         
         do{
@@ -39,19 +39,19 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     
-    // MARK: - Core Data source
-    func tipoContasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "TipoConta")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-    }
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        
-        frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return frc
-    }
+//    // MARK: - Core Data source
+//    func tipoContasFetchRequest() -> NSFetchRequest{
+//        let fetchRequest = NSFetchRequest(entityName: "TipoConta")
+//        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+//        fetchRequest.sortDescriptors = [sortDescriptor]
+//        return fetchRequest
+//    }
+//    
+//    func getFetchedResultsController() -> NSFetchedResultsController {
+//        
+//        frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        return frc
+//    }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
@@ -110,12 +110,12 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
-                do{
-                    context.deleteObject(tipoConta)
-                    try context.save()
-                }catch{
-                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
-                }
+//                do{
+//                    context.deleteObject(tipoConta)
+//                    try context.save()
+//                }catch{
+//                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+//                }
             }
             
             // Verifica se tem alguma conta associada, se não tiver permite deletarß

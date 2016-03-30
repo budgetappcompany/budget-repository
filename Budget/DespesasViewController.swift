@@ -124,15 +124,9 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             erros.appendContentsOf("Preencha o campo Descrição!\n")
         }
         
-        despesa = Despesa.getDespesa()
-        
-        despesa?.nome = txtNome.text
-        despesa?.descricao = txtDescricao.text
-        despesa?.valor = Float(txtValor.text!)
-        despesa?.endereco = txtEndereco.text
-        despesa?.conta = conta
-        despesa?.categoria = categoria
-        despesa?.data = Data.removerTime(txtData.text!)
+        if Validador.vazio(txtConta.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
         
         if Validador.vazio(txtCategoria.text!){
             erros.appendContentsOf("Selecione a Categoria!")
@@ -143,11 +137,28 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         validarCampos()
         
-        do{
-            try despesaDAO.salvar(despesa!)
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if(erros.isEmpty){
+            despesa = Despesa.getDespesa()
+            despesa?.nome = txtNome.text
+            despesa?.descricao = txtDescricao.text
+            despesa?.valor = Float(txtValor.text!)
+            despesa?.endereco = txtEndereco.text
+            despesa?.conta = conta
+            despesa?.categoria = categoria
+            despesa?.data = Data.removerTime(txtData.text!)
+            indexChanged(sgFglTipo)
+            
+            // Atualizar o saldo da conta referente
+            conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+            do{
+                try despesaDAO.salvar(despesa!)
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             erros.removeAll()
         }
@@ -170,7 +181,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             }
             
             do{
-                try despesa?.managedObjectContext?.save()
+                try despesaDAO.salvar(despesa!)
                 navigationController?.popViewControllerAnimated(true)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
@@ -190,12 +201,8 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             return true
         }
         
-        do{
-            try despesaDAO.salvar(despesa!)
-            navigationController?.popViewControllerAnimated(true)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-            presentViewController(alert, animated: true, completion: nil)
+        if identifier == "alterarCategoriaDespesa"{
+            return true
         }
         
         return false

@@ -13,6 +13,7 @@ class CategoriasViewController: UITableViewController {
 
     var categoria: Categoria?
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
+    var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
@@ -56,11 +57,19 @@ class CategoriasViewController: UITableViewController {
     func addConta(){
         
         
-        categoria?.nome = txtNome.text
-        do{
-            try categoriaDAO.salvar(categoria!)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if (erros.isEmpty){
+            categoria = Categoria.getCategoria()
+            
+            categoria?.nome = txtNome.text
+            do{
+                try categoriaDAO.salvar(categoria!)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+
+        }else{
+            let alert = Notification.mostrarErro("Campo vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             erros.removeAll()
         }
