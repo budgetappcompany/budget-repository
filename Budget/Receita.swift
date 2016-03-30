@@ -14,5 +14,8 @@ class Receita: NSManagedObject {
     static func getReceita() -> Receita{
         return ContextFactory.getManagedObject("Receita") as! Receita
     }
-
+    
+    static func getReceitasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("Receita", firstSort: firstSort, secondSort: secondSort, sectionName: sectionName)
+    }
 }

@@ -13,21 +13,12 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
 
 
     var tabBar: UITabBar?
-    
-    let context = ContextFactory.getContext()
     var frc = NSFetchedResultsController()
+    let receitaDAO = ReceitaDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        Personalizar TabBar
-//        É necessário colocar na table inicial para mudar em todas.
-//        tabBar = self.tabBarController!.tabBar
-//        CustomTabBar.custom(&tabBar!)
-
-        
-        
-        frc = getFetchedResultsController()
+        frc = Receita.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         
         do{
@@ -47,22 +38,6 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Core Data source
-    func contasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "Receita")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
-        return fetchRequest
-    }
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        
-        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
-        
-        return frc
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -96,56 +71,20 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sections = frc.sections {
             let currentSection = sections[section]
-//            sections[section]
-            
-            
-            let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
-            
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd"
-            let ddd = dateFormat.dateFromString(string)
-
-            
-            
-            dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
-            dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
-            dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
-            
-            let dateString = dateFormat.stringFromDate(ddd!)
-            
-            return dateString
+            return Data.sectionFormatarData(currentSection.name)
         }
-        
-//        if let sections = frc.sections {
-//            let currentSection = sections[section]
-//            return currentSection.name
-//        }
         
         return nil
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        
         
         let cell: PlaceReceitaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellReceita", forIndexPath: indexPath) as! PlaceReceitaTableViewCell
+        
         // Configure the cell...
-        
         let receita = frc.objectAtIndexPath(indexPath) as! Receita
-        
-//        cell.textLabel?.text = receita.nome
-        
         cell.lblNome.text = receita.nome
-        
-//        cell.txtConta?.text = conta.nome
-//        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
-//        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
-        
-        //        cell.textLabel?.text = conta.nome
-        //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
-        //String("R$ \(conta.saldo!)")
-        
         
         return cell
     }
@@ -161,9 +100,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
-        }else{
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
         }
     }
     
@@ -190,45 +129,19 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            let receita : Receita = frc.objectAtIndexPath(indexPath) as! Receita
             
-            // Pega o valor da receita e o saldo da conta.
-            let valorReceita = receita.valueForKey("valor")
-            let valorConta = receita.conta!.valueForKey("saldo")
-            
-            // Subtrai o saldo da conta pelo valor da receita
-            let saldoAtualConta = valorConta!.floatValue - valorReceita!.floatValue
-            
-
-            
-            // Método para ser chamado ao deletar item
-            func removerSelecionado(action:UIAlertAction){
+            let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir?", completion:{
+                (action:UIAlertAction) in
                 do{
-                    context.deleteObject(receita)
-                    
-                    // Atualiza o saldo da conta removendo o valor da receita que estava cadastrada
-                    receita.conta!.setValue(saldoAtualConta, forKey: "saldo")
-                    
-                    try context.save()
-                }catch{
+                    let receita:Receita = self.frc.objectAtIndexPath(indexPath) as! Receita
+                    try self.receitaDAO.remover(receita)
+                } catch {
                     let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
-                    presentViewController(alert, animated: true, completion: nil)
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
-            }
-            
-            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar? \n O salda da sua conta será atualizado!", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-            detalhes.addAction(cancelar)
-            
-            let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-            detalhes.addAction(deletar)
+            })
             
             presentViewController(detalhes, animated: true, completion: nil)
-            
-            
-            
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -259,7 +172,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : ReceitaViewController = segue.destinationViewController as! ReceitaViewController
+            let contaController : ReceitasViewController = segue.destinationViewController as! ReceitasViewController
             let receita: Receita = frc.objectAtIndexPath(indexPath!) as! Receita
             contaController.receita = receita
         }
@@ -269,3 +182,94 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
 }
+/*==========================================================================================
+
+let context = ContextFactory.getContext()
+
+//Personalizar TabBar
+//É necessário colocar na table inicial para mudar em todas.
+tabBar = self.tabBarController!.tabBar
+CustomTabBar.custom(&tabBar!)
+
+// MARK: - Core Data source
+func contasFetchRequest() -> NSFetchRequest{
+    let fetchRequest = NSFetchRequest(entityName: "Receita")
+    let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+    let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
+    return fetchRequest
+}
+
+func getFetchedResultsController() -> NSFetchedResultsController {
+
+    frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
+
+    return frc
+}
+
+sections[section]
+
+let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
+
+let dateFormat = NSDateFormatter()
+dateFormat.dateFormat = "yyyy-MM-dd"
+let ddd = dateFormat.dateFromString(string)
+
+dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
+dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
+dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
+
+let dateString = dateFormat.stringFromDate(ddd!)
+
+if let sections = frc.sections {
+    let currentSection = sections[section]
+    return currentSection.name
+}
+
+let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+
+cell.textLabel?.text = receita.nome
+
+cell.txtConta?.text = conta.nome
+cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+
+cell.textLabel?.text = conta.nome
+cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
+String("R$ \(conta.saldo!)")
+
+// Delete the row from the data source
+let receita : Receita = frc.objectAtIndexPath(indexPath) as! Receita
+
+// Pega o valor da receita e o saldo da conta.
+let valorReceita = receita.valueForKey("valor")
+let valorConta = receita.conta!.valueForKey("saldo")
+
+// Subtrai o saldo da conta pelo valor da receita
+let saldoAtualConta = valorConta!.floatValue - valorReceita!.floatValue
+
+
+
+// Método para ser chamado ao deletar item
+func removerSelecionado(action:UIAlertAction){
+do{
+receita.managedObjectContext?.deleteObject(receita)
+
+// Atualiza o saldo da conta removendo o valor da receita que estava cadastrada
+receita.conta!.setValue(saldoAtualConta, forKey: "saldo")
+
+try receita.managedObjectContext?.save()
+}catch{
+let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
+presentViewController(alert, animated: true, completion: nil)
+}
+}
+
+let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar? \n O salda da sua conta será atualizado!", preferredStyle: UIAlertControllerStyle.Alert)
+
+let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+detalhes.addAction(cancelar)
+
+let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+detalhes.addAction(deletar)
+==========================================================================================*/

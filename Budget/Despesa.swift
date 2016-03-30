@@ -15,5 +15,8 @@ class Despesa: NSManagedObject {
     static func getDespesa() -> Despesa{
         return ContextFactory.getManagedObject("Despesa") as! Despesa
     }
-
+    
+    static func getReceitasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("Despesa", firstSort: firstSort, secondSort: secondSort, sectionName: sectionName)
+    }
 }
