@@ -321,7 +321,7 @@
             </objects>
             <point key="canvasLocation" x="2674" y="1923"/>
         </scene>
-        <!--Budget-->
+        <!--Dashboard View Controller-->
         <scene sceneID="WVk-AJ-feH">
             <objects>
                 <viewController id="Ub3-ny-xK3" customClass="DashboardViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
@@ -2750,9 +2750,7 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KF9-Rj-9X1"/>
         <segue reference="wxT-DJ-QcZ"/>
-        <segue reference="Jf3-7w-7j9"/>
         <segue reference="LrU-3t-XTb"/>
         <segue reference="KF9-Rj-9X1"/>
         <segue reference="fYU-Lj-GrT"/>
