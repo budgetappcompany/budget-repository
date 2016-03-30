@@ -110,6 +110,7 @@ static CGFloat scaledValue( CGFloat v1, CGFloat min2, CGFloat max2, CGFloat min1
 }
 
 
+
 - (CGRect)hierarchycalFrameAdjustment:(CGRect)frame
 {
     if ( _c.presentFrontViewHierarchically )
@@ -662,14 +663,16 @@ const int FrontViewPositionNone = 0xff;
     _replaceViewAnimationDuration = 0.25;
     _frontViewShadowRadius = 0.0f;
     _frontViewShadowOffset = CGSizeMake(0.0f, 0.0f);
-    _frontViewShadowOpacity = 0.0f;
-    _frontViewShadowColor = [UIColor blackColor];
+    _frontViewShadowOpacity = 1.0f;
+    _frontViewShadowColor = [UIColor whiteColor];
     _userInteractionStore = YES;
     _animationQueue = [NSMutableArray array];
     _draggableBorderWidth = 0.0f;
     _clipsViewsToBounds = NO;
     _extendsPointInsideHit = NO;
 }
+
+
 
 
 #pragma mark - StatusBar
@@ -1499,6 +1502,7 @@ const int FrontViewPositionNone = 0xff;
 }
 
 
+
 #pragma mark Position based view controller deployment
 
 // Deploy/Undeploy of the front view controller following the containment principles. Returns a block
@@ -1880,6 +1884,7 @@ NSString * const SWSegueRightIdentifier = @"sw_right";
 }
 
 @end
+
 
 
 //#pragma mark - SWRevealViewControllerSegue Class

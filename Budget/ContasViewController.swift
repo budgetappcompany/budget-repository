@@ -30,12 +30,15 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         if let conta = conta {
             txtNome.text = conta.nome!
+            
             if let saldo = conta.saldo?.floatValue{
                 txtSaldo.text = saldo.convertToMoedaBr()
             }
             
             tipoConta = conta.tipoconta as? TipoConta
+            
             navegacao.title = "Alterar"
+            txtSaldo.enabled = false
         }
         
         txtTipo.text = tipoConta?.nome
@@ -118,7 +121,10 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
+        
     }
     
     // Define Delegate Method

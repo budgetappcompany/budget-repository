@@ -12,6 +12,8 @@ class MenuTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.backgroundColor = Color.uicolorFromHex(0x49A99E)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -54,6 +56,8 @@ class MenuTableViewController: UITableViewController {
             cell.backgroundColor = Color.uicolorFromHex(0x49A99E)
         }
     }
+    
+    
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

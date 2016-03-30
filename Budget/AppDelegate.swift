@@ -21,32 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // TabBar - Rodape - Personalizacao
-        UITabBar.appearance().tintColor = uicolorFromHex(0x49A99E)
-        //UITabBar.appearance().barTintColor = uicolorFromHex(0x44a499)
-        //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : uicolorFromHex(0xffffff)], forState: UIControlState.Normal)
+        UITabBar.appearance().tintColor = Color.uicolorFromHex(0x274561)
+        UITabBar.appearance().barTintColor = Color.uicolorFromHex(0xffffff)
+//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : Color.uicolorFromHex(0xffffff)], forState: UIControlState.Normal)
         
         
         // NavigationBar - Topo - Personalizacao
         let navigationBarAppearace = UINavigationBar.appearance()
         
-        navigationBarAppearace.tintColor = uicolorFromHex(0xffffff)
-        navigationBarAppearace.barTintColor = uicolorFromHex(0x49A99E)
+        navigationBarAppearace.tintColor = Color.uicolorFromHex(0xffffff)
+        navigationBarAppearace.barTintColor = Color.uicolorFromHex(0x274561)
+        
         // 44a499
         // change navigation item title color
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         return true
     }
     
-    func uicolorFromHex(rgbValue:UInt32)->UIColor{
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        
-        return UIColor(red:red, green:green, blue:blue, alpha:1.0)
-    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

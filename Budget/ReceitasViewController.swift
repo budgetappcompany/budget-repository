@@ -11,7 +11,7 @@ import CoreData
 
 class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
 
-    
+    var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
@@ -44,11 +44,19 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta as? Conta
             categoria = receita.categoria as? Categoria
+            
             navegacao.title = "Alterar"
+            txtValor.enabled = false
+            txtData.enabled = false
+            txtConta.enabled = false
+            
+        } else {
+            txtData.text = Data.formatDateToString(pickerView.date)
         }
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        
         txtData.inputView = pickerView
         
         // Alinhar as labels
@@ -56,8 +64,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
 
     }
     
-    func updateTextField(sende:UIDatePicker){
-        txtData.text = Data.formatDateToString(sende.date)
+    func updateTextField(sender:UIDatePicker){
+        txtData.text = Data.formatDateToString(sender.date)
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,7 +95,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
     }
     
-    func addConta(){
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
         
         receita = Receita.getReceita()
         receita?.nome = txtNome.text
@@ -108,26 +119,53 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+
     }
     
     func updateConta(){
         
-        receita?.nome = txtNome.text
-        receita?.valor = Float(txtValor.text!)
-        receita?.endereco = txtEndereco.text
-        receita?.descricao = txtDescricao.text
+        validarCampos()
         
-        
-        receita?.data = Data.removerTime(txtData.text!)
-        
-        
-        if let conta = conta {
-            receita?.conta? = conta
+        if(erros.isEmpty){
+            receita?.nome = txtNome.text
+            receita?.endereco = txtEndereco.text
+            receita?.descricao = txtDescricao.text
+            
+            if let categoria = categoria{
+                receita?.categoria = categoria
+            }
+            
+            do{
+                try receita?.managedObjectContext?.save()
+                navigationController?.popViewControllerAnimated(true)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
+            presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
         
-        if let categoria = categoria{
-            receita?.categoria = categoria
+        
+//        receita?.valor = Float(txtValor.text!)
+
+//        receita?.data = Data.removerTime(txtData.text!)
+        
+//        if let conta = conta {
+//            receita?.conta? = conta
+//        }
+        
+
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if receita == nil{
+            return true
         }
         
         do{
@@ -137,6 +175,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
             presentViewController(alert, animated: true, completion: nil)
         }
+        
+        return false
     }
     
     // Define Delegate Method
@@ -165,17 +205,9 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         case 2: return 1    // section 2 has 1 row
         default: fatalError("Unknown number of sections")
         }
+        
+        
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
 
     /*
     // Override to support conditional editing of the table view.

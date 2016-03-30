@@ -47,9 +47,14 @@ class CategoriasViewController: UITableViewController {
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+    }
+    
     func addConta(){
         
-        categoria = Categoria.getCategoria()
         
         categoria?.nome = txtNome.text
         do{
@@ -57,7 +62,9 @@ class CategoriasViewController: UITableViewController {
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
     }
 
     // MARK: - Table view data source

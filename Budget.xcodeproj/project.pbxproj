@@ -33,6 +33,7 @@
 		4E8113881C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */; };
 		4E8113891C99D9F200B7A4B4 /* Receita.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8113871C99D9F200B7A4B4 /* Receita.swift */; };
 		4E884D211C9B264B005742EF /* PlaceReceitaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */; };
+		4EB995891CA9D24B0031195D /* Validador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB995881CA9D24B0031195D /* Validador.swift */; };
 		4EC38F481C99EB7E0079F381 /* ReceitasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */; };
 		A83F43821CA8D939003FAD23 /* TextoMascara.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83F43811CA8D939003FAD23 /* TextoMascara.swift */; };
 		A84081501C8E0EC700186308 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840814F1C8E0EC700186308 /* PorcentagemController.swift */; };
@@ -163,6 +164,7 @@
 		4E8113861C99D9F200B7A4B4 /* Receita+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receita+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E8113871C99D9F200B7A4B4 /* Receita.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receita.swift; sourceTree = "<group>"; };
 		4E884D201C9B264B005742EF /* PlaceReceitaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceReceitaTableViewCell.swift; sourceTree = "<group>"; };
+		4EB995881CA9D24B0031195D /* Validador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validador.swift; sourceTree = "<group>"; };
 		4EC38F471C99EB7E0079F381 /* ReceitasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceitasTableViewController.swift; sourceTree = "<group>"; };
 		A83F43811CA8D939003FAD23 /* TextoMascara.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextoMascara.swift; sourceTree = "<group>"; };
 		A840814F1C8E0EC700186308 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PorcentagemController.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				TargetAttributes = {
 					4E6C72101C86393E001522DB = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = MFLZ22F4ZR;
 					};
 					4E6C72271C86393E001522DB = {
 						CreatedOnToolsVersion = 7.2;
@@ -800,6 +803,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Budget/Budget-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -815,6 +819,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.budget.Budget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Budget/Budget-Bridging-Header.h";
 			};
 			name = Release;
