@@ -13,6 +13,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     
     var currentString = ""
+    var erros: String = ""
     var conta: Conta?
     var tipoConta: TipoConta? = nil
     
@@ -29,12 +30,15 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         if let conta = conta {
             txtNome.text = conta.nome!
+            
             if let saldo = conta.saldo?.floatValue{
                 txtSaldo.text = saldo.convertToMoedaBr()
             }
             
             tipoConta = conta.tipoconta as? TipoConta
+            
             navegacao.title = "Alterar"
+            txtSaldo.enabled = false
         }
         
         txtTipo.text = tipoConta?.nome
@@ -85,6 +89,20 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+        
+        if Validador.vazio(txtSaldo.text!){
+            erros.appendContentsOf("Preencha o campo Saldo!\n")
+        }
+        
+        if Validador.vazio(txtTipo.text!){
+            erros.appendContentsOf("Selecione a Conta!\n")
+        }
+    }
+    
     func addConta(){
         conta = Conta.getConta()
         conta?.nome = txtNome.text
@@ -113,14 +131,23 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     private func salvarConta(){
-        do{
-            
-            
-            try Conta.salvar(conta!)
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+        
+        validarCampos()
+        
+        if (erros.isEmpty){
+            do{
+                try Conta.salvar(conta!)
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
+        
     }
     
     // Define Delegate Method

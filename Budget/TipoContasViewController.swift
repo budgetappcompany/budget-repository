@@ -12,6 +12,7 @@ import CoreData
 class TipoContasViewController: UITableViewController {
     
     var tipoConta: TipoConta?
+    var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
@@ -39,37 +40,39 @@ class TipoContasViewController: UITableViewController {
     
     @IBAction func btnSave(sender: AnyObject) {
         
-        //        if tipoConta != nil {
-        //            updateConta()
-        //
-        //        }else{
         addConta()
         navigationController?.popViewControllerAnimated(true)
-        //        }
         
-        //        dissmissViewController()
     }
     
     func dissmissViewController(){
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    func addConta(){
-        //        let context = self.context
-        //        let tipoContaEntity = NSEntityDescription.entityForName("TipoConta", inManagedObjectContext: context)
-        //        let newTipoConta = NSManagedObject(entity: tipoContaEntity!, insertIntoManagedObjectContext: context)
-        
-        tipoConta = TipoConta.getTipoConta()
-        
-        //        tipoConta.setValue(txtNome.text, forKey: "nome")
-        
-        tipoConta?.nome = txtNome.text
-        do{
-            try tipoConta?.managedObjectContext?.save()
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-            presentViewController(alert, animated: true, completion: nil)
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
         }
+    }
+    
+    func addConta(){
+
+        if (erros.isEmpty){
+            tipoConta = TipoConta.getTipoConta()
+            tipoConta?.nome = txtNome.text
+            
+            do{
+                try tipoConta?.managedObjectContext?.save()
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }else{
+            let alert = Notification.mostrarErro("Campo vazio", mensagem: "\(erros)")
+            presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
+        }
+
     }
     
     

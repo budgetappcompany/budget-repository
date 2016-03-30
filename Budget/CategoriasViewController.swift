@@ -12,6 +12,7 @@ import CoreData
 class CategoriasViewController: UITableViewController {
 
     var categoria: Categoria?
+    var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
@@ -48,17 +49,32 @@ class CategoriasViewController: UITableViewController {
         navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    func validarCampos(){
+        if Validador.vazio(txtNome.text!){
+            erros.appendContentsOf("Preencha o campo nome!\n")
+        }
+    }
+    
     func addConta(){
         
-        categoria = Categoria.getCategoria()
         
-        categoria?.nome = txtNome.text
-        do{
-            try categoria?.managedObjectContext?.save()
-        }catch{
-            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+        if (erros.isEmpty){
+            categoria = Categoria.getCategoria()
+            
+            categoria?.nome = txtNome.text
+            do{
+                try categoria?.managedObjectContext?.save()
+            }catch{
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
+                presentViewController(alert, animated: true, completion: nil)
+            }
+
+        }else{
+            let alert = Notification.mostrarErro("Campo vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
+            erros.removeAll()
         }
+        
     }
 
     // MARK: - Table view data source

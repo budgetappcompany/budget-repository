@@ -67,7 +67,6 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
 //        var month:Array<String> = months
 //        setChart(month, values: balanco)
         
