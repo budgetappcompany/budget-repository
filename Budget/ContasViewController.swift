@@ -15,6 +15,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     var currentString = ""
     var erros: String = ""
     var conta: Conta?
+    let contaDAO:ContaDAO = ContaDAO()
     var tipoConta: TipoConta? = nil
     
     @IBOutlet var labels: [UILabel]!
@@ -59,11 +60,14 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         //            return false
         //        }
         
-        return currentCharacterCount < 14
+        if (range.length > 0){
+            return true
+        }
+        return currentCharacterCount < 12
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        sender.text = TextoMascara.aplicarMascara(sender.text!)
+        TextoMascara.aplicarMascara(&sender.text!)
     }
     
     
@@ -136,7 +140,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         if (erros.isEmpty){
             do{
-                try Conta.salvar(conta!)
+                try contaDAO.salvar(conta!)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
                 presentViewController(alert, animated: true, completion: nil)
@@ -257,3 +261,13 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
 
 }
+/*====================================================================================
+
+//                let currentCharacterCount = textField.text?.characters.count
+//        print(range.length)
+
+//        textField.text = TextoMascara.aplicarMascara(&textField.text!)
+//        TextoMascara.aplicarMascara(&textField.text!)
+
+
+====================================================================================*/

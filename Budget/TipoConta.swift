@@ -15,5 +15,9 @@ class TipoConta: NSManagedObject {
     static func getTipoConta() -> TipoConta{
         return ContextFactory.getManagedObject("TipoConta") as! TipoConta
     }
+    
+    static func getTipoContasController(firstSort:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("TipoConta", firstSort: firstSort)
+    }
 
 }

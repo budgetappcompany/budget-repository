@@ -17,13 +17,14 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
 
     weak var delegate: CategoriaViewControllerDelegate?
     
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    var frc = NSFetchedResultsController()
+    let categoriaDAO:CategoriaDAO = CategoriaDAO()
+//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var frc = Categoria.getCategoriasController("nome")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let frc = getFetchedResultsController()
         frc.delegate = self
         
         do{
@@ -36,20 +37,6 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Core Data source
-    func tipoContasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "Categoria")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-    }
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        
-        frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return frc
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -100,42 +87,18 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            
-            //            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-            
-            let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
-            
-            // Método para ser chamado ao deletar item
-            func removerSelecionado(action:UIAlertAction){
+            let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir?", completion:{
+                (action:UIAlertAction) in
                 do{
-                    context.deleteObject(categoria)
-                    try context.save()
-                }catch{
-                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+                    let categoria:Categoria = self.frc.objectAtIndexPath(indexPath) as! Categoria
+                    try self.categoriaDAO.remover(categoria)
+                } catch {
+                    let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
-            }
+            })
             
-            // Verifica se tem alguma conta associada, se não tiver permite deletarß
-            if (categoria.receita?.count > 0){
-                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
-                presentViewController(alerta, animated: true, completion: nil)
-            }else{
-                
-                let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-                detalhes.addAction(cancelar)
-                
-                let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-                detalhes.addAction(deletar)
-                
-                presentViewController(detalhes, animated: true, completion: nil)
-                
-            }
-            
-            
+            presentViewController(detalhes, animated: true, completion: nil)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -168,3 +131,52 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     */
 
 }
+
+/*==========================================================================================
+// MARK: - Core Data source
+func tipoContasFetchRequest() -> NSFetchRequest{
+let fetchRequest = NSFetchRequest(entityName: "Categoria")
+let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+fetchRequest.sortDescriptors = [sortDescriptor]
+return fetchRequest
+}
+
+func getFetchedResultsController() -> NSFetchedResultsController {
+
+frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+return frc
+}
+
+// Delete the row from the data source
+//tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+//            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
+
+let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
+
+// Método para ser chamado ao deletar item
+func removerSelecionado(action:UIAlertAction){
+do{
+context.deleteObject(categoria)
+try context.save()
+}catch{
+presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+}
+}
+
+// Verifica se tem alguma conta associada, se não tiver permite deletarß
+if (categoria.receita?.count > 0){
+let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+presentViewController(alerta, animated: true, completion: nil)
+}else{
+
+let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
+
+let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+detalhes.addAction(cancelar)
+
+let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+detalhes.addAction(deletar)
+
+presentViewController(detalhes, animated: true, completion: nil)
+==========================================================================================*/

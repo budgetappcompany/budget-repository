@@ -10,16 +10,16 @@ import UIKit
 import CoreData
 
 class DespesasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-
-    let context = ContextFactory.getContext()
+    
     var frc = NSFetchedResultsController()
+    var despesaDAO:DespesaDAO = DespesaDAO()
     var categoria: Categoria?
     var conta: Conta?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        frc = getFetchedResultsController()
+        frc = Despesa.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         
         do{
@@ -39,22 +39,6 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Core Data source
-    func contasFetchRequest() -> NSFetchRequest{
-        let fetchRequest = NSFetchRequest(entityName: "Despesa")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
-        return fetchRequest
-    }
-    
-    func getFetchedResultsController() -> NSFetchedResultsController {
-        
-        frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
-        
-        return frc
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -97,8 +81,6 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
             dateFormat.dateFormat = "yyyy-MM-dd"
             let ddd = dateFormat.dateFromString(string)
             
-            
-            
             dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
             dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
             dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
@@ -112,8 +94,6 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        
         
         let cell: PlaceDespesaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellDespesa", forIndexPath: indexPath) as! PlaceDespesaTableViewCell
         // Configure the cell...
@@ -170,46 +150,20 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            let despesa : Despesa = frc.objectAtIndexPath(indexPath) as! Despesa
-            
-            // Pega o valor da despesa e o saldo da conta.
-            let valorDespesa = despesa.valueForKey("valor")
-            let valorConta = despesa.conta!.valueForKey("saldo")
-            
-            // Soma o saldo da conta pelo valor da despesa
-            let saldoAtualConta = valorConta!.floatValue + valorDespesa!.floatValue
-            
-            
-            
-            // Método para ser chamado ao deletar item
-            func removerSelecionado(action:UIAlertAction){
-                do{
-                    context.deleteObject(despesa)
-                    
-                    // Atualiza o saldo da conta somando o valor da despesa que estava cadastrada
-                    despesa.conta!.setValue(saldoAtualConta, forKey: "saldo")
-                    
-                    try context.save()
-                }catch{
+            func removerDespesa(action:UIAlertAction) {
+                let despesa:Despesa = frc.objectAtIndexPath(indexPath) as! Despesa
+               
+                do {
+                    try despesaDAO.remover(despesa)
+                } catch {
                     let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
                     presentViewController(alert, animated: true, completion: nil)
                 }
             }
             
-            let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar? \n O salda da sua conta será atualizado!", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-            detalhes.addAction(cancelar)
-            
-            let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-            detalhes.addAction(deletar)
+            let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir? \n O saldo da sua conta será atualizado!", completion: removerDespesa)
             
             presentViewController(detalhes, animated: true, completion: nil)
-            
-            
-            
-            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -238,7 +192,7 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "editar"{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
-            let contaController : DespesasViewController = segue.destinationViewController as! DespesasViewController
+            let contaController:DespesasViewController = segue.destinationViewController as! DespesasViewController
             let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
             contaController.despesa = despesa
         }
@@ -248,3 +202,69 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
 }
+
+/*==========================================================================================
+let context = ContextFactory.getContext()
+// Delete the row from the data source
+let despesa : Despesa = frc.objectAtIndexPath(indexPath) as! Despesa
+
+// Pega o valor da despesa e o saldo da conta.
+let valorDespesa = despesa.valueForKey("valor")
+let valorConta = despesa.conta!.valueForKey("saldo")
+
+// Soma o saldo da conta pelo valor da despesa
+let saldoAtualConta = valorConta!.floatValue + valorDespesa!.floatValue
+
+
+
+// Método para ser chamado ao deletar item
+func removerSelecionado(action:UIAlertAction){
+    do{
+        context.deleteObject(despesa)
+        
+        // Atualiza o saldo da conta somando o valor da despesa que estava cadastrada
+        despesa.conta!.setValue(saldoAtualConta, forKey: "saldo")
+        
+        try context.save()
+    }catch{
+        let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
+        presentViewController(alert, animated: true, completion: nil)
+    }
+}
+
+let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar? \n O saldo da sua conta será atualizado!", preferredStyle: UIAlertControllerStyle.Alert)
+
+let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
+detalhes.addAction(cancelar)
+
+let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
+detalhes.addAction(deletar)
+
+// MARK: - Core Data source
+func contasFetchRequest() -> NSFetchRequest{
+    let fetchRequest = NSFetchRequest(entityName: "Despesa")
+    let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+    let sortDescriptor1 = NSSortDescriptor(key: "data", ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
+    return fetchRequest
+}
+
+func getFetchedResultsController() -> NSFetchedResultsController {
+
+    frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "data", cacheName: nil)
+
+    return frc
+}
+
+let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+
+cell.txtConta?.text = conta.nome
+cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+
+cell.textLabel?.text = conta.nome
+cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
+String("R$ \(conta.saldo!)")
+
+==========================================================================================*/
+

@@ -68,8 +68,8 @@ class Conta: NSManagedObject {
         return ContextFactory.getManagedObject("Conta") as! Conta
     }
     
-    static func salvar(conta:Conta) throws {
-        try conta.managedObjectContext?.save()
+    static func getContasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("Conta", firstSort: firstSort, secondSort: secondSort, sectionName: sectionName)
     }
 
     func moeda(valor: Float) -> String{

@@ -12,6 +12,7 @@ import CoreData
 class CategoriasViewController: UITableViewController {
 
     var categoria: Categoria?
+    let categoriaDAO:CategoriaDAO = CategoriaDAO()
     var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
@@ -38,8 +39,6 @@ class CategoriasViewController: UITableViewController {
     
     
     @IBAction func btnSave(sender: AnyObject) {
-        
-
         addConta()
         navigationController?.popViewControllerAnimated(true)
 
@@ -63,7 +62,7 @@ class CategoriasViewController: UITableViewController {
             
             categoria?.nome = txtNome.text
             do{
-                try categoria?.managedObjectContext?.save()
+                try categoriaDAO.salvar(categoria!)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
                 presentViewController(alert, animated: true, completion: nil)

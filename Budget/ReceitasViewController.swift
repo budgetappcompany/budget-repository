@@ -15,6 +15,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
+    let receitaDAO:ReceitaDAO = ReceitaDAO()
     var pickerView: UIDatePicker!
     
     @IBOutlet var labels: [UILabel]!
@@ -138,7 +139,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
             
             do{
-                try receita?.managedObjectContext?.save()
+                try receitaDAO.salvar(receita!)
                 navigationController?.popViewControllerAnimated(true)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
@@ -167,7 +168,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             }
             
             do{
-                try receita?.managedObjectContext?.save()
+                try receitaDAO.salvar(receita!)
                 navigationController?.popViewControllerAnimated(true)
             }catch{
                 let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
