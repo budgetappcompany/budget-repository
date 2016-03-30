@@ -39,4 +39,16 @@ class ReceitaDAO {
         return []
     }
     
+    func getReceitasFromMonth(month:Int, year:Int) -> [Receita] {
+        let components = NSDateComponents()
+        components.month = month
+        components.year = year
+        
+        let data = NSCalendar.currentCalendar().dateFromComponents(components)
+        
+        let predicate = NSPredicate(format: "(data>=%@) and (data<=%@)", (data?.startOfMonth())!, (data?.endOfMonth())!)
+        
+        return (self.getListaReceitas() as NSArray).filteredArrayUsingPredicate(predicate) as! [Receita]
+    }
+    
 }

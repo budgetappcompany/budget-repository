@@ -11,20 +11,12 @@ import CoreData
 
 class Dashboard {
     
+    private static func getCurrentDate() -> NSDateComponents {
+        return NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
+    }
+    
     static func getTotalBalanco() -> Float {
         let contaDAO:ContaDAO = ContaDAO()
-//        let fetchRequest = NSFetchRequest(entityName: "Conta")
-//        do {
-//            
-//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-//            
-//            for result in results {
-//                total += result.valueForKey("saldo")! as! Float
-//            }
-//            
-//        } catch {
-//            print(error)
-//        }
         
         let saldo:[Float] = contaDAO.getListaContas().map({conta in conta.valueForKey("saldo") as! Float})
         
@@ -32,86 +24,44 @@ class Dashboard {
     }
     
     static func getTotalReceitas() -> Float {
-//        var total:Float = 0.0
-//        let fetchRequest = NSFetchRequest(entityName: "Receita")
-//        do {
-//            
-//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-//            
-//            for result in results {
-//                total += result.valueForKey("valor")! as! Float
-//            }
-//            
-//        } catch {
-//            print(error)
-//        }
+
         let receitaDAO:ReceitaDAO = ReceitaDAO()
-        let saldo:[Float] = receitaDAO.getListaReceitas().map({receita in receita.valueForKey("valor") as! Float})
+        let receitasDoMes = receitaDAO.getReceitasFromMonth(getCurrentDate().month, year:getCurrentDate().year)
+        
+        let saldo:[Float] = receitasDoMes.map({receita in receita.valueForKey("valor") as! Float})
         return saldo.reduce(0.0, combine: +)
     }
     
     static func getTotalDespesas() -> Float {
-//        var total:Float = 0.0
-//        let fetchRequest = NSFetchRequest(entityName: "Despesa")
-//        do {
-//            
-//            let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-//            
-//            for result in results {
-//                total += result.valueForKey("valor")! as! Float
-//            }
-//            
-//        } catch {
-//            print(error)
-//        }
+
         let despesaDAO:DespesaDAO = DespesaDAO()
-        let saldo:[Float] = despesaDAO.getListaDespesas().map({despesa in despesa.valueForKey("valor") as! Float})
+        let despesasDoMes = despesaDAO.getDespesasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
+        let saldo:[Float] = despesasDoMes.map({despesa in despesa.valueForKey("valor") as! Float})
         
         return saldo.reduce(0.0, combine: +)
     }
     
-    static func getBalancoAnual() -> (Array<String>,[Double]){
-        let fetchRequest = NSFetchRequest(entityName: "Receita")
+    static func getBalancoAnual() -> (Array<String>,[Double]) {
         
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        
-        let currentDate = NSDate()
-        let currentMonth = NSCalendar.currentCalendar().components([.Month], fromDate: currentDate)
-        let currentYear = NSCalendar.currentCalendar().components([.Year], fromDate: currentDate)
-
-        let calendar = NSCalendar.currentCalendar()
-        let newDate = calendar.dateFromComponents(currentYear)
-        
         var total:Double = 0
-        var receitasPorMes:[Double] = []
+        var balancoMensal:[Double] = []
+        let receitaDAO:ReceitaDAO = ReceitaDAO()
+        let despesaDAO:DespesaDAO = DespesaDAO()
         
-        var firstDay:NSDate?
-        var lastDay:NSDate?
-        
-        do{
-            for i in 0..<currentMonth.month {
-                firstDay = newDate?.dateByAddingMonths(i)!.startOfMonth()
-                lastDay = newDate?.dateByAddingMonths(i)!.endOfMonth()
+        for i in 1...getCurrentDate().month {
+            let receitas = receitaDAO.getReceitasFromMonth(i, year:getCurrentDate().year)
+            let valorReceitas:[Double] = receitas.map({result in result.valueForKey("valor") as! Double})
+            total = valorReceitas.reduce(0.0, combine: +)
+            
+            let despesas = despesaDAO.getDespesasFromMonth(i, year:getCurrentDate().year)
+            let valorDespesas:[Double] = despesas.map({result in result.valueForKey("valor") as! Double})
+            total -= valorDespesas.reduce(0.0, combine: +)
+            
+            balancoMensal.append(total)
                 
-                let predicate = NSPredicate(format: "(data>=%@) and (data<=%@)", firstDay!, lastDay!)
-                fetchRequest.predicate = predicate
-                
-                let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-                
-                //Map() - cria um novo array com valores vindos do array de receitas do mês
-                let valores = results.map({result in result.valueForKey("valor") as! Double})
-                
-                //Round() - usado para arrendondar o valor para duas casas decimais
-                //Reduce() - usado para somar os valores dentro do novo array vindo do map()
-                total = round(100*valores.reduce(0.0,combine: +))/100
-                
-                receitasPorMes.append(total)
-            }
-        }catch{
-            print(error)
         }
-        
-        return (Array(months[0..<currentMonth.month]),receitasPorMes)
+        return (Array(months[0..<getCurrentDate().month]),balancoMensal)
     }
     
     static func getDespesasPorCategoria() -> ([String],[Double]) {
@@ -175,3 +125,76 @@ class Dashboard {
     }
     
 }
+
+
+/*========================================================================
+
+let fetchRequest = NSFetchRequest(entityName: "Conta")
+do {
+
+    let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+
+    for result in results {
+        total += result.valueForKey("saldo")! as! Float
+    }
+
+} catch {
+    print(error)
+}
+
+let currentDate = NSDate()
+let currentMonth = NSCalendar.currentCalendar().components([.Month], fromDate: currentDate)
+
+let currentYear = NSCalendar.currentCalendar().components([.Year], fromDate: NSDate())
+
+let calendar = NSCalendar.currentCalendar()
+let newDate = calendar.dateFromComponents(currentYear)
+
+var total:Float = 0.0
+let fetchRequest = NSFetchRequest(entityName: "Receita")
+do {
+
+    let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+
+    for result in results {
+        total += result.valueForKey("valor")! as! Float
+    }
+
+} catch {
+    print(error)
+}
+
+var total:Float = 0.0
+let fetchRequest = NSFetchRequest(entityName: "Despesa")
+do {
+
+    let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+
+    for result in results {
+        total += result.valueForKey("valor")! as! Float
+    }
+
+} catch {
+    print(error)
+}
+
+var firstDay:NSDate?
+var lastDay:NSDate?
+
+do{
+        firstDay = newDate?.dateByAddingMonths(i)!.startOfMonth()
+        lastDay = newDate?.dateByAddingMonths(i)!.endOfMonth()
+
+        let predicate = NSPredicate(format: "(data>=%@) and (data<=%@)", firstDay!, lastDay!)
+        fetchRequest.predicate = predicate
+
+        let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+}catch{
+    print(error)
+}
+
+//Map() - cria um novo array com valores vindos do array de receitas do mês
+//Round() - usado para arrendondar o valor para duas casas decimais
+//Reduce() - usado para somar os valores dentro do novo array vindo do map()
+
+==========================================================================*/

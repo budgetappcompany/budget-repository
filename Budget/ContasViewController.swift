@@ -51,16 +51,15 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let currentCharacterCount = textField.text?.characters.count
-        //        let currentCharacterCount = textField.text?.characters.count ?? 0
-        //        if (range.length + range.location > currentCharacterCount){
-        //            return false
-        //        }
-        textField.text = TextoMascara.aplicarMascara(&textField.text!)
-        return currentCharacterCount < 14
+        
+        if (range.length > 0){
+            return true
+        }
+        return currentCharacterCount < 12
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-//        sender.text = TextoMascara.aplicarMascara(sender.text!)
+        TextoMascara.aplicarMascara(&sender.text!)
     }
     
     
@@ -229,3 +228,13 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
 
 }
+/*====================================================================================
+
+//                let currentCharacterCount = textField.text?.characters.count
+//        print(range.length)
+
+//        textField.text = TextoMascara.aplicarMascara(&textField.text!)
+//        TextoMascara.aplicarMascara(&textField.text!)
+
+
+====================================================================================*/
